@@ -1488,6 +1488,8 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
 
 ## Exercise 4: Enabling Telemetry with Application Insights
 
+Duration: 30 Minutes
+
 To configure the application for logging and diagnostics, you have been asked to configure Microsoft Azure Application Insights and add some custom telemetry.
 
 ### Task 1: Configure the application for telemetry
@@ -1689,6 +1691,8 @@ To configure the application for logging and diagnostics, you have been asked to
     ![In the Custom events section, event metrics are displayed for users and sessions. Different web pages are listed. e.g. OrderCompleted and SuccessfulPaymentAuth.](media/2019-03-29-11-35-33.png "Event Statistics")
 
 ## Exercise 5: Automating backend processes with Azure Functions and Logic Apps
+
+Duration: 45 Minutes
 
 Contoso wants to automate the process of generating receipts in PDF format and alerting users when their orders have been processed using Azure Logic App and Functions. To run custom snippets of C\# or node.js in logic apps, you can create custom functions through Azure Functions. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) offers server-free computing in Microsoft Azure and are useful for performing these tasks:
 
