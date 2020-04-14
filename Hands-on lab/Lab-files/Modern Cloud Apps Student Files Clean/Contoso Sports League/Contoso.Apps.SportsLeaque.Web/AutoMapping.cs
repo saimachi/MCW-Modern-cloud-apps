@@ -14,6 +14,7 @@ namespace Contoso.Apps.SportsLeaque.Web
             CreateMap<Product, ProductModel>();
             CreateMap<Category, CategoryModel>();
             CreateMap<Order, OrderModel>();
+            CreateMap<OrderModel, Order>();
         }
     }
 

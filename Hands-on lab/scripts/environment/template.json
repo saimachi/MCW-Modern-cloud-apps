@@ -17,7 +17,9 @@
         "databaseName": "ContosoSportsDB",
         "databaseServerName": "[concat('contososports', variables('nameSuffix'))]",
         "appInsightsName": "[concat('contososportsai', variables('nameSuffix'))]",
-        "storageAccountName": "[concat('contoso', variables('nameSuffix'))]"
+        "storageAccountName": "[concat('contoso', variables('nameSuffix'))]",
+        "serviceBusName": "[concat('contoso', variables('nameSuffix'))]",
+        "serviceBusQueueName": "receiptgenerator"
     },
     "resources": [
         {
@@ -163,6 +165,59 @@
             },
             "kind": "StorageV2",
             "tags": {}
+        },
+
+        {
+            "type": "Microsoft.ServiceBus/namespaces",
+            "apiVersion": "2017-04-01",
+            "name": "[variables('serviceBusName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Basic",
+                "tier": "Basic"
+            },
+            "properties": {
+                "zoneRedundant": false
+            }
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces/queues",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(variables('serviceBusName'), '/', variables('serviceBusQueueName'))]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces/queues/authorizationRules",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(variables('serviceBusName'), '/', variables('serviceBusQueueName'), '/Listener')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusName'), variables('serviceBusQueueName'))]",
+                "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusName'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Listen"
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces/queues/authorizationRules",
+            "apiVersion": "2017-04-01",
+            "name": "[concat(variables('serviceBusName'), '/', variables('serviceBusQueueName'), '/Publisher')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusName'), variables('serviceBusQueueName'))]",
+                "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusName'))]"
+            ],
+            "properties": {
+                "rights": [
+                    "Send"
+                ]
+            }
         }
     ]
 }

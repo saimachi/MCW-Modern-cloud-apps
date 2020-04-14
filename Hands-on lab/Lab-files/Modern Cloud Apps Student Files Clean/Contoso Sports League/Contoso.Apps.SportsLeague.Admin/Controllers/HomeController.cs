@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace Contoso.Apps.SportsLeague.Admin.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
         public HomeController(ProductContext context)

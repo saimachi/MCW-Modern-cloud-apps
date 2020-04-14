@@ -87,44 +87,5 @@ namespace ContosoFunctionApp
             log.LogInformation($"Using fileUri {fileUri}");
             return fileUri;
         }
-
-        /// <summary>
-        /// Grabs the next pending queue message containing the next order
-        /// whose receipt we need to generate.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<int> GetOrderIdFromQueue()
-        {
-            int orderId = 0;
-
-            // Create the queue client.
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-
-            // Retrieve a reference to a queue.
-            CloudQueue queue = queueClient.GetQueueReference("receiptgenerator");
-
-            // Create the queue if it doesn't already exist.
-            if (await queue.CreateIfNotExistsAsync())
-            {
-                Console.WriteLine("Queue '{0}' Created", queue.Name);
-            }
-            else
-            {
-                Console.WriteLine("Queue '{0}' Exists", queue.Name);
-            }
-
-            // Get the next message.
-            CloudQueueMessage retrievedMessage = await queue.GetMessageAsync();
-
-            if (retrievedMessage != null)
-            {
-                Trace.TraceInformation("Retrieved Queue Message: " + retrievedMessage.AsString);
-                // Process the message in less than 30 seconds, and then delete the message.
-                await queue.DeleteMessageAsync(retrievedMessage);
-                int.TryParse(retrievedMessage.AsString, out orderId);
-            }
-
-            return orderId;
-        }
     }
 }

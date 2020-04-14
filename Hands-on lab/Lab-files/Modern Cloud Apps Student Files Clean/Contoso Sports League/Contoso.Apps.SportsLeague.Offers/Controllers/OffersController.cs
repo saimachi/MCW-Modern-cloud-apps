@@ -13,6 +13,7 @@ namespace Contoso.Apps.SportsLeague.Offers.Controllers
 {
     [ApiController]
     [EnableCors()]
+    [Microsoft.AspNetCore.Authorization.AllowAnonymous]
     public class OffersController : ControllerBase
     {
         public OffersController(ProductContext context)

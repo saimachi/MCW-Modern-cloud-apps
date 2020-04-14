@@ -1,6 +1,5 @@
 ![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
-
 <div class="MCWHeader1">
 Modern cloud apps
 </div>
@@ -10,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2019
+March 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -19,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -36,14 +35,14 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Deploy the e-commerce website, SQL Database, and storage](#task-1-deploy-the-e-commerce-website-sql-database-and-storage)
       - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
       - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-Retrieve-Storage-Account-Access-Keys)
-      - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
-      - [Subtask 4: Deploy the e-commerce Web App from Visual Studio](#subtask-4-deploy-the-e-commerce-web-app-from-visual-studio)
+      - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
+      - [Subtask 4: Update the configuration in the starter project](#subtask-4-update-the-configuration-in-the-starter-project)
+      - [Subtask 5: Deploy the e-commerce Web App from Visual Studio](#subtask-5-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
       - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
-      - [Subtask 2: Failover secondary SQL database](#subtask-2-failover-secondary-sql-database)
-      - [Subtask 3: Test e-commerce Web App after Failover](#subtask-3-test-e-commerce-web-app-after-failover)
-      - [Subtask 4: Revert Failover back to Primary database](#subtask-4-revert-failover-back-to-primary-database)
-      - [Subtask 5: Test e-commerce Web App after reverting failover](#subtask-5-test-e-commerce-web-app-after-reverting-failover)
+      - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
+      - [Subtask 3: Failover SQL Database Failover Group](#subtask-3-failover-sql-database-failover-group)
+      - [Subtask 4: Test e-commerce Web App after Failover](#subtask-4-test-e-commerce-web-app-after-failover)
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
       - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
       - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
@@ -72,10 +71,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Add a new application](#task-2-add-a-new-application)
     - [Task 3: Create Policies, Sign up and sign in](#task-3-create-policies-sign-up-and-sign-in)
     - [Task 4: Create a profile editing policy](#task-4-create-a-profile-editing-policy)
-    - [Task 5: Modify the Contoso.App.SportsLeague.Web](#task-5-modify-the-contosoappsportsleagueweb)
-    - [Task 6: Send authentication requests to Azure AD](#task-6-send-authentication-requests-to-azure-ad)
-    - [Task 7: Display user information](#task-7-display-user-information)
-    - [Task 8: Run the sample app](#task-8-run-the-sample-app)
+    - [Task 5: Create a password reset policy](#task-5-create-a-password-reset-policy)
+    - [Task 6: Modify the Contoso.App.SportsLeague.Web](#task-6-modify-the-contosoappsportsleagueweb)
+    - [Task 7: Send authentication requests to Azure AD](#task-7-send-authentication-requests-to-azure-ad)
+    - [Task 8: Display user information](#task-8-display-user-information)
+    - [Task 9: Run the sample app](#task-9-run-the-sample-app)
   - [Exercise 4: Enabling Telemetry with Application Insights](#exercise-4-enabling-telemetry-with-application-insights)
     - [Task 1: Configure the application for telemetry](#task-1-configure-the-application-for-telemetry)
       - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
@@ -211,7 +211,37 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![In the Access keys blade default keys section, the copy button for the key1 connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image36.png "Access keys blade, default keys section")
 
-#### Subtask 3: Update the configuration in the starter project
+#### Subtask 3: Retrieve Service Bus Queue Connection String
+
+1. Go back to the **contososports** blade resource group, and select the **contoso** Service Bus Namespace.
+
+    ![Service Bus Namespace resource is highlighted](media/2020-03-18-10-38-09.png "Service Bus Namespace")
+
+2. Select the **Queues** link under Entities.
+
+    ![Queues link under Entities](media/2020-03-18-10-38-57.png "Queues link")
+
+3. On the **Queues** pane, select the **receiptgenerator** Service Bus Queue.
+
+    ![receiptgenerator queue is highlighted](media/2020-03-18-10-40-40.png "receiptgenerator queue is highlighted")
+
+4. On the **receiptgenerator** Service Bus Queue blade, select the **Shared access policies** link under Settings.
+
+    ![Shared access policies link is shown](media/2020-03-18-10-42-03.png "Shared access policies link is shown")
+
+5. Select the **Publisher** shared access policy.
+
+    ![Publisher policy is highlighted](media/2020-03-18-10-43-12.png "Publisher policy is highlighted")
+
+    >**Note**: The _Publisher_ and _Listener_ shared access policies for the Azure Service Bus Queue were deployed as part of the ARM Template that was used to setup the lab environment. As you can see, the **Publisher** policy that we're copying the connection string for, only has permissions to _Send_ messages to the queue.
+    >
+    > By default, no policies are created. Additionally, it is best practice to use least privilege security to create separate shared access policies for publishers sending messages and listeners receiving messages from the queue. 
+
+6. On the **SAS Policy** pane, copy the **Primary Connection String**. Paste the value into **Notepad** for later usage. 
+
+    ![Primary Connection String is highlighted](media/2020-03-18-10-54-39.png "Primary Connection String is highlighted")
+
+#### Subtask 4: Update the configuration in the starter project
 
 1. Go back to the **contososports** resource group blade.
 
@@ -221,7 +251,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
 3. Copy the web app URL to Notepad.
 
-    - select the **Overview** link.
+    - Select the **Overview** link.
     - Copy the URL to Notepad for later use. Use the **Copy to clipboard** link.
 
     ![In the Web App Overview settings, the URL has a box around the link.](media/2019-03-22-16-33-05.png "Contoso Web App Overview")
@@ -234,7 +264,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
    - Key: `AzureQueueConnectionString`
 
-   - Value: Enter the Connection String for the **Azure Storage Account** just created.
+   - Value: Enter the Connection String for the **Azure Service Bus Queue** just created.
 
     ![In the App settings section for the App Service blade, the new entry for AzureQueueConnectionString is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image40.png "App settings section")
 
@@ -256,7 +286,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
 8. Select **Save**.
 
-#### Subtask 4: Deploy the e-commerce Web App from Visual Studio
+#### Subtask 5: Deploy the e-commerce Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** of Visual Studio.
 
@@ -288,7 +318,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     >**Note**: If prompted with a warning about App Service supporting .NET Core 3.0.0, select **OK** to dismiss the warning.
     >
-    > ![App Service .NET Core 3.0.0 support warning](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/2019-11-15-18-12-21.png "App Service .NET Core 3.0.0 support warning")
+    > ![App Service .NET Core 3.0.0 support warning.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/2019-11-15-18-12-21.png "App Service .NET Core 3.0.0 support warning")
 
 8. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
 
@@ -325,8 +355,8 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
     The Secondary Azure Region should be the Region Pair for the region the SQL Database is hosted in. Consult <https://docs.microsoft.com/en-us/azure/best-practices-availability-paired-regions> to see which region pair the location you are using for this lab is in.
 
     >**Note**: If you choose a region that cannot be used as a secondary region, you will not be able to pick a pricing plan. Choose another region.
-
-    ![Wrong geo-replication region selected. Not available options presented.](media/2019-03-30-16-05-25.png "Not available options presented.")
+    > 
+    > ![Wrong geo-replication region selected. Not available options presented.](media/2019-03-30-16-05-25.png "Not available options presented.")
 
 5. On the **Create secondary** blade, select **Secondary Type** as **Readable**.
 
@@ -336,7 +366,7 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 7. On the **New server** blade, specify the following configuration:
 
-   - Server name: **A unique value (ensure the green checkmark appears)**
+   - Server name: **A unique value (ensure the green checkmark appears)**.
 
    - Server admin login: **demouser**
 
@@ -362,41 +392,33 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
     ![In the list of Databases, the ContosoSportsDB secondary replication role is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image58.png "Database list")
 
-12. On the **SQL Database** blade, open the **Show database connection strings** link.
-
-    ![On the SQL database blade, in the Essentials blade, the Connection strings (show database connection strings) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image59.png "SQL database blade")
-
-13. On the **Database connection strings** blade, select and copy the **ADO.NET** connection string, and save it in Notepad for use later.
-
-    ![On the Database connection strings blade, ADO.NET tab, the connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image60.png "Database connection strings blade")
-
-14. On the SQL database blade in the Essentials section, select the SQL Database Server name link.
+12. On the SQL database blade in the Essentials section, select the SQL Database Server name link.
 
     ![On the SQL database blade in the Essentials section, the Server name (contososqlserver2.database.windows.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image61.png "SQL database blade, Essentials section")
 
-15. On the **SQL Server** blade, select **Set server firewall** at the top.
+13. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
 
     ![On the SQL Server blade, at the top, the Set server firewall tile is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image62.png "SQL Server blade, Essentials section")
 
-16. On the **Firewall Settings** blade, specify a new rule named **ALL**, with START IP **0.0.0.0**, and END IP **255.255.255.255**.
+14. On the **Firewall Settings** blade, specify a new rule named **ALL**, with START IP **0.0.0.0**, and END IP **255.255.255.255**.
 
     ![On the Firewall Settings blade, in the New rule section, a new rule has been created with the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image27.png "New rule section ")
 
-17. Select **Save**.
+    >**Note**: This is only done to make the lab easier to do. In production, you do **NOT** want to open your SQL Database to all IP Addresses this way. Instead, you will want to specify just the IP Addresses you wish to allow through the Firewall.
+
+15. Select **Save**.
 
     ![Screenshot of the Firewall settings Save button.](media/2019-04-10-16-00-29.png "Firewall settings Save button")
 
-18. Update progress can be found by choosing the **Notifications** link located at the top of the page.
+16. Update progress can be found by choosing the **Notifications** link located at the top of the page.
 
     ![Screenshot of the Success dialog box, which says that the server firewall rules have been successfully updated.](media/2019-04-19-13-39-41.png "Success dialog box")
 
-19. Close all configuration blades.
+17. Close all configuration blades.
 
-#### Subtask 2: Failover secondary SQL database
+#### Subtask 2: Setup SQL Failover Group
 
->**Note**: This subtask is optional.
-
-Since the Replication and Failover process can take anywhere from 10 to 30 minutes to complete, you have the choice to skip Subtask 2 through 5, and go directly to Task 3. However, if you have the time, it is recommended that you complete these steps.
+With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feature can be used to enable "auto failover" scenarios for the SQL Database. This enables a single connection string endpoint to be used by the application, and SQL Database will automatically handle failing over from Primary to Secondary database in the event of a SQL Database outage / down time.
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
 
@@ -404,133 +426,116 @@ Since the Replication and Failover process can take anywhere from 10 to 30 minut
 
     ![Screenshot of SQL Databases tile](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
 
-3. On the **Settings** blade, select **Geo-Replication**.
+3. On the **SQL database** blade, within the **Overview** pane, select the **Server name**.
 
-    ![On the Settings blade, under Settings, Geo-Replication is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image64.png "Settings section")
+    ![SQL database blade with server name highlighted](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/primarysqldatabaseserverlink.png "SQL database blade with server name highlighted")
 
-4. On the **Geo-Replication** blade, select the *secondary* database.
+4. On the **SQL server** blade, select **Failover groups** under **Settings**.
 
-    ![The Geo-Replication blade has a map of the world with locations marked on it. Under the map, Primary is set to West US, which on the map has a blue check mark. Under Secondaries, East US is circled, and displays on the map with a green check mark. A line connects the West Coast (blue) and East Coast (green) check marks.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image65.png "Geo-Replication blade")
+    ![Failover groups setting option](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlserverfailovergroupslink.png "Failover groups setting option")
 
-5. Select the **Forced Failover** button.
+5. On the **Failover groups** pane, select the **Add group** button.
 
-    ![the Forced Failover button is circled on the Secondary database blade.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image66.png "Secondary database blade")
+    ![Add group button](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/failovergroupsaddgroupbutton.png "Add group buton")
 
-6. On the **Forced Failover** prompt, select **Yes**.
+6. On the **Failover group** pane, enter a unique **Failover group name**.
 
-    ![On the East US Secondary database blade, in response to the questing asking if you are sure you want to proceed, the Yes button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image67.png "Failover prompt")
+    ![Failover group name field](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupname.png "Failover group name field")
 
-The failover may take a few minutes to complete. You can continue with the next Subtask modifying the Web App to point to the Secondary SQL Database while the Failover is pending.
+7. Select **Secondary server**, then choose the **Secondary SQL Database** that was previously created.
 
-#### Subtask 3: Test e-commerce Web App after Failover
+    ![Secondary SQL Database is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondaryserver.png "Secondary SQL Database is highlighted")
 
-1. Once completed, in the Azure Portal, select **SQL databases**, and select the NEW **ContosoSportsDB** secondary.
+8. Select **Database within the group**, then choose the **ContosoSportsDB** database, then click **Select**.
 
-    ![On the SQL databases blade, under Name, the ContosoSportsDB Secondary replication role is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image68.png "SQL databases blade")
+    ![Steps to choose the ContosoSportsDB are highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondarydatabase.png "Steps to choose the ContosoSportsDB are highlighted")
 
-2. Next, select **Show database connection strings**, and copy it off thereby replacing the user and password.
+9. Select **Create** to create the SQL Failover Group.
 
-    ![On the SQL database blade, on the left Overview is selected. On the right, under Essentials, the Connection strings (Show database connection strings) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image69.png "SQL database blade")
+10. Once the Failover Group has been created, select it in the list.
 
-3. From the Azure portal, select **Resource Groups**, and select **contososports**.
+    ![Failover Group is highlighted](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergrouplist.png "Failover Group is highlighted")
 
-4. Select the **Web App** created earlier.
+11. Notice, on the **Failover group** pane, the map and display showing the _Primary_ and _Secondary_ SQL Database servers within the failover group. The _Primary_ database shows as **Automatic** failover for Read/Write of data, while the _Secondary_ database doesn't since it is currently Read only.
 
-5. On the **App Service** blade, scroll down in the left pane, and select **Configuration settings**.
+    ![Map display of Primary and Seconary databases.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupmap.png "Map display of Primary and Seconary databases")
 
-    ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
+12. Scroll down, below the map, to where the **Read/write listener endpoint** and **Read-only listener endpoint** are displayed. These allow for applications to be configured to connect to the SQL Failover Group endpoints instead of the individual SQL Server endpoints.
 
-6. Scroll down, and locate the **Connection strings** section.
+    Copy both **Listener Endpoint** values for later reference.
 
-7. Update the **ContosoSportsLeague** Connection String to the value of the **original Secondary Azure SQL Database**.
+    ![Read/Write and Read-only listener endpoints are displayed.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupendpoints.png "Read/Write and Read-only listener endpoints are displayed")
 
-    ![On the App Service blade, in the Connection strings section, the ContosoSportsLeague connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image70.png "App Service blade")
+13. Go back to the **contososports** resource group blade.
 
-    >**Note**: Ensure you replace the string placeholder values **{your\_username}** and **{your\_password\_here}** with the username and password you respectively setup during creation (demouser & demo@pass123).
+14. Select the **contosoapp** web app (**App Service** type).
 
-    ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder values")
+    ![contosoapp is highlighted](media/2019-04-19-13-46-40.png "contosoapp is highlighted")
 
-8. Select the **Save** button.
+15. On the **App Service** blade, scroll down in the left pane. Under the **Settings** menu, select **Configuration**.
 
-9. On the **App Service** blade, select **Overview**.
+    ![Configuration option is highlighted.](media/2019-04-19-16-38-54.png "Configuration option is highlighted")
 
-    ![Screenshot of Overview menu option](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image71.png "App Service blade")
+16. Locate the **Connection Strings** section, and modify the value of the **ContosoSportsLeague** connection string to include the **Azure SQL Failover Group Read/Write Listener Endpoint** that was copied previously.
 
-10. On the **Overview** pane, select the **URL** for the Web App to open it in a new browser tab.
+    > Note: The connection string will need to be in the following format:
+    > ```
+    > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID={your_username};Password={your_password_here};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    > ```
+    >
+    > Be sure to replace the string placeholder values **{your_username}**, **{your_password_here}**, and **{failover_group_endpoint}** with the username, password, and read/write listener endpoint for the SQL Database Failover Group. The username and password will remain the same as they were for the SQL Server.
 
-    ![On the App Service blade, in the Essentials section, the URL (http;//contososportsweb4azurewebsites.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image72.png "App Service blade Essentials section")
+17. Select **Save**.
 
-11. After the e-commerce Web App loads in Internet Explorer, select **STORE** in the top navigation bar of the website.
+#### Subtask 3: Failover SQL Database Failover Group
 
-    ![On the Contoso sports league website navigation bar, the Store button is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image73.png "Contoso sports league website navigation bar")
+>**Note**: This subtask is optional.
 
-12. Verify the product list from the database displays.
-
-    ![Screenshot of the Contoso store webpage. Under Team Apparel, a Contoso hat, tank top, and hoodie display.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image74.png "Contoso store webpage")
-
-#### Subtask 4: Revert Failover back to Primary database
+Since the Replication and Failover process can take anywhere from 10 to 30 minutes to complete, you have the choice to skip Subtask 3 and 4, and go directly to Task 3. However, if you have the time, it is recommended that you complete these steps.
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
 
-2. In the new **SQL databases**, and select the name of the SQL Database you created previously.
+2. In the navigation menu to the left, select **SQL databases**, and select the name of the *primary* SQL Database you created previously.
 
-    ![Screenshot of SQL Databases menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "SQL Databases")
+    ![Screenshot of SQL Databases tile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
 
-3. On the **Settings** blade, select **Geo-Replication**.
+3. On the **Overview** pane, select the **Server name**.
 
-    ![In the Settings section, Geo-Replication is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image64.png "Settings section")
+    ![Server name is highlighted.](images/2020-03-17-19-35-23.png "Server name is highlighted")
 
-4. On the **Geo-Replication** blade, select the Secondary database.
+4. On the **SQL server** blade, select **Failover groups** under Settings.
 
-    ![The Geo-Replication blade has a map of the world with locations marked on it. Under the map, Primary is set to East US, which on the map has a blue check mark. Under Secondaries, West US is circled, and displays on the map with a green check mark. A line connects the East US (blue) and West US (green) check marks.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image75.png "Geo-Replication blade")
+    ![Failover groups option is highlighted.](images/2020-03-17-19-37-00.png "Failover groups option is highlighted")
 
-5. Select the **Forced Failover** button.
+5. Select the **Failover group** in the list.
 
-    ![The Forced Failover button in the Secondary Database blade is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image76.png "Secondary Database blade")
+    ![Failover group is highlighted in the list.](images/2020-03-17-19-38-01.png "Failover group is highlighted in the list")
 
-6. On the **Forced Failover** prompt, select **Yes**.
+6. On the Failover group blade, select the **Forced Failover** button, then select **Yes** to confirm the forced failover of the SQL Database Failover Group.
 
-    ![On the West US Secondary database blade, in response to the questing asking if you are sure you want to proceed, the Yes button is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image77.png "Failover prompt")
+    ![Forced failover confirmation is displayed.](images/2020-03-17-19-39-56.png "Forced failover confirmation is displayed")
 
-The failover may take a few minutes to complete. You can continue with the next Subtask modifying the Web App to point back to the Primary SQL Database while the Failover is pending.
+The failover may take a few minutes to complete. You can continue with the next Subtask.
 
-#### Subtask 5: Test e-commerce Web App after reverting failover
+#### Subtask 4: Test e-commerce Web App after Failover
 
-1. In the Azure Portal, select **Resource Groups** **\>** **contososports** resource group.
+1. From the Azure portal, select **Resource Groups**, and select **contososports**.
 
-2. Select the **Web App** created in a previous step.
+2. Select the **Web App** created earlier.
 
-3. On the **App Service** blade, scroll down in the left pane, and select **Configuration settings**.
+3. On the **App Service** blade, select **Overview**.
 
-    ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
+    ![Screenshot of Overview menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image71.png "App Service blade")
 
-4. Scroll down, and locate the **Connection strings** section.
+4. On the **Overview** pane, select the **URL** for the Web App to open it in a new browser tab.
 
-5. Update the **ContosoSportsLeague** Connection String back to the value of the Connection String for the **original Primary SQL Database**.
+    ![On the App Service blade, in the Essentials section, the URL (http;//contososportsweb4azurewebsites.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image72.png "App Service blade Essentials section")
 
-    ![In the App Service blade Connection strings section, the ContosoSportsLeague connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image70.png "App Service blade")
-
-    > **Note**: Ensure you replace the string placeholder values **{your\_username}** **{your\_password\_here}** with the username and password you respectively setup during creation (demouser & demo@pass123).
-
-    ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder value")
-
-6. Select **Save**.
-
-    ![the Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
-
-7. On the **App Service** blade, select **Overview**.
-
-    ![Overview is selected on the App Service blade.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image71.png "App Service blade")
-
-8. On the **Overview** pane, select the **URL** for the Web App to open it in a new browser tab.
-
-    ![In the App Service blade Essentials section, the URL (http:/contososportsweb4.azurewebsites.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image72.png "App Service blade, Essentials section")
-
-9. After the e-commerce Web App loads in Internet Explorer, select **STORE** in the top navigation bar of the website.
+5. After the e-commerce Web App loads in Internet Explorer, select **STORE** in the top navigation bar of the website.
 
     ![On the Contoso sports league website navigation bar, the Store button is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image73.png "Contoso sports league website navigation bar")
 
-10. Verify the product list from the database displays.
+6. Verify the product list from the database displays.
 
     ![Screenshot of the Contoso store webpage. Under Team Apparel, a Contoso hat, tank top, and hoodie display.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image74.png "Contoso store webpage")
 
@@ -544,11 +549,11 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 2. Select **+Create a resource** then select **Web**, then **Web App**.
 
-3. Specify a **unique URL** for the Web App, and ensure the **same App Service Plan** and **resource group** you have used throughout the lab are selected. Also, specify **.NET Core 3.0** as the **Runtime stack**.
+3. Specify a **unique URL** for the Web App, **resource group** you have used throughout the lab are selected. Also, specify **.NET Core 3.1 (LTS)** as the **Runtime stack**.
 
     ![On the Web App blade, the App name field is set to contososportscallcentercp.](media/2019-03-28-05-29-59.png "Web App blade")
 
-4. Select **Windows Plan**, and select the **ContosoSportsPlan** used by the front-end Web app.
+4. Select **Linux Plan**, and create a new Linux-based App Service Plan for the Web App.
 
 5. After the values are accepted, select **Review and create**, then **Create**.  It will take a few minutes to provision.
 
@@ -556,7 +561,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 1. Navigate to the **App Service** blade for the Call Center Admin App just provisioned.
 
-    ![The App Service blade displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image80.png "App Service blade")
+    ![The App Service blade displays.](media/2020-03-17-19-59-03.png "App Service blade")
 
 2. On the **App Service** blade, select **Configuration** in the left pane.
 
@@ -568,19 +573,15 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     - Name: `ContosoSportsLeague`
 
-    - Value: **Enter the Connection String for the primary SQL Database**.
+    - Value: **Enter the Connection String for the SQL Database Failover Group Read/Write Listener Endpoint**.
 
     - Type: `SQL Azure`
 
     ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
 
-    >**Note**: Ensure you replace the string placeholder values **{your\_username}** **{your\_password\_here}** with the username and password you respectively setup during creation (demouser & demo@pass123).
+5. Select the **Update** button.
 
-    ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder values")
-
-    - Select the **Update** button.
-
-5. Select the **Save** button.
+6. Select the **Save** button.
 
     ![the Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
 
@@ -592,9 +593,9 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     ![In Solution Explorer, the right-click menu for Contoso.Apps.SportsLeague.Admin displays, and Publish is selected.](media/2019-04-19-14-30-03.png "Right-Click menu")
 
-3. Choose **App Service** as the publish target, choose **Select Existing**, then select **Create Profile**
+3. Choose **App Service Linux** as the publish target, choose **Select Existing**, then select **Create Profile**.
 
-    ![On the Publish tab, Microsoft Azure App Service is selected. Below that, the radio button is selected for Select Existing.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image87.png "Publish tab")
+    ![On the Publish tab, App Service Linux is selected. Below that, the radio button is selected for Select Existing.](media/2020-03-17-20-09-01.png "Publish tab")
 
 4. Select the **Web App** for the Call Center Admin App.
 
@@ -626,7 +627,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
    - **App name:** Specify a unique name for the App Name.
    - **Subscription:** Your Azure MSDN subscription.
-   - **Resource Group:** select **Use existing** option.
+   - **Resource Group:** Select **Use existing** option.
    - **App Service Plan/Location** Select the same primary region used in previous steps.
    - **Application Insights:** **Disabled**
 
@@ -648,19 +649,19 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 4. Select the Payment Gateway API app created earlier, select **OK**.
 
-    ![In the App Service section, the contososports folder is expanded, and PaymentsAPIO is selected. ](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image98.png "App Service section")
+    ![In the App Service section, the contososports folder is expanded, and PaymentsAPIO is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image98.png "App Service section")
 
 5. Select **Publish**.
 
 6. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
-    ![The Visual Studio output shows that the web app was published successfully. ](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
+    ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
 
 7. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
 
 8. Viewing the Web App in a browser will display the Swagger UI for the API.
 
-   ![Payment Gateway is up and running and the Swagger UI is displayed](media/2019-04-11-04-58-04.png "Swagger UI")
+   ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-04-58-04.png "Swagger UI")
 
 ### Task 5: Deploying the Offers Web API
 
@@ -704,19 +705,27 @@ In this exercise, the attendee will provision an Azure API app template using th
 
       - Name: `ContosoSportsLeague`
 
-      - Value: **Enter the Connection String for the SQL Database that was created**.
+      - Value: **Enter the Connection String for the SQL Database Failover Group Read-only Listener Endpoint**.
 
       - Type: `SQL Azure`
 
         ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
 
-        >**Note**: Ensure you replace the string placeholder values **{your\_username}** **{your\_password\_here}** with the username and password you respectively setup during creation (demouser & demo@pass123).
+        >**Note**: The Connection String for the SQL Database Failover Group Read-only Listener Endpoint will be in the following format:
+        >
+        > ```
+        > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID={your_username};Password={your_password_here};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+        > ```
+        >
+        > Ensure you replace the string placeholder values **{your\_username}**, **{your\_password\_here}**, and **{failover_group_endpoint}** with the username, password, and Failover Group Read-only Listener Endpoint you respectively setup during creation (demouser & demo@pass123).
+        >
+        > ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder value")
+        >
+        > The SQL Failover Group Read-only Listener Endpoint will be the DNS name that ends in `.secondary.database.windows.net`. You will have copied this previously when setting up the SQL Failover Group.
 
-        ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder value")
+3. Select the **Update** button.
 
-      - Select the **Update** button.
-
-3. Select the **Save** button.
+4. Select the **Save** button.
 
     ![The Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
 
@@ -744,7 +753,11 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 8. Viewing the Web App in a browser will display the Swagger UI for the API.
 
-    ![Payment Gateway is up and running and the Swagger UI is displayed](media/2019-04-11-05-20-40.png "Swagger UI")
+    ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-05-20-40.png "Swagger UI")
+
+9. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
+
+    ![Swagger UI displaying API call response.](media/2020-03-17-20-56-31.png "Swagger UI")
 
 ### Task 6: Update and deploy the e-commerce website
 
@@ -763,8 +776,6 @@ In this exercise, the attendee will provision an Azure API app template using th
     ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
 
 5. Scroll down, and locate the **Applications settings** section.
-
-    ![The App settings section of the App Service blade displays with AzureQueueConnectionString selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image115.png "App settings section")
 
 6. Add a new **Application Setting** with the following values:
 
@@ -824,7 +835,7 @@ The Contoso call center admin application will only be accessible by users of th
 
 2. In the left-hand navigation menu, select **Azure Active Directory**.
 
-    ![The Azure Active Directory menu option](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image123.png "Azure Portal")
+    ![The Azure Active Directory menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image123.png "Azure Portal")
 
 3. On the **Azure Active Directory** blade, locate and select the **Company branding** option.
 
@@ -850,7 +861,7 @@ The Contoso call center admin application will only be accessible by users of th
 
 2. Select **Azure Active Directory** in the navigation menu to the left.
 
-    ![Screenshot of Azure Active Directory menu option](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image123.png "Azure Portal")
+    ![Screenshot of Azure Active Directory menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image123.png "Azure Portal")
 
 3. On the **Azure Active Directory** blade, select **Custom Domain names**.
 
@@ -953,7 +964,7 @@ The Contoso call center admin application will only be accessible by users of th
 
     ![On the Azure Active Directory blade, Company branding is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image148.png "Azure Active Directory blade")
 
-4. select the **Configure...** information box.
+4. Select the **Configure...** information box.
 
     ![The Configure company branding link is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image149.png "Configure company branding link")
 
@@ -1053,7 +1064,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 1. Navigate back to the **Azure AD B2C** blade that was opened in the last task.
 
-2. To enable sign-up on your application, you will need to create a sign-up policy. This policy describes the experiences consumers will go through during sign-up and the contents of tokens the application will receive on successful sign-ups. Select **User flows (policies)** link on the left menu and then **+New user flow** link at the top of the blade.
+2. To enable sign-up on your application, you will need to create a sign-up policy. This policy describes the experiences consumers will go through during sign-up and the contents of tokens the application will receive on successful sign-ups. Select **User flows** link on the left menu and then **+New user flow** link at the top of the blade.
 
     ![In the Azure Portal, on the left, Azure AD B2C - User Flows selected.](media/2019-03-28-12-17-22.png "Azure AD B2C - User Flows selected")
 
@@ -1072,7 +1083,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 6. **Multifactor authentication** set to **Disabled**.
 
 7. **User attributes and claims**.
-    - Select the **Show more...** link
+    - Select the **Show more...** link.
 
     ![In the Azure AD B2C - User flow policy - create user flow pane, the Show more link is highlighted after the default user attributes and claims.](media/2019-03-28-12-38-39.png "Show more link")
 
@@ -1103,25 +1114,26 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 12. Open the policy by selecting the link in the list e.g. **B2C\_1\_SignUp**.
 
 13. Select **Run user flow** and open the dialog.
+
     ![In the Policies section, Sign-in policies is selected.](media/2019-03-28-12-52-27.png "Policies section")
 
-14. **Run user flow** - Choose application and run user flow. 
+14. Select **Run user flow** - Choose application and run user flow. 
 
     ![Choose application options are displayed. Contoso B2C Application option is selected. Run user flow button is displayed.](media/2019-03-28-12-55-51.png "Test the user flow")
 
 15. A browser tab/window will open that looks like the following screenshot.
 
     ![Test the user flow.  Sample sign in presented in the browser.](media/2019-03-28-13-00-01.png "Test the user flow")
-
+    
 16. Select **Sign up now**.
 
-   ![Sign up now fields are presented to the user](media/2019-03-28-13-02-25.png "Sign up now")
+    ![Sign up now fields are presented to the user.](media/2019-03-28-13-02-25.png "Sign up now")
 
 ### Task 4: Create a profile editing policy
 
 To enable profile editing on your application, you will need to create a profile editing policy. This policy describes the experiences that consumers will go through during profile editing and the contents of tokens that the application will receive on successful completion.
 
-1. Select **User flows (polices)** link on the left blade.
+1. Select **User flows** link on the left blade.
 
 2. Select **+ New user flow** link at the top of the blade.
 
@@ -1137,7 +1149,7 @@ To enable profile editing on your application, you will need to create a profile
 
 5. Select Identity providers, and then "**Local Account SignIn**."
 
-6. Select the **Show more...** link
+6. Select the **Show more...** link.
 
 7. Select **Collect attributes**. Here, you choose attributes the consumer can view and edit.
 
@@ -1169,35 +1181,93 @@ To enable profile editing on your application, you will need to create a profile
 
 13. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
 
-### Task 5: Modify the Contoso.App.SportsLeague.Web
+### Task 5: Create a password reset policy
 
-1. Expand the **Contoso.Apps.SportsLeague.Web** project. Find the **Startup.cs** code file, locate the `public void Configure(` method declaration, then add the following line of code to this method:
+To enable profile editing on your application, you will need to create a profile password reset. This policy describes the experiences that consumers will go through during password reset and the contents of tokens that the application will receive on successful completion.
+
+1. Select **User flows** link on the left blade.
+
+2. Select **+ New user flow** link at the top of the blade.
+
+3. Select **Password reset**.
+
+    ![The Create a user flow pane is displayed.  The Recommended tab is selected. The Password reset is highlighted.](media/2020-03-19-09-47-15.png "Select Password reset")
+
+4. The Name determines the profile editing policy name used by your application. For example, enter **SSPR**.
+
+    ![In the Add policy blade, Identity providers (1 Selected) is selected. Identities providers - select Reset password using email address.](media/2020-03-19-09-50-24.png "select Reset password using email address")
+
+5. Select Identity providers, and then "**Reset password using email address**."
+
+6. Select the **Show more...** link.
+
+7. Select **Return claim**. Here, you choose attributes about the user that are returned to the application in the token.
+
+    For now, select the following:
+
+    - **Email Addresses**
+    - **Given Name**
+
+    ![Return claim attributes selected blade.](media/2020-03-19-09-54-28.png "Return claims")
+
+8. Select **OK**.
+
+10. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_SSPR**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
+
+11. Open the policy by selecting **B2C\_1\_SSPR**, then **Run user flow**.
+
+12. Select **Contoso B2C application** in the **Select Application** drop-down.
+
+13. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
+
+### Task 6: Modify the Contoso.App.SportsLeague.Web
+
+1. Expand the **Contoso.Apps.SportsLeague.Web** project. Find the **Startup.cs** code file, locate the `public void ConfigureServices(` method declaration, then add the following line of code to the bottom of this method:
 
     ```csharp
-    app.UseAuthorization();
+    services.AddAuthentication(Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2CDefaults.AuthenticationScheme)
+                .AddAzureADB2C(options => Configuration.Bind("AzureADB2C", options));
     ```
 
     ![The Startup.cs file with the "app.UseAuthorization();" line of code highlighted.](media/2019-04-19-15-08-40.png "Startup.cs")
 
-2. Locate the Azure AD B2C name by navigating to your resource group. Copy the name to Notepad.
+2. Add the following `using` directives to the top of the **Startup.cs** code file:
+
+    ```
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
+    ```
+
+3. Locate the `app.UseAuthentication();` line within the `public void Configure` method, and add the following line of code after it:
+
+    ```
+    app.UseAuthentication();
+    app.UseAuthorization();
+    ```
+
+    The result will look similar to the following:
+
+    ![app.UseAuthentication code inserted.](media/2020-03-18-14-44-13.png "app.UseAuthentication code inserted")
+
+4. Locate the Azure AD B2C name by navigating to your resource group. Copy the name to Notepad.
 
     ![List of all of the resources within the ContosoSports resource group. Pointing to the B2C tenant name.](media/2019-03-28-16-51-14.png "Locate B2C tenant name")
 
-3. Next, using the Azure Management Portal, using your main subscription, open the Contoso Web App blade, and select **Configuration**.
+5. Next, using the Azure Management Portal, using your main subscription, open the Contoso Web App blade, and select **Configuration**.
 
-4. Add the following settings in the **Application Settings** section:
+6. Add the following settings in the **Application Settings** section:
 
-   - AzureADB2C:Instance - `https://login.microsoftonline.com/tfp/`.
+   - AzureADB2C:Instance - `https://[your Azure AD B2C name].b2clogin.com/tfp/`
    - AzureADB2C:ClientId - **B2C Application ID you copied down earlier**.
-   - AzureADB2C:CallbackPath - `/signin-oidc-b2c`.
-   - AzureADB2C:Domain - **[your Azure AD B2C name].onmicrosoft.com**.
-   - AzureADB2C:SignUpSignInPolicyId - **B2C_1_SignUp**.
-   - AzureADB2C:ResetPasswordPolicyId - **B2C_1_SSPR**.
-   - AzureADB2C:EditProfilePolicyId - **B2C_1_EditProfile**.
+   - AzureADB2C:CallbackPath - `/signin-oidc-b2c`
+   - AzureADB2C:Domain - **[your Azure AD B2C name].onmicrosoft.com**
+   - AzureADB2C:SignUpSignInPolicyId - `B2C_1_SignUp`
+   - AzureADB2C:ResetPasswordPolicyId - `B2C_1_SSPR`
+   - AzureADB2C:EditProfilePolicyId - `B2C_1_EditProfile`
 
-5. Select **Save** when you are complete.
+7. Select **Save**.
 
-### Task 6: Send authentication requests to Azure AD
+### Task 7: Send authentication requests to Azure AD
 
 Your app is now properly configured to communicate with Azure AD B2C by using ASP.NET Core Identity. OWIN has taken care of all of the details of crafting authentication messages, validating tokens from Azure AD, and maintaining user session. All that remains is to initiate each user's flow.
 
@@ -1212,80 +1282,87 @@ Your app is now properly configured to communicate with Azure AD B2C by using AS
 3. Add the following using statement to the top of the controller:
 
     ```csharp
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-    using System.Threading.Tasks;
     ```
 
 4. Locate the default controller **Index** method.
 
     ![The Default controller method Index is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image179.png "Default controller method Index")
 
-    Replace the method with the following code, then **Save** the file.
+    Replace the method with the following code, then **Save** the file:
 
     ```csharp
     // Controllers\AccountController.cs
 
-    public static string SignUpSignInPolicyId;
-    public static string EditProfilePolicyId;
+    private string _editProfilePolicyId;
 
     public AccountController(IConfiguration configuration)
     {
-        SignUpSignInPolicyId = configuration.GetValue<string>("AzureADB2C:SignUpSignInPolicyId");
-        EditProfilePolicyId = configuration.GetValue<string>("AzureADB2C:EditProfilePolicyId");
+        _editProfilePolicyId = configuration.GetValue<string>("AzureADB2C:EditProfilePolicyId");
     }
 
-    public async Task SignIn()
+    public ActionResult SignIn()
     {
         if (!User.Identity.IsAuthenticated)
         {
-            // To execute a policy, you simply need to trigger an OWIN challenge.
-            // You can indicate which policy to use by specifying the policy id as the AuthenticationType
-            await HttpContext.ChallengeAsync(SignUpSignInPolicyId,
-                new AuthenticationProperties() { RedirectUri = "/" });
+            return Challenge(new AuthenticationProperties() { RedirectUri = "/" }, AzureADB2CDefaults.AuthenticationScheme);
         }
+        return RedirectToAction("Index", "Home");
     }
-
-    public async Task SignUp()
+            
+    public ActionResult SignUp()
     {
         if (!User.Identity.IsAuthenticated)
         {
-            await HttpContext.ChallengeAsync(SignUpSignInPolicyId,
-                new AuthenticationProperties() { RedirectUri = "/" });
+            return Challenge(new AuthenticationProperties() { RedirectUri = "/" }, AzureADB2CDefaults.AuthenticationScheme);
         }
+        return RedirectToAction("Index", "Home");
     }
 
-
-    public async Task Profile()
+    public ActionResult Profile()
     {
         if (User.Identity.IsAuthenticated)
         {
-            await HttpContext.ChallengeAsync(EditProfilePolicyId,
-                new AuthenticationProperties() { RedirectUri = "/" });
+                var properties = new AuthenticationProperties() { RedirectUri = "/" };
+                properties.Items[AzureADB2CDefaults.PolicyKey] = _editProfilePolicyId;
+                return Challenge(
+                    properties,
+                    AzureADB2CDefaults.AuthenticationScheme);
         }
+        return RedirectToAction("Index", "Home");
     }
 
-    public async Task SignOut()
+    public ActionResult SignOut()
     {
-        if (User.Identity.IsAuthenticated)
+        if (!User.Identity.IsAuthenticated)
         {
-            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
+        string redirectUri = Url.Action("Index", "Home", null, Request.Scheme);
+        var properties = new AuthenticationProperties
+        {
+            RedirectUri = redirectUri
+        };
+        return SignOut(properties, AzureADB2CDefaults.CookieScheme, AzureADB2CDefaults.OpenIdScheme);
     }
-
     ```
 
-### Task 7: Display user information
+5. Save the file.
+
+### Task 8: Display user information
 
 When you authenticate users by using OpenID Connect, Azure AD returns an ID token to the app that contains **claims**. These are assertions about the user. You can use claims to personalize your app. You can access user claims in your controllers via the ClaimsPrincipal.Current security principal object.
 
-1. Open the **Controllers\\HomeController.cs** file and add the following using statements at the end of the other using statements at the top of the file.
+1. Open the **Controllers\\HomeController.cs** file and add the following using statements at the end of the other using statements at the top of the file:
 
     ```csharp
-    using System.Linq;
-    using System.Security.Claims;
-    using Microsoft.AspNetCore.Authorization
+    using Contoso.Apps.SportsLeague.Web.Models;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     ```
 
 2. Still in the **Controllers\\HomeController.cs** file, add the following method to the **HomeController** class:
@@ -1294,8 +1371,9 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
     [Authorize]
     public ActionResult Claims()
     {
-        Claim displayName = ClaimsPrincipal.Current.FindFirst(ClaimsPrincipal.Current.Identities.First().NameClaimType);
-        ViewBag.DisplayName = displayName != null ? displayName.Value : string.Empty;
+        var displayName = User.Identity.Name;
+        ViewBag.DisplayName = displayName;
+        ViewBag.Claims = User.Claims;
         return View();
     }
     ```
@@ -1321,7 +1399,7 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
             <th class="claim-data claim-head">Claim Value</th>
         </tr>
 
-        @foreach (Claim claim in ClaimsPrincipal.Current.Claims)
+        @foreach (Claim claim in ViewBag.Claims)
         {
             <tr>
                 <td class="claim-type claim-data">@claim.Type</td>
@@ -1329,7 +1407,6 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
             </tr>
         }
     </table>
-
     ```
 
 5. Right-click on the **Views -\> Shared** folder, select **Add**, add a new **View**, and set it to **Create as a partial view**. Specify **\_LoginPartial** for the name.
@@ -1368,10 +1445,9 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
             <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
         </ul>
     }
-
     ```
 
-7. Open **Views\\Shared\\\_Layout.cshtml** in Visual Studio. Locate the header-top div. and add the line that starts with **@Html.ActionLink** and the line that starts with **@Html.Partial**.
+7. Open **Views\\Shared\\\_Layout.cshtml** in Visual Studio. Locate the header-top div, and add the line that starts with **@Html.ActionLink** and the line that starts with **@Html.Partial**.
 
     ```html
     <div class="header-top">
@@ -1393,7 +1469,7 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
     </div>
     ```
 
-### Task 8: Run the sample app
+### Task 9: Run the sample app
 
 1. Right-click on the **Contoso.Apps.SportsLeague.Web** project, and select **Publish**. Follow the steps to deploy the updated application to the Microsoft Azure Web App.
 
@@ -1407,9 +1483,12 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
 
     ![On the Contoso website, the following links are circled: Claims, Sign up, and Sign in.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image182.png "Contoso website")
 
-    Claims information page![On the Contoso website, the following links are circled: Russell, Sign out, and Edit Profile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image183.png "Contoso website, Claims information page")
+    Claims information page:    
+    ![On the Contoso website, the following links are circled: Russell, Sign out, and Edit Profile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image183.png "Contoso website, Claims information page")
 
 ## Exercise 4: Enabling Telemetry with Application Insights
+
+Duration: 30 Minutes
 
 To configure the application for logging and diagnostics, you have been asked to configure Microsoft Azure Application Insights and add some custom telemetry.
 
@@ -1458,9 +1537,10 @@ To configure the application for logging and diagnostics, you have been asked to
 
 2. Select the **Application Insights** instance with the name that starts with **contososportsai** that is associated with the Contoso E-Commerce Site.
 
-3. Capture the **Instrumentation Key**
-       - Select the **Overview** menu item.
-       - Copy the **Instrumentation Key** to Notepad for later use.
+3. Capture the **Instrumentation Key**.
+
+    - Select the **Overview** menu item.
+    - Copy the **Instrumentation Key** to Notepad for later use.
 
     ![Contoso.Apps.SportsLeague Application Insights Overview. Instrumentation Key selected.](media/2019-03-29-10-36-23.png "Instrumentation Key selected")
 
@@ -1472,23 +1552,25 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ![Screenshot of the MONITOR AND DIAGNOSE CLIENT SIDE APPLICATION arrow.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image197.png "MONITOR AND DIAGNOSE CLIENT SIDE APPLICATION ")
 
-    > **Note**: You can find the documentation page at the following URL: <https://docs.microsoft.com/azure/azure-monitor/app/javascript#snippet-based-setup>
+    > **Note**: You can find the documentation page at the following URL: <https://docs.microsoft.com/azure/azure-monitor/app/javascript#snippet-based-setup>.
 
 6. Select and copy the full contents of the JavaScript under the **Snippet based setup** heading.
 
-    ![Under Guidance in the Client application monitoring and diagnosis blade, JavaScript displays. ](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image198.png "Client application monitoring and diagnosis blade")
+    ![Under Guidance in the Client application monitoring and diagnosis blade, JavaScript displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image198.png "Client application monitoring and diagnosis blade")
 
     Here's the JavaScript code to copy/paste for quick reference:
 
     ```javascript
-        <script type="text/javascript">
-        var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(e){function n(e){t[e]=function(){var n=arguments;t.queue.push(function(){t[e].apply(t,n)})}}var t={config:e};t.initialize=!0;var i=document,a=window;setTimeout(function(){var n=i.createElement("script");n.src=e.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",i.getElementsByTagName("script")[0].parentNode.appendChild(n)});try{t.cookie=i.cookie}catch(e){}t.queue=[],t.version=2;for(var r=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];r.length;)n("track"+r.pop());n("startTrackPage"),n("stopTrackPage");var s="Track"+r[0];if(n("start"+s),n("stop"+s),n("addTelemetryInitializer"),n("setAuthenticatedUserContext"),n("clearAuthenticatedUserContext"),n("flush"),t.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},!(!0===e.disableExceptionTracking||e.extensionConfig&&e.extensionConfig.ApplicationInsightsAnalytics&&!0===e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){n("_"+(r="onerror"));var o=a[r];a[r]=function(e,n,i,a,s){var c=o&&o(e,n,i,a,s);return!0!==c&&t["_"+r]({message:e,url:n,lineNumber:i,columnNumber:a,error:s}),c},e.autoExceptionInstrumented=!0}return t}(
-        {
-          instrumentationKey:"INSTRUMENTATION_KEY"
-        }
-        );window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
-        </script>
+    <script type="text/javascript">
+    var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(n){var o={config:n,initialize:!0},t=document,e=window,i="script";setTimeout(function(){var e=t.createElement(i);e.src=n.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",t.getElementsByTagName(i)[0].parentNode.appendChild(e)});try{o.cookie=t.cookie}catch(e){}function a(n){o[n]=function(){var e=arguments;o.queue.push(function(){o[n].apply(o,e)})}}o.queue=[],o.version=2;for(var s=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];s.length;)a("track"+s.pop());var r="Track",c=r+"Page";a("start"+c),a("stop"+c);var u=r+"Event";if(a("start"+u),a("stop"+u),a("addTelemetryInitializer"),a("setAuthenticatedUserContext"),a("clearAuthenticatedUserContext"),a("flush"),o.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},!(!0===n.disableExceptionTracking||n.extensionConfig&&n.extensionConfig.ApplicationInsightsAnalytics&&!0===n.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){a("_"+(s="onerror"));var p=e[s];e[s]=function(e,n,t,i,a){var r=p&&p(e,n,t,i,a);return!0!==r&&o["_"+s]({message:e,url:n,lineNumber:t,columnNumber:i,error:a}),r},n.autoExceptionInstrumented=!0}return o}(
+    {
+    instrumentationKey:"INSTRUMENTATION_KEY"
+    }
+    );(window[aiName]=aisdk).queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
+    </script>
     ```
+
+    >**Note**: Make sure to replace the `INSTRUMENTATION_KEY` placeholder with the Application Insights Instrumentation Key.
 
 7. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** in Visual Studio.
 
@@ -1588,7 +1670,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ![The Application Insights configuration option Contoso.Apps.SportsLeague.Web is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image216.png "Application Insights configuration option")
 
-5. Select **Dashboard**.  View the performance timeline to see the overall number of requests and page load time.
+5. Select **Application Dashboard**.  View the performance timeline to see the overall number of requests and page load time.
 
     ![Application Insights - Contoso.Apps.SportsLeague.Web - At the top of the page, the Application Dashboard link is highlighted and has an arrow pointing to it. Failed requests and server response metrics are displayed.](media/2019-03-29-11-10-04.png "Click the Dashboard link")
 
@@ -1600,15 +1682,17 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ![Contoso.Apps.SportsLeague.Web Performance - Endpoint performance metrics are displayed for various types of HTTP requests.](media/2019-03-29-11-20-06.png "Endpoint performance")
 
-7. Under **Usage** link area. select the **Events** menu option. Select the **View More Insights** button.
+7. Under **Usage** link area, select the **Events** menu option. Select the **View More Insights** button.
 
     ![A screenshot using the Events button under the Usage Preview section.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image218.png "The Usage Preview section")
 
-8. Select **View More Metrics**, then scroll down to see event list.
+8. Select **View More Insights**, then scroll down to see event list.
 
     ![In the Custom events section, event metrics are displayed for users and sessions. Different web pages are listed. e.g. OrderCompleted and SuccessfulPaymentAuth.](media/2019-03-29-11-35-33.png "Event Statistics")
 
 ## Exercise 5: Automating backend processes with Azure Functions and Logic Apps
+
+Duration: 45 Minutes
 
 Contoso wants to automate the process of generating receipts in PDF format and alerting users when their orders have been processed using Azure Logic App and Functions. To run custom snippets of C\# or node.js in logic apps, you can create custom functions through Azure Functions. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview) offers server-free computing in Microsoft Azure and are useful for performing these tasks:
 
@@ -1626,66 +1710,72 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 2. Provision and deploy the new function app, with the following settings:
 
-    - [**Resource Group**](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview): Use the existing resource group, **contososports**.
+    - **Resource Group**: Use the existing resource group, **contososports**.
+
+    - **Function App name**: _Choose a unique name_.
+
+    - **Publish**: Code
 
     - **Runtime Stack**: .NET Core.
 
-    - **Region**: Choose the same region used for the e-commerce web apps in this lab.
+    - **Region**: _Choose the same region used for the e-commerce web apps in this lab_.
 
 3. Select **Next: Hosting >**.
 
 4. On the **Hosting** tab, select the following values, then select **Review + create**:
 
-    - **Operating System**: Windows.
+    - **Operating System**: Windows
 
-    - **Plan type**: App service plan.
+    - **Plan type**: App service plan
 
     - **Windows Plan**: Choose the App Service Plan used for the e-commerce web app.
 
-5. Navigate to the Storage Account in the **contososports** resource group, go to **Access Keys** and copy the **Connection String** for the Storage Account. Paste your storage account connection string into Notepad to save for later.
+5. Select **Create**.
+
+6. Navigate to the Storage Account in the **contososports** resource group, go to **Access Keys** and copy the **Connection String** for the Storage Account. Paste your storage account connection string into Notepad to save for later.
 
     ![Display storage account list.  Pointing to Access keys.](media/2019-04-15-15-07-15.png "Storage Account Access keys")
 
-6. Navigate to the **Function App** that was just created, and select **Configuration**.
+7. Navigate to the **Function App** that was just created, and select **Configuration**.
 
     ![Display Contoso Function App, with the Configuration link highlighted.](media/2019-04-15-15-15-22.png "Contoso Function App Application Settings")
 
-7. Add a new Application Setting with the following values, then select **Save**:
+8. Add a new Application Setting with the following values, then select **Save**:
 
-    - **Name**: `contososportsstorage`.
+    - **Name**: `contososportsstorage`
     - **Value**: Enter the Connection String for your storage account.
 
     ![Updated Function App Application settings. Showing final values.](media/2019-04-15-16-18-36.png "Updated Function App Application settings.")
 
-8. To publish the Function App, open the Visual Studio solution, Right-click on the **ContosoFunctionApp** project, then select **Publish**.
+9. To publish the Function App, open the Visual Studio solution, Right-click on the **ContosoFunctionApp** project, then select **Publish**.
 
     ![Visual Studio Solution Explorer is open. Menu is displayed for Contoso Function App. Selecting function app publish.](media/2019-04-15-15-31-03.png "Selecting function app publish")
 
-9. On the **Pick a publish target** dialog, choose **Select existing**, then select **Create Profile**.
+10. On the **Pick a publish target** dialog, choose **Select existing**, then select **Create Profile**.
 
-10. Select the **Function App**, then select **OK**.
+11. Select the **Function App**, then select **OK**.
 
     ![Azure function app tree displayed. The Contoso Function App is selected.](media/2019-04-15-15-34-54.png "Azure function app tree displayed")
 
-11. Select **Publish**.
+12. Select **Publish**.
 
-    The publish should only take minute or so. You can check the **Output** window for any errors that may occur.
+    The publish should only take a minute or so. You can check the **Output** window for any errors that may occur.
 
     ![The build Output window is displayed. Publish succeeded message is shown.](media/2019-04-15-15-33-20.png "Output window.")
 
-12. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
+13. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
 
-13. select the **Test** link located on the right-hand blade.
+14. Select the **Test** link located on the right-hand blade.
 
     ![Function apps are listed on the left hand side. ContosoMakePDF is selected.  There is an arrow pointing to the Test link on the right pane.](media/2019-04-15-15-40-27.png "Function Test link")
 
-14. Select **POST** for the HTTP method.
+15. Select **POST** for the HTTP method.
 
-15. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
+16. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
 
     ![A small screenshot of Windows Explorer is shown emphasizing the file path to the sample.dat file.](media/2019-04-15-15-47-39.png "Sample.dat File")
 
-16. Select the **Run** button located at the bottom of the blade.
+17. Select the **Run** button located at the bottom of the blade.
 
     ![The screenshot displays the Test blade with sample.dat contents. The Request body field shows the Order JSON. There is an arrow pointing to Run button.](media/2019-04-15-15-52-59.png "Display Test blade with sample.dat contents")
 
@@ -1695,22 +1785,22 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
     ![There is a screenshot displaying the Function App test result log.  A status code of 200 OK is displayed on the right side pane.](media/2019-04-15-15-58-54.png "Function App test result log.")
 
-16. Check your receipt PDF in the storage account blob.
+18. Check your receipt PDF in the storage account blob.
 
     - Navigate to the ContosoSports storage account.
     - Select the **Blobs** link.
 
     ![The Settings options are displayed. There is an arrow pointing to the Blobs link.](media/2019-04-15-16-06-17.png "Blobs link")
 
-17. Choose the newly created **receipts** blob container.
+19. Choose the newly created **receipts** blob container.
 
-    ![The storage account blobs are listed. Receipts blob container is highlighted.](media/2019-04-15-16-08-35.png "Click the Blobs link")
+    ![The storage account blobs are listed. The receipts blob container is highlighted.](media/2019-04-15-16-08-35.png "Click the Blobs link")
 
-18. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
+20. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
 
     ![There is a screenshot displaying a list of the newly created PDF receipts. An arrow pointing to the Download link is located on the right side of the screen.](media/2019-04-15-16-11-24.png "PDF Receipts")
 
-    - Open the `...` link and choose download menu item.
+21. Open the `...` link and choose download menu item.
 
     ![A sample Contoso Sports League PDF receipt is displayed.](media/2019-04-15-16-15-06.png "Sample PDF receipt")
 
@@ -1744,7 +1834,7 @@ The advantages of using Logic Apps include the following:
 
     ![In the Azure Portal, logic is in the search field, and under that, Logic apps is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image238.png "Azure Portal")
 
-4. select the **Logic App Designer** link.
+4. Select the **Logic App Designer** link.
 
     ![In the Logic app blade, under Development tools, Logic App Designer is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image239.png "Logic app blade")
 
@@ -1752,142 +1842,145 @@ The advantages of using Logic Apps include the following:
 
     ![In the Logic Apps Designer, the Blank Logic App tile is selected.](media/2019-03-29-12-56-10.png "Logic Apps Designer")
 
-6. Search for **Azure Queues**.
+6. Select the **All** tab, then select **Azure Queues**.
 
-    ![In the Services section, the Azure Queues tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image241.png "Services section")
+    ![In the Services section, the Azure Service Bus tile is selected.](media/2020-03-18-12-12-10.png "Services section")
 
-7. Select **Azure Queues -- When there are messages in a queue**.
+7. Select **Service Bus - When a message is received in a queue (auto-complete)**.
 
-    ![In the Search all triggers section, Azure Queues - When there are messages in a queue is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image242.png "Search all triggers section")
+    ![In the Search all triggers section, Service Bus - When a message is received in a queue (auto-complete).](media/2020-03-18-12-13-24.png "Search all triggers section")
 
-8. Specify **ContosoStorage** as the connection name, select the Contoso storage account from the list, and select **Create**.
+8. Specify **ContosoQueue** as the connection name, select the Contoso storage account from the list, and select **Create**.
 
-    ![In When there are messages in a queue, the Connection Name is ContosoStorage, and under Storage Account, contosostorage123321 is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image243.png "When there are messages in a queue ")
+    ![In When there are messages in a queue, the Connection Name is ContosoQueue, and under Service Bus Namespace, contosooiyxeonvhew7u is selected.](media/2020-03-18-12-15-23.png "When there are messages in a queue ")
 
-9. Select the **receiptgenerator** queue from the drop-down, select **New Step**, and **Add an Action**.
+9. Select the **RootManageSharedAccessKey*** from the list of Service Bus Policies, then select **Create**.
 
-    ![Under When there are messages in a queue, the Queue name is set to receiptgenerator. At the bottom, the New Step and Add an action buttons are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image244.png "Queue name")
+    ![RootManageSharedAccessKey is selected.](media/2020-03-18-12-17-17.png "RootManageSharedAccessKey is selected")
 
-10. Select **Azure Functions**.
+10. Select the **receiptgenerator** queue from the drop-down, select **New Step**, and **Add an Action**.
 
-    ![In the Choose an action section, under Services ,the Azure Functions tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image245.png "Choose an action")
+    ![Under When there are messages in a queue, the Queue name is set to receiptgenerator.](media/2020-03-18-12-19-06.png "Queue name")
 
-11. Select the **Azure Function App** you just created.
+    >**Note**: If you wish, you can set the **Interval** and **Frequency** to check for new items to a shorter interval than the default; such as every 30 seconds. This could help reduce delay for when the Logic App is triggered when new messages are sent to the Service Bus Queue while you progress through this lab.
 
-    ![Under Azure Functions, on the Actions tab, a single Action, the Azure function contosofunction2101, is listed.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image246.png "Azure Functions")
+11. Select the **+ New step** button, then select **Azure Functions**.
 
-12. Select the Azure function **ContosoMakePDF**.
+    ![In the Choose an action section, under Services ,the Azure Functions tile is selected.](media/2020-03-18-12-21-44.png "Choose an action")
 
-    ![Under Azure Functions, on the Actions tab, a single Action, the Azure function contosofunction2101, is listed.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image247.png "Azure Functions")
+12. Select the **Azure Function App** you just created.
 
-13. Type this in the Request Body:
+    ![Under Azure Functions, on the Actions tab, a single Action, the Azure function ContosoFunctionApp, is listed.](media/2020-03-18-12-22-46.png "Azure Functions")
 
-    ```json
-    {"Order": pick MessageText from list on right }
-    ```
+13. Select the Azure function **ContosoMakePDF**.
 
-    Make sure the syntax is json format. Sometimes the ":" will go to the right side of MessageText by mistake. Keep it on the left. It should look like this:
+    ![Under Azure Functions, on the Actions tab, a single Action, the Azure function ContosoMakePDF, is listed.](media/2020-03-18-12-23-39.png "Azure Functions")
 
-    ![Under ContosoMakePDF, the previous JSON code is typed in the Request Body, and to the right of this, in Insert parameters from previous steps, Message text is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image248.png "ContosoMakePDF")
-
-14. Select **Save** to save the Logic App.
-
-15. There is one modification we need to make in the code. select the **CodeView** button.
-
-    ![In the Logic App, the CodeView button is selected from the top menu.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image250.png "Logic App")
-
-16. Find the line of code in the body for the Order item that reads the MessageText value from the queue, and add the base64 function around it to ensure it encoded before passing it off to the Azure function. It should look like the following:
+14. Type this in the Request Body:
 
     ```json
-    "Order": "@{base64(triggerBody()?['MessageText'])}"
+    {"Order": pick Content from list }
     ```
 
-    ![In the Order item code, the following line of code is circled: \"Order\": \"@{base64(triggerBody()?\[\'MessageText\'\])}\"](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image251.png "Order item code")
+    Make sure the syntax is json format. Sometimes the ":" will go to the right side of Content by mistake. Keep it on the left. It should look like this:
 
-17. Select **Save** again.
+    ![Under ContosoMakePDF, the previous JSON code is typed in the Request Body, and to the right of this, in Insert parameters from previous steps, Content is selected.](media/2020-03-18-12-25-29.png "ContosoMakePDF")
 
-18. Run the logic app. It should process the orders you have submitted previously to test PDF generation. Using Azure Storage Explorer or Visual Studio Cloud Explorer you can navigate to the storage account and open the receipts container to see the created PDFs.
+15. Select **Save** to save the Logic App.
+
+16. Run the logic app. It should process the orders you have submitted previously to test PDF generation. Using Azure Storage Explorer or Visual Studio Cloud Explorer you can navigate to the storage account and open the receipts container to see the created PDFs.
 
     ![In Azure Storage Explorer, on the left, the following tree view is expanded: Storage Accounts\\contososportsstorage01r\\Blob Containers. Under Blob Containers, receipts is selected. On the right, the ContosoSportsLeague-Store-Receipt-72.pdf is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image252.png "Azure Storage Explorer")
 
-18. Double-click it to see the Purchase receipt.
+17. Double-click it to see the Purchase receipt.
 
-19. Now, select the **Designer** button in the Logic Apps Designer screen. add two more steps to the flow for updating the database and removing the message from the queue after it has been processed. Switch back to the designer, select **+ New step**.
+18. Now, select the **Designer** button in the Logic Apps Designer screen. add two more steps to the flow for updating the database and removing the message from the queue after it has been processed. Switch back to the designer, select **+ New step**.
 
     ![In Designer, the New Step link is circled. Under New step, the Add an action tile is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image254.png "Designer")
 
-20. Select **SQL Server**.
+19. Select **SQL Server**.
 
     ![In the Services section, under Services, SQL Server is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image255.png "Services section")
 
-21. Select **SQL Server - Update row**.
+20. Select **SQL Server - Update row (V2)**.
 
-    ![In the SQL Server section, on the Actions tab, SQL Server - Update row is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image256.png "SQL Server section")
+    ![In the SQL Server section, on the Actions tab, SQL Server - Update row (V2) is selected.](media/2020-03-18-12-35-07.png "SQL Server section")
 
-22. Name the connection `ContosoSportsDB`, and select the primary ContosoSportsDB database for your solution. Under the user name and password used to create it, select **Create**.
+21. Enter the following values, then select **Create**:
 
-    ![The Update row section displays the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image257.png "Update row")
+    - Authentication Type: **SQL Server Authentication**
 
-23. From the drop-down select the name of the table, **Orders**.
+    - SQL server name: _Enter the DNS name of the SQL Database Failover Cluster Read/Write Listener Endpoint that was copied previously_.
 
-    ![In the Update row section, under Table name, Orders is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image258.png "Update row section")
+    - SQL database name: `ContosoSportsDB`
 
-24. Press **Save** and ignore the error. Select the **Code View** button.
+    - Username: `demouser`
 
-25. Replace these lines:
+    - Password: `demo@pass123`
 
-    ![Screenshot of code to be replaced.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image259.png "Code view")
+    ![The Update row section displays the previously defined settings.](media/2020-03-18-12-37-03.png "Update row")
 
-    With these:
+22. Select the **Server name** and **Database name** previously specified, then from the drop-down select the name of the **Orders** table, and enter `OrderId` into the **Row id** field.
 
-    ```json
-    "OrderDate": "@{body('ContosoMakePDF')['OrderDate']}",
-    "FirstName": "@{body('ContosoMakePDF')['FirstName']}",
-    "LastName": "@{body('ContosoMakePDF')['LastName']}",
-    "Address": "@{body('ContosoMakePDF')['Address']}",
-    "City": "@{body('ContosoMakePDF')['City']}",
-    "State": "@{body('ContosoMakePDF')['State']}",
-    "PostalCode": "@{body('ContosoMakePDF')['PostalCode']}",
-    "Country": "@{body('ContosoMakePDF')['Country']}",
-    "Phone": "@{body('ContosoMakePDF')['Phone']}",
-    "SMSOptIn": "@{body('ContosoMakePDF')['SMSOptIn']}",
-    "SMSStatus": "@{body('ContosoMakePDF')['SMSStatus']}",
-    "Email": "@{body('ContosoMakePDF')['Email']}",
-    "ReceiptUrl": "@{body('ContosoMakePDF')['ReceiptUrl']}",
-    "Total": "@{body('ContosoMakePDF')['Total']}",
-    "PaymentTransactionId": "@{body('ContosoMakePDF')['PaymentTransactionId']}",
-    "HasBeenShipped": "@{body('ContosoMakePDF')['HasBeenShipped']}"
-    ```
+    ![In the Update row section, under Table name, Orders is selected.](media/2020-03-18-12-41-11.png "Update row section")
 
-26. And modify the path variable to include the index key or OrderId to be as follows:
+23. Press **Save**, then select the **Code View** button.
+
+24. Add the following JSON within the `Update_row_(V2).inputs` object:
 
     ```json
-    "path": "/datasets/default/tables/@{encodeURIComponent(encodeURIComponent('[dbo].[Orders]'))}/items/@{encodeURIComponent(encodeURIComponent(body('ContosoMakePDF')['OrderId']))}"
+    "body": {
+        "OrderDate": "@{body('ContosoMakePDF')['OrderDate']}",
+        "FirstName": "@{body('ContosoMakePDF')['FirstName']}",
+        "LastName": "@{body('ContosoMakePDF')['LastName']}",
+        "Address": "@{body('ContosoMakePDF')['Address']}",
+        "City": "@{body('ContosoMakePDF')['City']}",
+        "State": "@{body('ContosoMakePDF')['State']}",
+        "PostalCode": "@{body('ContosoMakePDF')['PostalCode']}",
+        "Country": "@{body('ContosoMakePDF')['Country']}",
+        "Phone": "@{body('ContosoMakePDF')['Phone']}",
+        "SMSOptIn": "@{body('ContosoMakePDF')['SMSOptIn']}",
+        "SMSStatus": "@{body('ContosoMakePDF')['SMSStatus']}",
+        "Email": "@{body('ContosoMakePDF')['Email']}",
+        "ReceiptUrl": "@{body('ContosoMakePDF')['ReceiptUrl']}",
+        "Total": "@{body('ContosoMakePDF')['Total']}",
+        "PaymentTransactionId": "@{body('ContosoMakePDF')['PaymentTransactionId']}",
+        "HasBeenShipped": "@{body('ContosoMakePDF')['HasBeenShipped']}"
+    },
     ```
 
-    The code should now look as follows for the update\_row method:
+    After this has been added, the JSON will look as follows:
 
-    ![Screenshot of replacement code.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image260.png "Code")
+    ![JSON edits have been made.](media/2020-03-18-18-21-47.png "JSON edits have been made")
 
-27. **Save** and return to the designer.
+25. And modify the `path` variable for the `Update_row_(V2)` action to include the index key or OrderId as follows:
 
-28. Your updated designer view should look like this:
+    ```json
+    "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('default'))},@{encodeURIComponent(encodeURIComponent('default'))}/tables/@{encodeURIComponent(encodeURIComponent('[dbo].[Orders]'))}/items/@{encodeURIComponent(encodeURIComponent(body('ContosoMakePDF')['OrderId']))}"
+    ```
+
+26. **Save** and return to the designer.
+
+27. Your updated designer view should look like this:
 
     ![The Update row section displays the purchase fields.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image261.png "Update row section")
 
-29. Finally, let us add one more step to remove the message from the queue. Press **+New Step**. Type in Queue in the search box, and select Azure Queues -- Delete message.
+28. Finally, let us add one more step to remove the message from the queue. Press **+New Step**. Select **Service Bus**, then select the **Complete the message in a queue** action.
 
-    ![In the Choose an action section, queue is typed in the search field. Under Services, Azure Queues is selected. On the Actions tab, Azure Queues - Delete message is selected. ](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image262.png "Choose an action section")
+    ![In the Choose an action section, under Service Bus, the Complete the message in a queue is selected. ](media/2020-03-18-12-51-40.png "Choose an action section")
 
-30. Select the **receiptgenerator** queue from the list.
+29. Select the **receiptgenerator** queue from the list.
 
-31. Select **Message Id** **\>** **Pop Receipt** from the list, and select **Save**.
+30. Select **Lock token of the message** **\>** **Lock Token** from the list of outputs form the Trigger, and select **Save**.
 
-    ![In the Update row section, on the left in the Delete message fields, Message ID and Pop receipt are selected. On the right, under When there are messages in a queue, Message ID and Pop receipt are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image263.png "Update row section")
+    ![Lock token of the message field is set to the Lock Token of the Service Bus Trigger.](media/2020-03-18-12-54-28.png "Lock token is highlighted")
+
+31. Select **Save**.
 
 32. Select Run on the Logic App Designer, and then run the Contoso sports Web App and check out an Item.
 
 33. Run the call center website app, and select the last Details link in the list.
+
     ![Screenshot of the Details link.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image264.png "Details link")
 
 34. You should now see a Download receipt link because the database has been updated.
@@ -1898,7 +1991,7 @@ The advantages of using Logic Apps include the following:
 
 36. Return to the Logic app and you should see all green check marks for each step. If not, select the yellow status icon to find out details.
 
-    ![In the Logic app, all steps have green checkmarks.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image267.png "Logic app")
+    ![In the Logic app, all steps have green checkmarks.](media/2020-03-18-19-05-39.png "Logic app")
 
 ### Task 3: Use Twilio to send SMS Order Notifications
 
@@ -1906,9 +1999,9 @@ The advantages of using Logic Apps include the following:
 
 1. If you do not have a Twilio account, sign up for one for free at the following URL:
 
-    [**https://www.twilio.com/try-twilio**](https://www.twilio.com/try-twilio)
+[**https://www.twilio.com/try-twilio**](https://www.twilio.com/try-twilio)
 
-    ![Screenshot of the Twilio account Sign up for free webpage.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image268.png "Twilio account Sign up webpage")
+   ![Screenshot of the Twilio account Sign up for free webpage.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image268.png "Twilio account Sign up webpage")
 
 2. Select **All Products & Services**.
 
@@ -1943,6 +2036,7 @@ The advantages of using Logic Apps include the following:
     > - In the Overview, locate the **Show database connection strings** link.
     > - Copy the **Server** parameter value.
     e.g. Server=tcp:``contososqlserver2019th.database.windows.net,1433``
+    
 
     ![In Object Explorer, ContosoSportsDBserver1234.database is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image276.png "Object Explorer")
 
@@ -1984,9 +2078,9 @@ The advantages of using Logic Apps include the following:
 
     ![In the Azure Portal, on the left side, the Create a resource menu option is selected. On the right, Web and Logic App are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image279.png "Azure Portal")
 
-8. On the **Create logic app** blade, assign a value for **Name**, and set the Resource Group to **contososports**.
+8. On the **Create logic app** blade, assign a value for **Name**, and set the Resource Group to **contososports**, then create the Logic App.
 
-    ![In the Create logic app blade, the Name field is set to contososportssms. Under Resource group, Use existing is selected, and contososports is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image280.png "Create logic app blade")
+    ![In the Create logic app blade, the Name field is set to contososportssms. Under Resource group, Use existing is selected, and contososports is selected.](media/2020-03-19-11-31-05.png "Create logic app blade")
 
 9. In the navigation menu to the left in the Portal, select **Resource Groups** then **contososports**, then the new Logic App you just created. 
 
@@ -2002,71 +2096,65 @@ The advantages of using Logic Apps include the following:
 
     ![Under Recurrence, the Frequency field is Minute, and the Interval field is 1.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image284.png "Recurrence section")
 
-13. Select the **New Step** button followed by **Add an action**.
+13. Select the **+ New Step** button.
 
-    ![The New step button and Add an action buttons are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image285.png "Recurrence section")
+14. Type **SQL Server** into the filter box, and select the **SQL Server -- Execute stored procedure (V2)** action.
 
-14. Type **SQL Server** into the filter box, and select the SQL **Server -- Execute stored procedure** action.
+    ![Under Choose an action, sql server is typed in the search field. On the Actions tab, SQL Server (Execute stored procedure V2) is selected.](media/2020-03-19-11-34-57.png "Choose an action section")
 
-    ![Under Choose an action, sql server is typed in the search field. On the Actions tab, SQL Server (Execute stored procedure) is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image286.png "Choose an action section")
+15. Select the **Server name**, **Database name**, and `'[dbo].[GetUnprocessedOrders]` **Procedure name** values.
 
-15. The first time you add a SQL action, you will be prompted for the connection information. Name the connection **ContosoDB**, input the server and database details used earlier, and select **Create**.
+    ![In the Execute stored procedure section, the Procedure name is \[dbo\].\[GetUnprocessedOrders\].](media/2020-03-19-11-37-08.png "Execute stored procedure section")
 
-    ![In the SQL Server - Execute stored procedure section, the Connection Name is contosoDB. Server and database details are the same as used earlier.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image287.png "SQL Server - Execute stored procedure section")
-
-16. Select the **\[dbo\].\[GetUnprocessedOrders\]** stored procedure from the drop-down on the Procedure Name field.
-
-    ![In the Execute stored procedure section, the Procedure name is \[dbo\].\[GetUnprocessedOrders\].](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image288.png "Execute stored procedure section")
-
-17. Select **New Step**, and search for and select the **Control** object.
+16. Select **New Step**, and search for and select the **Control** object.
 
     ![The Control object is highlighted on the logic app designer pick tool.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image289.png "Buttons")
 
-18. Select **New Step**, and search for and select the **Control -> Condition** object.
+17. Select **New Step**, and search for and select the **Control -> Condition** object.
 
     ![The Control Condition object is highlighted on the logic app designer pick tool.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image290b.png "Buttons")  
 
-19. Select **Choose a value**, and then select **Return Code** from the Dynamic content tile.
+18. Select **Choose a value**, and then select **Return Code** from the Dynamic content tile.
 
     ![The Choose a value box and Return Code objects are highlighte in the Dynamic content tile in the Logic Designer.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image290c.png "Buttons")
 
-20. Specify **ReturnCode**, set the RELATIONSHIP to **is greater than**, and set the VALUE to **0**.
+19. Specify **ReturnCode**, set the RELATIONSHIP to **is greater than**, and set the VALUE to **0**.
 
     ![Under Condition, Object Name is ReturnCode, Relationship is greater than, and Value is 0.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image290.png "Condition section")
 
-21. Select the **Add an action** link on the **If true** condition.
+20. Select the **Add an action** link on the **If true** condition.
 
     ![Under If true, the Add an action button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image291.png "If yes section")
 
-22. Select **SQL Server**, and then select the **SQL Server -- Execute stored procedure** action
+21. Select **SQL Server**, and then select the **SQL Server -- Execute stored procedure (V2)** action.
 
-    ![Under If Yes, SQL Server - Execute stored procedure is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image292.png "If yes section")
+    ![Under If Yes, SQL Server - Execute stored procedure is circled.](media/2020-03-19-11-39-54.png "If yes section")
 
-23. Select the **ProcessOrders** stored procedure in the Procedure name dropdown.
+22. Select the **ProcessOrders** stored procedure in the Procedure name dropdown.
 
-    ![Under If Yes, Execute stored procedure 2 is selected, and the Procedure name is \[dbo\].\[ProcessOrders\].](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image293.png "If yes section")
+    ![Under If Yes, Execute stored procedure 2 is selected, and the Procedure name is \[dbo\].\[ProcessOrders\].](media/2020-03-19-11-40-49.png "If yes section")
 
-24. Select the **Add an action** link.
+23. Select the **Add an action** link.
 
     ![The Add an action button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image294.png "Add an action button")
 
-25. Type **Twilio** in the filter box, and select the **Twilio -- Send Text Message (SMS)** connector.
+24. Type **Twilio** in the filter box, and select the **Twilio -- Send Text Message (SMS)** connector.
 
     ![Under Show Microsoft managed APIs, the Search box is set to Twilio, and below, Twilio - Send Text Message (SMS) is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image295.png "Show Microsoft managed APIs")
 
-26. Set the Connection Name to Twilio, specify your Twilio **Account SID** and **Authentication Token**, then select the **Create** button.
+25. Set the Connection Name to Twilio, specify your Twilio **Account SID** and **Authentication Token**, then select the **Create** button.
 
     ![In the Twilio - Send Text Message (SMS) section, fields are set to the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image296.png "Twilio - Send Text Message (SMS)")
 
-27. Using the drop-down, select your Twilio number for the **FROM PHONE NUMBER** field. Specify a place holder phone number in the **TO PHONE NUMBER**, and a **TEXT** message.
+26. Using the drop-down, select your Twilio number for the **FROM PHONE NUMBER** field. Specify a place holder phone number in the **TO PHONE NUMBER**, and a **TEXT** message.
 
-    ![Under Send Text Message (SMS), the From Phone Number and To Phone Number fields are circled, and in the Text field is the message, Hello, your order has shipped!](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image297.png "Send Text Message (SMS)")
+    ![Under Send Text Message (SMS), the From Phone Number and To Phone Number fields are circled, and in the Text field is the message, Hello, your order has shipped!](media/2020-03-19-11-43-06.png "Send Text Message (SMS)")
 
-28. On the Logic App toolbar, select the **Code View** button.
+27. On the Logic App toolbar, select the **Code View** button.
 
     ![The code view button is selected on the Logic App toolbar.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image298.png "Logic App toolbar")
 
-29. Find the **Send\_Text\_Message\_(SMS)** action, and modify the body property of the Twilio action:
+28. Find the **Send\_Text\_Message\_(SMS)** action, and modify the body property of the Twilio action:
 
     ![The Code view displays the text message, and the from and to phone numbers.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image299.png "Code view")
 
@@ -2078,7 +2166,7 @@ The advantages of using Logic Apps include the following:
 
     ![The Code view now displays the added code in the text message.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image300.png "Code view")
 
-30. Modify the **to** property to pull the phone number from the item.
+29. Modify the **to** property to pull the phone number from the item.
 
     ```json
     "to": "@{item()['Phone']}"
@@ -2086,7 +2174,7 @@ The advantages of using Logic Apps include the following:
 
     ![The to phone number code now displays the updated line of code.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image301.png "Code view")
 
-31. Immediately before the **Send\_Text\_Message\_(SMS)** section, create a new line, and add the following code:
+30. Immediately before the **Send\_Text\_Message\_(SMS)** section, create a new line, and add the following code:
 
   ```json
     "forEach_email": {
@@ -2095,11 +2183,11 @@ The advantages of using Logic Apps include the following:
       "actions": {
   ```
 
-32. Remove the **runAfter** block from the **Send\_Text\_Message\_(SMS)** action.
+31. Remove the **runAfter** block from the **Send\_Text\_Message\_(SMS)** action.
 
     ![The runAfter block of code displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image302.png "Code view")
 
-33. Locate the closing bracket of the **Send\_Text\_Message\_(SMS)** action, create a new line after it (be **SURE** to place a leading comma after the closing bracket), and add the following code:
+32. Locate the closing bracket of the **Send\_Text\_Message\_(SMS)** action, create a new line after it (be **SURE** to place a leading comma after the closing bracket), and add the following code:
 
   ```json
         },
@@ -2111,15 +2199,15 @@ The advantages of using Logic Apps include the following:
     }
   ```
 
-34. Select **Save** on the toolbar to enable the logic app.
+33. Select **Save** on the toolbar to enable the logic app.
 
     ![On the Logic Apps Designer toolbar, the Save button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image304.png "Logic Apps Designer toolbar")
 
-35. After the code for the **Send\_Text\_Message\_(SMS)** has been modified to be contained within the **forEach\_email** action and you save it, it should look like the following:
+34. After the code for the **Send\_Text\_Message\_(SMS)** has been modified to be contained within the **forEach\_email** action and you save it, it should look like the following:
 
     ![The Code view displays the code from \"Foreach\" to \"Execute stored procedure.\"](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image303.png "Code view")
 
-36. Your workflow should look like below, and you should receive a text for each order you have placed.
+35. Your workflow should look like the image below, and you should receive a text for each order you placed.
 
     ![The Workflow diagram begins with Recurrence, then flows to Execute stored procedure, then to Condition. The Condition fields are as follows: Object Name, ReturnCode; Relationship, is greater than; Value, 0. Below the Workflow diagram is an If Yes box, with a workflow that begins wtih Execute stored procedure 2, and flows to forEach email. There is also an If No, Do Nothing box.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image305.png "Workflow diagram")
 
