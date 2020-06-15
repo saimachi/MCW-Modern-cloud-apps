@@ -414,7 +414,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
 
-2. In the navigation menu to the left, select **SQL databases**, and select the name of the *primary* SQL Database you created previously.
+2. In the navigation menu to the left, select **SQL databases**, and select the name of the **Primary** SQL Database you created previously.
 
     ![Screenshot of SQL Databases tile](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
 
@@ -487,7 +487,7 @@ Since the Replication and Failover process can take anywhere from 10 to 30 minut
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
 
-2. In the navigation menu to the left, select **SQL databases**, and select the name of the *primary* SQL Database you created previously.
+2. In the navigation menu to the left, select **SQL databases**, and select the name of the **Primary** SQL Database you created previously.
 
     ![Screenshot of SQL Databases tile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
 
