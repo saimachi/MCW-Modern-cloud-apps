@@ -288,31 +288,27 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** of Visual Studio.
 
-    ![In Solution Explorer, under Solution \'Contoso.Apps.SportsLeague\' (7 projects), Web is expanded, and under Web, Contoso.Apps.SportsLeague.Web is selected.](media/2019-04-19-14-03-04.png "Solution Explorer")
-
 2. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Publish**.
 
-    >**Note**: Don't publish if the configuration does not show your settings. Choose **New Profile** to publish to your Azure subscription.
-    > 
-    > ![Visual Studio Publish configuration left over from developer. A don't publish message is displayed. There is a box around New Profile link.](media/2019-03-22-12-42-48.png "Select New Profile")
+    ![In Solution Explorer, under Solution \'Contoso.Apps.SportsLeague\' (7 projects), Web is expanded, and under Web, Contoso.Apps.SportsLeague.Web is selected.](media/2019-04-19-14-03-04.png "Solution Explorer")
 
-3. Choose **Azure App Service** as the publish target, and choose **Select Existing** and then **Create Profile** at the bottom of the wizard.
+3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
 
-    ![On the Publish tab, the Microsoft Azure App Service tile is selected, as is the radio button for Select Existing.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish tab")
+    ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. If prompted, log on with your Azure Subscription credentials.
+4. For the **Specifici target**, choose **Azure App Service (Windows)**, then select **Next**.
 
-    ![App Service Select Existing App Service dialog is displayed. The Sign In link is highlighted](media/2019-04-19-14-07-19.png "Azure Sign In")
+    ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
 
-    >**Note**: If you Sign In and nothing happens, shut down Visual Studio reopen to the solution. Repeat the publishing steps.
+5. Select the **Contoso Sports Web App** (with the name that was created previously).
 
-5. Select the **Contoso Sports Web App** (with the name you created previously).
+    ![Under Subscriptions, under contososports, contosoapp Web App is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image49.png "Publish App Service")
 
-    ![Under Subscriptions, under contososports, contososportsweb0 is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image49.png "Subscriptions")
-
-6. Select **OK**.
+6. Select **Finish**.
 
 7. Select **Publish** to publish the Web application.
+
+    ![Publish profile is displayed with the Publish button highlighted](media/2020-06-15-16-53-15.png "Publish profile")
 
     >**Note**: If prompted with a warning about App Service supporting .NET Core 3.0.0, select **OK** to dismiss the warning.
     >
@@ -348,7 +344,7 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 4. Select the Azure Region to place the Secondary within.
 
-    ![The Geo-Replication blade has a map of the world with locations marked on it. Under the map, Primary is set to West US, which on the map has a blue checkmark.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image54.png "Geo-Replication blade")
+    ![The Geo-Replication pane with list of locations. Primary location is set to West US.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image54.png "Geo-Replication blade")
 
     The Secondary Azure Region should be the Region Pair for the region the SQL Database is hosted in. Consult <https://docs.microsoft.com/en-us/azure/best-practices-availability-paired-regions> to see which region pair the location you are using for this lab is in.
 
