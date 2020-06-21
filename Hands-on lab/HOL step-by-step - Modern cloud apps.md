@@ -81,9 +81,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
       - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
       - [Subtask 2: Enable client side telemetry](#subtask-2-enable-client-side-telemetry)
       - [Subtask 3: Deploy the e-commerce Web App from Visual Studio](#subtask-3-deploy-the-e-commerce-web-app-from-visual-studio)
-    - [Task 2: Creating the web performance test and load test](#task-2-creating-the-web-performance-test-and-load-test)
-      - [Subtask 1: Create the load test](#subtask-1-create-the-load-test)
-      - [Subtask 2: View the Application Insights logs](#subtask-2-view-the-application-insights-logs)
+    - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
     - [Task 2: Create an Azure Logic App to Process Orders](#task-2-create-an-azure-logic-app-to-process-orders)
@@ -1238,7 +1236,7 @@ To enable profile editing on your application, you will need to create a profile
     using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
     ```
 
-3. Locate the `app.UseAuthentication();` line within the `public void Configure` method, and add the following line of code after it:
+3. Locate the `app.UseAuthorization();` line within the `public void Configure` method, and add the following line of code before it:
 
     ```
     app.UseAuthentication();
@@ -1275,7 +1273,7 @@ Your app is now properly configured to communicate with Azure AD B2C by using AS
 
     ![In Solution Explorer, in the right-click menu for the Controllers folder, Add is selected, and from its menu, Controller is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image177.png "Solution Explorer")
 
-2. Select **MVC Controller -- Empty** and then select **Add**. Replace **DefaultController** value with **AccountController** in the **Add Controller** dialog box.
+2. Select **MVC Controller -- Empty** and then select **Add**. Replace default name of **HOmeController1.cs** with the name of **AccountController.cs** for the new Controller being added.
 
     ![On the left of the Add Scaffold window, Installed / Controller is selected. In the center of the window, MVC 5 Controller - Empty is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image178.png "Add Scaffold window")
 
@@ -1378,7 +1376,7 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
     }
     ```
 
-3. You can access any claim that your application receives in the same way. A list of all the claims the app receives is available for you on the **Claims** page. In Visual Studio on the Contoso.Apps.SportsLeague.Web object, right-click on **Views -\> Home,** select **Add -\> View** and name it **Claims.**  Select **OK**.
+3. You can access any claim that your application receives in the same way. A list of all the claims the app receives is available for you on the **Claims** page. In Visual Studio on the Contoso.Apps.SportsLeague.Web object, right-click on **Views -\> Home,** select **Add -\> View**, choose **Razor View - Empty** and name it **Claims.cshtml**.
 
     ![In Solution Explorer, on the right-click menu for Views\\Home, Add is selected, and from its menu, View is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image180.png "Solution Explorer")
 
@@ -1409,11 +1407,9 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
     </table>
     ```
 
-5. Right-click on the **Views -\> Shared** folder, select **Add**, add a new **View**, and set it to **Create as a partial view**. Specify **\_LoginPartial** for the name.
+5. Right-click on the **Views -\> Shared** folder, select **Add**, add a new **View**. Choose **Razor View - Empty** and **\_LoginPartial.cshtml** for the name.
 
     ![In Solution Explorer, on the right-click menu for Views\\Shared, Add is selected, and from its menu, View is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image180.png  "Solution Explorer")
-
-    !["Create as a partial view" is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image180-b.png "Add MVC View")
 
 6. Add the following code to the razor partial view to provide a sign-in and sign-out link as well as a link to edit the user's profile:
 
@@ -1447,7 +1443,7 @@ When you authenticate users by using OpenID Connect, Azure AD returns an ID toke
     }
     ```
 
-7. Open **Views\\Shared\\\_Layout.cshtml** in Visual Studio. Locate the header-top div, and add the line that starts with **@Html.ActionLink** and the line that starts with **@Html.Partial**.
+7. Open `Views\Shared\_Layout.cshtml` in Visual Studio. Locate the header-top div, and add the line that starts with `@Html.ActionLink` and the line that starts with `@Html.Partial`.
 
     ```html
     <div class="header-top">
@@ -1562,15 +1558,20 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ```javascript
     <script type="text/javascript">
-    var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(n){var o={config:n,initialize:!0},t=document,e=window,i="script";setTimeout(function(){var e=t.createElement(i);e.src=n.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",t.getElementsByTagName(i)[0].parentNode.appendChild(e)});try{o.cookie=t.cookie}catch(e){}function a(n){o[n]=function(){var e=arguments;o.queue.push(function(){o[n].apply(o,e)})}}o.queue=[],o.version=2;for(var s=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];s.length;)a("track"+s.pop());var r="Track",c=r+"Page";a("start"+c),a("stop"+c);var u=r+"Event";if(a("start"+u),a("stop"+u),a("addTelemetryInitializer"),a("setAuthenticatedUserContext"),a("clearAuthenticatedUserContext"),a("flush"),o.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},!(!0===n.disableExceptionTracking||n.extensionConfig&&n.extensionConfig.ApplicationInsightsAnalytics&&!0===n.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){a("_"+(s="onerror"));var p=e[s];e[s]=function(e,n,t,i,a){var r=p&&p(e,n,t,i,a);return!0!==r&&o["_"+s]({message:e,url:n,lineNumber:t,columnNumber:i,error:a}),r},n.autoExceptionInstrumented=!0}return o}(
-    {
-    instrumentationKey:"INSTRUMENTATION_KEY"
-    }
-    );(window[aiName]=aisdk).queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
+    !function(T,l,y){var S=T.location,u="script",k="instrumentationKey",D="ingestionendpoint",C="disableExceptionTracking",E="ai.device.",I="toLowerCase",b="crossOrigin",w="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"4",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[I](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,p,l,u;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][I]()]=i[1])}if(!e[D]){var r=e.endpointsuffix,o=r?e.location:null;e[D]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[k]||d[k]||"",p=s[D],l=p?p+"/v2/track":config.endpointUrl,(u=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=l,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),u.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,l)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:w,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(w,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(u,l))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(u);n.src=h;var e=y[b];return!e&&""!==e||"undefined"==n[b]||(n[b]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(u)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[C]&&!0!==s[C]){method="onerror",t(["_"+method]);var c=T[method];T[method]=function(e,t,n,a,i){var r=c&&c(e,t,n,a,i);return!0!==r&&m["_"+method]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);(T[t]=n).queue&&0===n.queue.length&&n.trackPageView({})}(window,document,{
+    src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
+    //name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
+    //ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
+    //useXhr: 1, // Use XHR instead of fetch to report failures (if available),
+    //crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
+    cfg: { // Application Insights Configuration
+        instrumentationKey: "YOUR_INSTRUMENTATION_KEY_GOES_HERE"
+        /* ...Other Configuration Options... */
+    }});
     </script>
     ```
 
-    >**Note**: Make sure to replace the `INSTRUMENTATION_KEY` placeholder with the Application Insights Instrumentation Key.
+    >**Note**: Make sure to replace the `YOUR_INSTRUMENTATION_KEY_GOES_HERE` placeholder with the Application Insights Instrumentation Key.
 
 7. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** in Visual Studio.
 
@@ -1598,67 +1599,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 4. Select a few links on the published E-Commerce website, and submit several orders to generate some sample telemetry.
 
-### Task 2: Creating the web performance test and load test
-
-#### Subtask 1: Create the load test
-
-1. Open the Azure Management Portal (<http://portal.azure.com>), and navigate to the **contososports** Resource Group.
-
-2. Select the **Application Insights** instance with the name that starts with **contososportsai** that is associated with the Contoso E-Commerce Site.
-
-3. Select **Performance Testing**.
-
-    ![On the Configure menu, Performance Testing is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image205.png "Configure menu")
-
-4. Select the **Set Organization** button to associate/create an Azure DevOps account.
-
-    ![On the Application Insights blade, Set Organization is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image206.png "Application Insights blade")
-
-5. On the Organization Settings tile, select the **Or Create New** link.
-
-    ![On the Organization Settings tile, the Or Create New link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image207.png "Account tile")
-
-6. Specify a unique name for the account and select a region.
-
-    >**Note**: The region may differ from the region you have deployed your resources.
-
-    ![On the Organization Settings blade, under Azure DevOps Account, contososportsis selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image208.png "Account Settings blade")
-
-7. Select **Subscription**, and select **your Subscription**.
-
-    ![The Subscription option displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image209.png "Subscription option")
-
-8. Choose **Select location**. Next, select a Location.
-
-    ![The Select location option displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image210.png "Select location option ")
-
-    >**Note**: The location tile may disappear after setting your Subscription.
-
-9. Then, select **OK**.
-
-    >**Note**: The Azure DevOps account creation will take a minute to complete.
-
-10. Select **New**.
-
-    ![On the Application Insights blade, the New button is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image211.png "Application Insights blade")
-
-11. Select **Configure Test Using**.
-
-    ![The Configure Test Using option displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image212.png "Configure Test Using option")
-
-12. Specify the **URL** to the Contoso E-Commerce site, and select **Done**.
-
-    ![In the Configure test using blade, the https://contososportsweb3.azurewebsites URL is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image213.png "Configure test using")
-
-13. Name the test **ContosoSportsTest**, and select the **Run test** button.
-
-    ![On the New performance test blade, under Name, ContosoSportsTest is selected. At the bottom, the Run test button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image214.png "New performance test blade")
-
-14. Wait until the load test has completed. This may take 5-10 minutes.
-
-    ![In the Recent runs section, the load test for ContosoSportsTest has a state of Completed.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image215.png "Recent runs section")
-
-#### Subtask 2: View the Application Insights logs
+### Task 2: View the Application Insights logs
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management portal <http://portal.azure.com>.
 
@@ -1668,7 +1609,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 4. On the **Application Insights** blade, select the Application Insights configuration you created for the e-commerce website.
 
-    ![The Application Insights configuration option Contoso.Apps.SportsLeague.Web is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image216.png "Application Insights configuration option")
+    ![The Application Insights configuration option Contoso.Apps.SportsLeague.Web is selected.](media/2020-06-21-11-06-31.png "Application Insights configuration option")
 
 5. Select **Application Dashboard**.  View the performance timeline to see the overall number of requests and page load time.
 
@@ -1676,7 +1617,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ![The Contoso web metrics are displayed. Usage, reliability, and responsiveness graphs are displayed.](media/2019-03-29-11-12-13.png "Application Insights Default Dashboard")
 
-6. Navigate back to the Application Insights overview for ``Contoso.Apps.SportsLeague.Web``. Select **Performance** to see individual endpoint render performance.
+6. Navigate back to the Application Insights overview for the **Application Insights** instance, then select **Performance** to see individual endpoint render performance.
   
     ![Contoso.Apps.SportsLeague.Web Performance link selected.](media/2019-03-29-11-01-14.png "Performance link selected")
 
@@ -1689,6 +1630,7 @@ To configure the application for logging and diagnostics, you have been asked to
 8. Select **View More Insights**, then scroll down to see event list.
 
     ![In the Custom events section, event metrics are displayed for users and sessions. Different web pages are listed. e.g. OrderCompleted and SuccessfulPaymentAuth.](media/2019-03-29-11-35-33.png "Event Statistics")
+    ![](media/2020-06-21-11-09-04.png)
 
 ## Exercise 5: Automating backend processes with Azure Functions and Logic Apps
 
@@ -1730,7 +1672,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
     - **Windows Plan**: Choose the App Service Plan used for the e-commerce web app.
 
-5. Select **Create**.
+5. Select **Review + create**, then **Create**.
 
 6. Navigate to the Storage Account in the **contososports** resource group, go to **Access Keys** and copy the **Connection String** for the Storage Account. Paste your storage account connection string into Notepad to save for later.
 
@@ -1738,7 +1680,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 7. Navigate to the **Function App** that was just created, and select **Configuration**.
 
-    ![Display Contoso Function App, with the Configuration link highlighted.](media/2019-04-15-15-15-22.png "Contoso Function App Application Settings")
+    ![Display Contoso Function App, with the Configuration link highlighted.](media/2020-06-21-11-19-23.png "Contoso Function App Application Settings")
 
 8. Add a new Application Setting with the following values, then select **Save**:
 
@@ -1751,11 +1693,11 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
     ![Visual Studio Solution Explorer is open. Menu is displayed for Contoso Function App. Selecting function app publish.](media/2019-04-15-15-31-03.png "Selecting function app publish")
 
-10. On the **Pick a publish target** dialog, choose **Select existing**, then select **Create Profile**.
+10. On the **Publish** dialog, choose the target of **Azure**, then **Azure Function App (Windows)**.
 
-11. Select the **Function App**, then select **OK**.
+11. Select the **Function App**, then select **Finish**.
 
-    ![Azure function app tree displayed. The Contoso Function App is selected.](media/2019-04-15-15-34-54.png "Azure function app tree displayed")
+    ![Azure function app tree displayed. The Contoso Function App is selected.](media/2020-06-21-11-22-17.png "Azure function app tree displayed")
 
 12. Select **Publish**.
 
@@ -1765,9 +1707,11 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 13. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
 
-14. Select the **Test** link located on the right-hand blade.
+    ![The Azure Functions shows the ContosoMakePDF function listed.](media/2020-06-21-11-25-59.png "Azure Functions")
 
-    ![Function apps are listed on the left hand side. ContosoMakePDF is selected.  There is an arrow pointing to the Test link on the right pane.](media/2019-04-15-15-40-27.png "Function Test link")
+14. Select the **Code + Test** link, then select the **Test/Run** button.
+
+    ![The Code + Test link and Test/Run button are highlighted](media/2020-06-21-11-27-28.png "Function Test link")
 
 15. Select **POST** for the HTTP method.
 
@@ -1777,20 +1721,20 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 17. Select the **Run** button located at the bottom of the blade.
 
-    ![The screenshot displays the Test blade with sample.dat contents. The Request body field shows the Order JSON. There is an arrow pointing to Run button.](media/2019-04-15-15-52-59.png "Display Test blade with sample.dat contents")
+    ![The screenshot displays the Test blade with sample.dat contents. The Request body field shows the Order JSON. There is an arrow pointing to Run button.](media/2020-06-21-11-29-48.png "Display Test blade with sample.dat contents")
 
     > **Note**: There is also a **Run** button located at the top of the Azure Function blade. Selecting either of these buttons will run the function just the same.
 
     After a few seconds, you should see logs like in the below image. You should see return status code of 200.  The **Output** text box should show recent Contoso purchase data. You should see a message stating the file has been created and stored in the blob storage.
 
-    ![There is a screenshot displaying the Function App test result log.  A status code of 200 OK is displayed on the right side pane.](media/2019-04-15-15-58-54.png "Function App test result log.")
+    ![There is a screenshot displaying the Function App test result log.  A status code of 200 OK is displayed on the right side pane.](media/2020-06-21-11-30-54.png "Function App test result log.")
 
 18. Check your receipt PDF in the storage account blob.
 
     - Navigate to the ContosoSports storage account.
     - Select the **Blobs** link.
 
-    ![The Settings options are displayed. There is an arrow pointing to the Blobs link.](media/2019-04-15-16-06-17.png "Blobs link")
+    ![The Settings options are displayed. There is an arrow pointing to the Blobs link.](media/2020-06-21-11-32-12.png "Containers link")
 
 19. Choose the newly created **receipts** blob container.
 
