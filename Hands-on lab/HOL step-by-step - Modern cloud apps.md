@@ -296,7 +296,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. For the **Specifici target**, choose **Azure App Service (Windows)**, then select **Next**.
+4. For the **Specific target**, choose **Azure App Service (Windows)**, then select **Next**.
 
     ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
 
@@ -567,11 +567,11 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     - Value: **Enter the Connection String for the SQL Database Failover Group Read/Write Listener Endpoint**.
 
-    - Type: `SQL Azure`
+    - Type: `SQLAzure`
 
     ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
 
-5. Select the **Update** button.
+5. Select the **Ok** button.
 
 6. Select the **Save** button.
 
@@ -585,21 +585,25 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     ![In Solution Explorer, the right-click menu for Contoso.Apps.SportsLeague.Admin displays, and Publish is selected.](media/2019-04-19-14-30-03.png "Right-Click menu")
 
-3. Choose **App Service Linux** as the publish target, choose **Select Existing**, then select **Create Profile**.
+3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
 
-    ![On the Publish tab, App Service Linux is selected. Below that, the radio button is selected for Select Existing.](media/2020-03-17-20-09-01.png "Publish tab")
+    ![Publish dialog with Azure selected](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. Select the **Web App** for the Call Center Admin App.
+4. For the **Specific target**, choose **Azure App Service (Linux)", then select **Next**.
 
-    ![In the App Service section, in the tree view at the bottom, the contososports folder is expanded, and the Call Center Web App is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image88.png "App Service section")
+    ![Publish dialog with Azure App Service (Linux) selected](media/2020-06-19-22-17-31.png "Publish dialog")
 
-5. Select **OK**.
+5. Select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
 
-6. Select **Publish**.
+    ![Publish dialog with the Azure App Service web app highlighted](media/2020-06-19-22-20-53.png "Publish dialog")
 
-    ![Display the Visual Studio Contoso.Apps.SportsLeague.Admin publish success message in the output.](media/2019-03-28-05-45-28.png "Publish Succeeded")
+6. Select **Finish**.
 
-6. Once deployment is complete, navigate to the Web App. It should look like the following:
+7. Select **Publish** to publish the Web application.
+
+    ![Publish button is highlighted](media/2020-06-19-22-25-36.png "Publish button")
+
+8. Once deployment is complete, navigate to the Web App. It should look like the following:
 
     ![The Contoso website displays the Contoso Sports League Admin webpage, which says that orders that display below are sorted by date, and you can select an order to see its details. However, at this time, there is no data available under Completed Orders.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image89.png "Contoso website")
 
@@ -635,15 +639,23 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![In Solution Explorer, Contoso.Apps.PaymentGateway is selected, and in its right-click menu, Publish is selected.](media/2019-04-19-14-52-22.png "Solution Explorer")
 
-3. On the **Publish Web** dialog box, select **Azure App Service**, then choose **Select Existing**, and **Create Profile**.
+3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
 
-    > **Note**: If your Azure resource group does not show, choose **New Profile**.
+    ![Publish dialog with Azure selected](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. Select the Payment Gateway API app created earlier, select **OK**.
+4. For the Specific target, choose **Azure App Service (Windows), then select **Next**.
 
-    ![In the App Service section, the contososports folder is expanded, and PaymentsAPIO is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image98.png "App Service section")
+     ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
 
-5. Select **Publish**.
+5. Select the **API App** that was created previously.
+
+    ![API App is highlighted](media/2020-06-19-22-32-33.png "API App is highlighted")
+
+6. Select **Finish**.
+
+7. Select **Publish** to publish the API App.
+
+    ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
 
 6. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
@@ -673,7 +685,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 5. When the Web App template has completed provisioning, open the new API App by, in the navigation menu to the left, select **App Services** and then the Offer API app you just created.
 
-   ![In the Azure Portal, on the left More services is selected, and on the right under Web + Mobile, App Services displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image101.png "Azure Portal, More Services")
+   ![In the Azure Portal, on the left More services is selected, and on the right under App Services displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image101.png "App Services")
 
 #### Subtask 2: Configure Cross-Origin Resource Sharing (CORS)
 
@@ -699,7 +711,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
       - Value: **Enter the Connection String for the SQL Database Failover Group Read-only Listener Endpoint**.
 
-      - Type: `SQL Azure`
+      - Type: `SQLAzure`
 
         ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
 
@@ -715,7 +727,7 @@ In this exercise, the attendee will provision an Azure API app template using th
         >
         > The SQL Failover Group Read-only Listener Endpoint will be the DNS name that ends in `.secondary.database.windows.net`. You will have copied this previously when setting up the SQL Failover Group.
 
-3. Select the **Update** button.
+3. Select the **Ok** button.
 
 4. Select the **Save** button.
 
@@ -729,15 +741,23 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![In Solution Explorer, from the Contoso.Apps.SportsLeague.Admin right-click menu, Publish is selected.](media/2019-04-19-15-03-45.png "Solution Explorer")
 
-3. On the **Publish Web** dialog box, select **Azure App Service**, choose **Select Existing**, and select **Create Profile**.
+3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
 
-    ![On the Publish tab, the Microsoft Azure App Service tile is selected, and under it, the radio button for Select Existing is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image109.png "Publish tab")
+    ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. Select the Offers API app created earlier, and select **OK**.
+4. For the **Specific target**, choose **Azure App Service (Windows)**, then select **Next**.
+
+    ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
+
+4. Select the Offers API app created previously.
 
     ![In the App Service section, the contososports folder is expanded, and OffersAPI4 is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image110.png "App Service section")
 
-5. Select **Publish**.
+5. Select **Finish**.
+
+6. Select **Publish** to publish the Offers API.
+
+    ![Publish button is highlighted](media/2020-06-19-22-50-46.png "Publish button is highlighted")
 
 6. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
 
@@ -1002,25 +1022,15 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     ![In the Everything blade, the active directory B2C text is in the Search field, and under Results, Azure Active Directory B2C displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image156.png "Everything blade")
 
-2. In the new blade, select **Create a new Azure AD B2C Tenant**. Then, enter the name as **ContosoB2C** and a unique domain name and region. Then, select **Create**. After directory creation completes, select the link in the new information tile that reads **Click here to manage your new directory**.
+2. In the new blade, select **Create a new Azure AD B2C Tenant**. Then, enter the name as **ContosoB2C** and a unique domain name and region. Select **Review + create**, then **Create**. After directory creation completes, select the link in the new information tile that reads **Click here to navigagte to your new directory**.
 
-    ![In the Azure Portal, under Create new B2C Tenant or Link to existing Tenant, Create a new Azure AD B2C Tenant is selected. On the right, the word \"here,\" which is a link, is circled in the Select here to manage your new directory message.](media/2019-03-28-09-29-30.png "Azure Portal")
+    ![Create a directory with the required fields filled in](media/2020-06-20-23-12-29.png "Create a directory")
 
-    ![In the Azure Portal, under Create new B2C Tenant or Link to existing Tenant, Create a new Azure AD B2C Tenant is selected. On the right, the word \"here,\" which is a link, is circled in the Select here to manage your new directory message.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image157.png "Azure Portal")
+    ![Directory creation was successful](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image157.png "Directory creation was successful")
 
-3. Select the orange **No Subscription** message for instructions on how to link to an active subscription.
+3. The new Azure AD Directory that was created will now be open in new browser tab. Keep this tab open for the next few steps.
 
-    ![In the Azure Portal, on the left, the \"No subscription linked to this B2C tenant or the Subscription needs your attention\" message is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image158.png "Azure Portal")
-
-    ![The three steps to link the B2C tenant to an Azure subscription are circled.](media/2019-08-25-17-45-26.png "Azure Portal")
-
-    >**Note**: Essentially, you will need to switch back to your previous Azure AD tenant, and then launch the Azure AD B2C creation wizard again.
-
-4. Select **Link an existing Azure AD B2C Tenant to my Azure subscription,** and select the Tenant you just created in the dropdown list and the existing resource group **contososports**. Then, select **Create**.
-
-    ![In the Create new B2C Tenant or Link to existing Tenant blade, on the left, Link an existing Azure AD B2C Tenant to my Azure subscription is selected. On the right, in the Azure AD B2C Resource blade, the Azure AD B2C Tenant drop-down field is contosodb2ccustsitecp.onmicrosoft.com. The Resource group is using the existing contososports.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image159.png "Create new B2C Tenant or Link to existing Tenant")
-
-5. After creation completes, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the B2C tenant you just created.
+5. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
 
     ![In the contososports resource group, the new B2C tenant is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
 
@@ -1028,29 +1038,27 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     ![In the Azure AD B2C tenant window, on the left, All Settings is selected. In the bottom right section, the Azure AD B2C Settings tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image160.png "Azure AD B2C Settings window")
 
-7. In the new tab that opened, under the **MANAGE** menu area of the open **Azure AD B2C** blade, select **Applications**. Then, in the new pane, select **+Add**.
+7. In the new tab that opened, under the **MANAGE** menu area of the open **Azure AD B2C** blade, select **App registrations**. Then, in the new pane, select **+New registration**.
 
-    ![In the Azure AD B2C Settings window, on the left, All Settings is selected. In the middle, under Settings, under Manage, Applications is selected. On the right, the Add button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2c-add-app-link.png "Azure AD B2C Settings window")
+    ![In the Azure AD B2C Settings window, on the left, All Settings is selected. In the middle, under Settings, under Manage, App registrations is selected. On the right, the New registration button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2c-add-app-link.png "Azure AD B2C Settings window")
 
 ### Task 2: Add a new application
 
-1. Specify the following configuration options for the Web App:
+1. Specify the following configuration options for the new Application registration:
 
-   - Name: **Contoso B2C Application**
+    - Name: **Contoso B2C Application**
 
-   - Include Web App / web API: **Yes**
+    - Supported account types: **Accounts in this organizational directory only**
 
-   - Allow Implicit Flow: **Yes**
+    - Redirect URI: Set to **Web**, then set the URL to the following format: `https://[your web url].azurewebsites.net/signin-oidc-b2c` _(This should be the HTTPS URL to the Contoso E-Commerce Site.)_
 
-   - Reply URL: `https://[your web url].azurewebsites.net/signin-oidc-b2c` _(This should be the HTTPS URL to the Contoso E-Commerce Site.)_
+        ![The New application fields are set to the previously defined values.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image161.png "New application")
 
-   ![The New application fields are set to the previously defined values.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image161.png "New application")
+2. Select **Register**.
 
-2. Select **Create**.
+3. Once App registration has completed, copy the **Application (client) ID** of your new application to Notepad to use later. Keep this tab open for the next task.
 
-3. Back on the **Azure AD B2C** blade in the **Applications** screen, copy the application ID of your new application to Notepad to use later. Keep this tab open for the next task.
-
-     ![B2C application name and ID values are shown.](media/2019-04-11-08-36-28.png "Azure AD B2C screen")
+     ![B2C application name and ID values are shown.](media/2020-06-20-23-36-30.png "Azure AD B2C screen")
 
 ### Task 3: Create Policies, Sign up and sign in
 
@@ -1058,7 +1066,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 2. To enable sign-up on your application, you will need to create a sign-up policy. This policy describes the experiences consumers will go through during sign-up and the contents of tokens the application will receive on successful sign-ups. Select **User flows** link on the left menu and then **+New user flow** link at the top of the blade.
 
-    ![In the Azure Portal, on the left, Azure AD B2C - User Flows selected.](media/2019-03-28-12-17-22.png "Azure AD B2C - User Flows selected")
+    ![In the Azure Portal, on the left, Azure AD B2C - User Flows selected.](media/2020-06-20-23-39-59.png "Azure AD B2C - User Flows selected")
 
 3. Select the **Sign up and sign in** link.
   
