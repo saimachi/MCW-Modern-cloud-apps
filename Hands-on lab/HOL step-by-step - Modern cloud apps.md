@@ -1798,7 +1798,7 @@ The advantages of using Logic Apps include the following:
 
     ![In When there are messages in a queue, the Connection Name is ContosoQueue, and under Service Bus Namespace, contosooiyxeonvhew7u is selected.](media/2020-03-18-12-15-23.png "When there are messages in a queue ")
 
-9. Select the **RootManageSharedAccessKey*** from the list of Service Bus Policies, then select **Create**.
+9. Select the **RootManageSharedAccessKey** from the list of Service Bus Policies, then select **Create**.
 
     ![RootManageSharedAccessKey is selected.](media/2020-03-18-12-17-17.png "RootManageSharedAccessKey is selected")
 
@@ -1943,7 +1943,7 @@ The advantages of using Logic Apps include the following:
 
 1. If you do not have a Twilio account, sign up for one for free at the following URL:
 
-[**https://www.twilio.com/try-twilio**](https://www.twilio.com/try-twilio)
+    [https://www.twilio.com/try-twilio](https://www.twilio.com/try-twilio)
 
    ![Screenshot of the Twilio account Sign up for free webpage.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image268.png "Twilio account Sign up webpage")
 
@@ -2147,9 +2147,38 @@ The advantages of using Logic Apps include the following:
 
     ![On the Logic Apps Designer toolbar, the Save button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image304.png "Logic Apps Designer toolbar")
 
-34. After the code for the **Send\_Text\_Message\_(SMS)** has been modified to be contained within the **forEach\_email** action and you save it, it should look like the following:
+34. After the code for the **Send\_Text\_Message\_(SMS)** has been modified to be contained within the **forEach\_email** action and you save it, it be like the following JSON with your Twilio phone number in the "from" field:
 
-    ![The Code view displays the code from \"Foreach\" to \"Execute stored procedure.\"](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image303.png "Code view")
+    ```json
+    "forEach_email": {
+        "type": "Foreach",
+        "foreach": "@body('Execute_stored_procedure_(V2)_2')['ResultSets']['Table1']",
+        "actions": {
+            "Send_Text_Message_(SMS)": {
+                "inputs": {
+                    "body": {
+                        "body": "Hello @{item()['FirstName']}, your order has shipped!",
+                        "from": "+1XXXXXXXXXX",
+                        "to": "@{item()['Phone']}"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['twilio']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/Messages.json"
+                },
+                "type": "ApiConnection"
+            }
+        },
+        "runAfter": {
+            "Execute_stored_procedure_(V2)_2": [
+                "Succeeded"
+            ]
+        }
+    }
+    ```
 
 35. Your workflow should look like the image below, and you should receive a text for each order you placed.
 
