@@ -33,37 +33,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Help references](#help-references)
   - [Exercise 1: Proof of concept deployment](#exercise-1-proof-of-concept-deployment)
     - [Task 1: Deploy the e-commerce website, SQL Database, and storage](#task-1-deploy-the-e-commerce-website-sql-database-and-storage)
-      - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
-      - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-Retrieve-Storage-Account-Access-Keys)
-      - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
-      - [Subtask 4: Update the configuration in the starter project](#subtask-4-update-the-configuration-in-the-starter-project)
-      - [Subtask 5: Deploy the e-commerce Web App from Visual Studio](#subtask-5-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
-      - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
-      - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
-      - [Subtask 3: Failover SQL Database Failover Group](#subtask-3-failover-sql-database-failover-group)
-      - [Subtask 4: Test e-commerce Web App after Failover](#subtask-4-test-e-commerce-web-app-after-failover)
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
-      - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
-      - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
-      - [Subtask 3: Deploy the call center admin Web App from Visual Studio](#subtask-3-deploy-the-call-center-admin-web-app-from-visual-studio)
     - [Task 4: Deploying the payment gateway](#task-4-deploying-the-payment-gateway)
-      - [Subtask 1: Provision the payment gateway API app](#subtask-1-provision-the-payment-gateway-api-app)
-      - [Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio](#subtask-2-deploy-the-contosoappspaymentgateway-project-in-visual-studio)
     - [Task 5: Deploying the Offers Web API](#task-5-deploying-the-offers-web-api)
-      - [Subtask 1: Provision the Offers Web API app](#subtask-1-provision-the-offers-web-api-app)
-      - [Subtask 2: Configure Cross-Origin Resource Sharing (CORS)](#subtask-2-configure-cross-origin-resource-sharing-cors)
-      - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project-1)
-      - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
     - [Task 6: Update and deploy the e-commerce website](#task-6-update-and-deploy-the-e-commerce-website)
-      - [Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project](#subtask-1-update-the-application-settings-for-the-web-app-that-hosts-the-contosoappssportsleagueweb-project)
-      - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
     - [Task 1: Enable Azure AD Premium Trial](#task-1-enable-azure-ad-premium-trial)
     - [Task 2: Create a new Contoso user](#task-2-create-a-new-contoso-user)
-    - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-application)
-      - [Subtask 1: Enable Azure AD Authentication](#subtask-1-enable-azure-ad-authentication)
-      - [Subtask 2: Verify the call center administration website uses the access control logon](#subtask-2-verify-the-call-center-administration-website-uses-the-access-control-logon)
+    - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-
     - [Task 4: Apply custom branding for the Azure Active Directory logon page](#task-4-apply-custom-branding-for-the-azure-active-directory-logon-page)
     - [Task 5: Verify the branding has been successfully applied to the Azure Active Directory logon page](#task-5-verify-the-branding-has-been-successfully-applied-to-the-azure-active-directory-logon-page)
   - [Exercise 3: Enable Azure B2C for customer site](#exercise-3-enable-azure-b2c-for-customer-site)
@@ -78,16 +56,11 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 9: Run the sample app](#task-9-run-the-sample-app)
   - [Exercise 4: Enabling Telemetry with Application Insights](#exercise-4-enabling-telemetry-with-application-insights)
     - [Task 1: Configure the application for telemetry](#task-1-configure-the-application-for-telemetry)
-      - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
-      - [Subtask 2: Enable client side telemetry](#subtask-2-enable-client-side-telemetry)
-      - [Subtask 3: Deploy the e-commerce Web App from Visual Studio](#subtask-3-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
     - [Task 2: Create an Azure Logic App to Process Orders](#task-2-create-an-azure-logic-app-to-process-orders)
     - [Task 3: Use Twilio to send SMS Order Notifications](#task-3-use-twilio-to-send-sms-order-notifications)
-      - [Subtask 1: Configure your Twilio trial account](#subtask-1-configure-your-twilio-trial-account)
-      - [Subtask 2: Create a new logic app](#subtask-2-create-a-new-logic-app)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete resources](#task-1-delete-resources)
 
@@ -306,7 +279,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
 7. Select **Publish** to publish the Web application.
 
-    ![Publish profile is displayed with the Publish button highlighted](media/2020-06-15-16-53-15.png "Publish profile")
+    ![Publish profile is displayed with the Publish button highlighted.](media/2020-06-15-16-53-15.png "Publish profile")
 
     >**Note**: If prompted with a warning about App Service supporting .NET Core 3.0.0, select **OK** to dismiss the warning.
     >
@@ -378,7 +351,7 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 10. After the Geo-Replication has finished provisioning, select **SQL Databases** in the navigation menu to the left.
 
-    ![The SQL databases option in the Azure Portal navigation menu](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "SQL Databases")
+    ![The SQL databases option in the Azure Portal navigation menu.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "SQL Databases")
 
 11. Select the name of the Secondary SQL Database you just created.
 
@@ -414,23 +387,23 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
 2. In the navigation menu to the left, select **SQL databases**, and select the name of the **Primary** SQL Database you created previously.
 
-    ![Screenshot of SQL Databases tile](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
+    ![Screenshot of SQL Databases tile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
 
 3. On the **SQL database** blade, within the **Overview** pane, select the **Server name**.
 
-    ![SQL database blade with server name highlighted](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/primarysqldatabaseserverlink.png "SQL database blade with server name highlighted")
+    ![SQL database blade with server name highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/primarysqldatabaseserverlink.png "SQL database blade with server name highlighted")
 
 4. On the **SQL server** blade, select **Failover groups** under **Settings**.
 
-    ![Failover groups setting option](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlserverfailovergroupslink.png "Failover groups setting option")
+    ![Failover groups setting option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlserverfailovergroupslink.png "Failover groups setting option")
 
 5. On the **Failover groups** pane, select the **Add group** button.
 
-    ![Add group button](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/failovergroupsaddgroupbutton.png "Add group buton")
+    ![Add group button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/failovergroupsaddgroupbutton.png "Add group buton")
 
 6. On the **Failover group** pane, enter a unique **Failover group name**.
 
-    ![Failover group name field](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupname.png "Failover group name field")
+    ![Failover group name field.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupname.png "Failover group name field")
 
 7. Select **Secondary server**, then choose the **Secondary SQL Database** that was previously created.
 
@@ -444,7 +417,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
 10. Once the Failover Group has been created, select it in the list.
 
-    ![Failover Group is highlighted](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergrouplist.png "Failover Group is highlighted")
+    ![Failover Group is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergrouplist.png "Failover Group is highlighted")
 
 11. Notice, on the **Failover group** pane, the map and display showing the _Primary_ and _Secondary_ SQL Database servers within the failover group. The _Primary_ database shows as **Automatic** failover for Read/Write of data, while the _Secondary_ database doesn't since it is currently Read only.
 
@@ -1020,7 +993,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     ![In the Everything blade, the active directory B2C text is in the Search field, and under Results, Azure Active Directory B2C displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image156.png "Everything blade")
 
-2. In the new blade, select **Create a new Azure AD B2C Tenant**. Then, enter the name as **ContosoB2C** and a unique domain name and region. Select **Review + create**, then **Create**. After directory creation completes, select the link in the new information tile that reads **Click here to navigagte to your new directory**.
+2. In the new blade, select **Create a new Azure AD B2C Tenant**. Then, enter the name as **ContosoB2C** and a unique domain name and region. Select **Review + create**, then **Create**. After directory creation completes, select the link in the new information tile that reads **Click here to navigate to your new directory**.
 
     ![Create a directory with the required fields filled in](media/2020-06-20-23-12-29.png "Create a directory")
 
