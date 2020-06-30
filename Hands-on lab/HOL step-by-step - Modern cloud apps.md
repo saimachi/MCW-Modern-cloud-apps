@@ -94,7 +94,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Create a service principal in Active Directory](#task-3-create-a-service-principal-in-active-directory)
     - [Task 4: Create repository secrets](#task-4-create-repository-secrets)
       - [Subtask 1: Create the service principal credentials secret](#subtask-1-create-the-service-principal-credentials-secret)
-      - [Subtask 2: Create the web portal publish profile secret](#subtask-2-create-the-web-portal-publish-profile-secret)
+      - [Subtask 2: Create the e-commerce web application publish profile secret](#subtask-2-create-the-e-commerce-web-application-publish-profile-secret)
       - [Subtask 3: Create publish profile secrets for the remaining projects](#subtask-3-create-publish-profile-secrets-for-the-remaining-projects)
     - [Task 5: Define the production deployment workflow](#task-5-define-the-production-deployment-workflow)
     - [Task 6: Trigger the Production Deployment Workflow](#task-6-trigger-the-production-deployment-workflow)
@@ -2282,9 +2282,9 @@ You have the ability to add secrets to the repository in GitHub. Secrets contain
 
 4. In the New secret form, enter the name **AZURE_CREDENTIALS**, and for the value, paste in the JSON data obtained when creating the Service Principal in the previous task. Select **Add secret**.
 
-#### Subtask 2: Create the web portal publish profile secret
+#### Subtask 2: Create the e-commerce web application publish profile secret
 
-1. In the Azure Portal, open the web portal application service, it is the one named contosoapp{randomcharacters}.
+1. In the Azure Portal, open the e-commerce web application service, it is the one named contosoapp{randomcharacters}.
 
 2. From the top toolbar of the App Service screen, select **Get publish profile** item. This will download a file. Open this file in a text editor.
 
