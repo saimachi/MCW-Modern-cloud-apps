@@ -33,15 +33,37 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Help references](#help-references)
   - [Exercise 1: Proof of concept deployment](#exercise-1-proof-of-concept-deployment)
     - [Task 1: Deploy the e-commerce website, SQL Database, and storage](#task-1-deploy-the-e-commerce-website-sql-database-and-storage)
+      - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
+      - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-retrieve-storage-account-access-keys)
+      - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
+      - [Subtask 4: Update the configuration in the starter project](#subtask-4-update-the-configuration-in-the-starter-project)
+      - [Subtask 5: Deploy the e-commerce Web App from Visual Studio](#subtask-5-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
+      - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
+      - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
+      - [Subtask 3: Failover SQL Database Failover Group](#subtask-3-failover-sql-database-failover-group)
+      - [Subtask 4: Test e-commerce Web App after Failover](#subtask-4-test-e-commerce-web-app-after-failover)
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
+      - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
+      - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
+      - [Subtask 3: Deploy the call center admin Web App from Visual Studio](#subtask-3-deploy-the-call-center-admin-web-app-from-visual-studio)
     - [Task 4: Deploying the payment gateway](#task-4-deploying-the-payment-gateway)
+      - [Subtask 1: Provision the payment gateway API app](#subtask-1-provision-the-payment-gateway-api-app)
+      - [Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio](#subtask-2-deploy-the-contosoappspaymentgateway-project-in-visual-studio)
     - [Task 5: Deploying the Offers Web API](#task-5-deploying-the-offers-web-api)
+      - [Subtask 1: Provision the Offers Web API app](#subtask-1-provision-the-offers-web-api-app)
+      - [Subtask 2: Configure Cross-Origin Resource Sharing (CORS)](#subtask-2-configure-cross-origin-resource-sharing-cors)
+      - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
+      - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
     - [Task 6: Update and deploy the e-commerce website](#task-6-update-and-deploy-the-e-commerce-website)
+      - [Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project](#subtask-1-update-the-application-settings-for-the-web-app-that-hosts-the-contosoappssportsleagueweb-project)
+      - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
     - [Task 1: Enable Azure AD Premium Trial](#task-1-enable-azure-ad-premium-trial)
     - [Task 2: Create a new Contoso user](#task-2-create-a-new-contoso-user)
-    - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-
+    - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-application)
+      - [Subtask 1: Enable Azure AD Authentication](#subtask-1-enable-azure-ad-authentication)
+      - [Subtask 2: Verify the call center administration website uses the access control logon](#subtask-2-verify-the-call-center-administration-website-uses-the-access-control-logon)
     - [Task 4: Apply custom branding for the Azure Active Directory logon page](#task-4-apply-custom-branding-for-the-azure-active-directory-logon-page)
     - [Task 5: Verify the branding has been successfully applied to the Azure Active Directory logon page](#task-5-verify-the-branding-has-been-successfully-applied-to-the-azure-active-directory-logon-page)
   - [Exercise 3: Enable Azure B2C for customer site](#exercise-3-enable-azure-b2c-for-customer-site)
@@ -56,11 +78,26 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 9: Run the sample app](#task-9-run-the-sample-app)
   - [Exercise 4: Enabling Telemetry with Application Insights](#exercise-4-enabling-telemetry-with-application-insights)
     - [Task 1: Configure the application for telemetry](#task-1-configure-the-application-for-telemetry)
+      - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
+      - [Subtask 2: Enable client side telemetry](#subtask-2-enable-client-side-telemetry)
+      - [Subtask 3: Deploy the e-commerce Web App from Visual Studio](#subtask-3-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
     - [Task 2: Create an Azure Logic App to Process Orders](#task-2-create-an-azure-logic-app-to-process-orders)
     - [Task 3: Use Twilio to send SMS Order Notifications](#task-3-use-twilio-to-send-sms-order-notifications)
+      - [Subtask 1: Configure your Twilio trial account](#subtask-1-configure-your-twilio-trial-account)
+      - [Subtask 2: Create a new logic app](#subtask-2-create-a-new-logic-app)
+  - [Exercise 6: Automate deployments using GitHub actions](#exercise-6-automate-deployments-using-github-actions)
+    - [Task 1: Create a Github repository](#task-1-create-a-github-repository)
+    - [Task 2: Commit the existing lab files to source control](#task-2-commit-the-existing-lab-files-to-source-control)
+    - [Task 3: Create a service principal in Active Directory](#task-3-create-a-service-principal-in-active-directory)
+    - [Task 4: Create repository secrets](#task-4-create-repository-secrets)
+      - [Subtask 1: Create the service principal credentials secret](#subtask-1-create-the-service-principal-credentials-secret)
+      - [Subtask 2: Create the web portal publish profile secret](#subtask-2-create-the-web-portal-publish-profile-secret)
+      - [Subtask 3: Create publish profile secrets for the remaining projects](#subtask-3-create-publish-profile-secrets-for-the-remaining-projects)
+    - [Task 3: Define the production deployment workflow](#task-3-define-the-production-deployment-workflow)
+      - [Subtask 4: Trigger the Production Deployment Workflow](#subtask-4-trigger-the-production-deployment-workflow)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete resources](#task-1-delete-resources)
 
@@ -89,6 +126,7 @@ The Cloud Workshop: Modern Cloud Apps lab is a hands-on exercise that will chall
 1. Microsoft Azure subscription
 2. Local machine or a virtual machine configured with Visual Studio 2019 Community Edition
 3. Twilio account and/or personal cell phone to setup a trial Twilio account
+4. A GitHub account and local installation of a Git client
 
 ## Help references
 
@@ -117,6 +155,7 @@ The Cloud Workshop: Modern Cloud Apps lab is a hands-on exercise that will chall
 | Logic Apps Docs | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-what-are-logic-apps> |
 | Azure Functions -- create first function | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function> |
 | Azure Functions docs | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-azure-functions> |
+| GitHub | <https://github.com/> |
 
 ## Exercise 1: Proof of concept deployment
 
@@ -628,13 +667,13 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
 
-6. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
+8. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
     ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
 
-7. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
+9. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
 
-8. Viewing the Web App in a browser will display the Swagger UI for the API.
+10. Viewing the Web App in a browser will display the Swagger UI for the API.
 
    ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-04-58-04.png "Swagger UI")
 
@@ -720,25 +759,25 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
 
-4. Select the Offers API app created previously.
+5. Select the Offers API app created previously.
 
     ![In the App Service section, the contososports folder is expanded, and OffersAPI4 is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image110.png "App Service section")
 
-5. Select **Finish**.
+6. Select **Finish**.
 
-6. Select **Publish** to publish the Offers API.
+7. Select **Publish** to publish the Offers API.
 
     ![Publish button is highlighted](media/2020-06-19-22-50-46.png "Publish button is highlighted")
 
-6. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
+8. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
 
-7. Record the value of the deployed API app URL into Notepad for later use.
+9. Record the value of the deployed API app URL into Notepad for later use.
 
-8. Viewing the Web App in a browser will display the Swagger UI for the API.
+10. Viewing the Web App in a browser will display the Swagger UI for the API.
 
     ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-05-20-40.png "Swagger UI")
 
-9. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
+11. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
 
     ![Swagger UI displaying API call response.](media/2020-03-17-20-56-31.png "Swagger UI")
 
@@ -1001,15 +1040,15 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 3. The new Azure AD Directory that was created will now be open in new browser tab. Keep this tab open for the next few steps.
 
-5. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
+4. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
 
     ![In the contososports resource group, the new B2C tenant is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
 
-6. In the new blade, select the **B2C Settings** tile for the new B2C tenant. You will be taken to the new subscription for this tenant.
+5. In the new blade, select the **B2C Settings** tile for the new B2C tenant. You will be taken to the new subscription for this tenant.
 
     ![In the Azure AD B2C tenant window, on the left, All Settings is selected. In the bottom right section, the Azure AD B2C Settings tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image160.png "Azure AD B2C Settings window")
 
-7. In the new tab that opened, under the **MANAGE** menu area of the open **Azure AD B2C** blade, select **App registrations**. Then, in the new pane, select **+New registration**.
+6. In the new tab that opened, under the **MANAGE** menu area of the open **Azure AD B2C** blade, select **App registrations**. Then, in the new pane, select **+New registration**.
 
     ![In the Azure AD B2C Settings window, on the left, All Settings is selected. In the middle, under Settings, under Manage, App registrations is selected. On the right, the New registration button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2c-add-app-link.png "Azure AD B2C Settings window")
 
@@ -1095,7 +1134,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 15. A browser tab/window will open that looks like the following screenshot.
 
     ![Test the user flow.  Sample sign in presented in the browser.](media/2019-03-28-13-00-01.png "Test the user flow")
-    
+
 16. Select **Sign up now**.
 
     ![Sign up now fields are presented to the user.](media/2019-03-28-13-02-25.png "Sign up now")
@@ -1112,17 +1151,17 @@ To enable profile editing on your application, you will need to create a profile
 
     ![The Create a user flow pane is displayed.  The ALL tab is selected. All user flows are displayed. The Profile editing has an arrow pointing at it.](media/2019-03-28-16-19-55.png "Select Profile Editing")
 
-3. Select **Profile editing**.
+4. Select **Profile editing**.
 
-4. The Name determines the profile editing policy name used by your application. For example, enter **EditProfile**.
+5. The Name determines the profile editing policy name used by your application. For example, enter **EditProfile**.
 
     ![In the Add policy blade, Identity providers (1 Selected) is selected. Identities providers - select Local Account SignIn.](media/2019-03-28-16-24-26.png "select Local Account SignIn")
 
-5. Select Identity providers, and then "**Local Account SignIn**."
+6. Select Identity providers, and then "**Local Account SignIn**."
 
-6. Select the **Show more...** link.
+7. Select the **Show more...** link.
 
-7. Select **Collect attributes**. Here, you choose attributes the consumer can view and edit.
+8. Select **Collect attributes**. Here, you choose attributes the consumer can view and edit.
 
     For now, select the following:
 
@@ -1133,7 +1172,7 @@ To enable profile editing on your application, you will need to create a profile
     - **State/Province**
     - **Street Address**
 
-8. Select **Return claims**. Here, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
+9. Select **Return claims**. Here, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
 
     For now, select the following:
 
@@ -1142,15 +1181,15 @@ To enable profile editing on your application, you will need to create a profile
 
     ![Sign up - User attributes selected blade.](media/2019-03-28-16-28-53.png "Sign up - User attributes selected blade")
 
-9. Select **OK**.
+10. Select **OK**.
 
-10. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_EditProfile**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
+11. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_EditProfile**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
 
-11. Open the policy by selecting **B2C\_1\_EditProfile**, then **Run user flow**.
+12. Open the policy by selecting **B2C\_1\_EditProfile**, then **Run user flow**.
 
-12. Select **Contoso B2C application** in the **Select Application** drop-down.
+13. Select **Contoso B2C application** in the **Select Application** drop-down.
 
-13. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
+14. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
 
 ### Task 5: Create a password reset policy
 
@@ -1183,13 +1222,13 @@ To enable profile editing on your application, you will need to create a profile
 
 8. Select **OK**.
 
-10. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_SSPR**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
+9. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_SSPR**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
 
-11. Open the policy by selecting **B2C\_1\_SSPR**, then **Run user flow**.
+10. Open the policy by selecting **B2C\_1\_SSPR**, then **Run user flow**.
 
-12. Select **Contoso B2C application** in the **Select Application** drop-down.
+11. Select **Contoso B2C application** in the **Select Application** drop-down.
 
-13. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
+12. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
 
 ### Task 6: Modify the Contoso.App.SportsLeague.Web
 
@@ -1204,14 +1243,14 @@ To enable profile editing on your application, you will need to create a profile
 
 2. Add the following `using` directives to the top of the **Startup.cs** code file:
 
-    ```
+    ```csharp
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
     ```
 
 3. Locate the `app.UseAuthorization();` line within the `public void Configure` method, and add the following line of code before it:
 
-    ```
+    ```csharp
     app.UseAuthentication();
     app.UseAuthorization();
     ```
@@ -1283,7 +1322,7 @@ Your app is now properly configured to communicate with Azure AD B2C by using AS
         }
         return RedirectToAction("Index", "Home");
     }
-            
+
     public ActionResult SignUp()
     {
         if (!User.Identity.IsAuthenticated)
@@ -2093,12 +2132,12 @@ The advantages of using Logic Apps include the following:
 
 30. Immediately before the **Send\_Text\_Message\_(SMS)** section, create a new line, and add the following code:
 
-  ```json
-    "forEach_email": {
-      "type": "Foreach",
-      "foreach": "@body('Execute_stored_procedure_(V2)_2')['ResultSets']['Table1']",
-      "actions": {
-  ```
+    ```json
+        "forEach_email": {
+        "type": "Foreach",
+        "foreach": "@body('Execute_stored_procedure_(V2)_2')['ResultSets']['Table1']",
+        "actions": {
+    ```
 
 31. Remove the **runAfter** block from the **Send\_Text\_Message\_(SMS)** action.
 
@@ -2106,7 +2145,7 @@ The advantages of using Logic Apps include the following:
 
 32. Locate the closing bracket of the **Send\_Text\_Message\_(SMS)** action, create a new line after it (be **SURE** to place a leading comma after the closing bracket), and add the following code:
 
-  ```json
+    ```json
         },
         "runAfter": {
             "Execute_stored_procedure_(V2)_2": [
@@ -2114,7 +2153,7 @@ The advantages of using Logic Apps include the following:
             ]
         }
     }
-  ```
+    ```
 
 33. Select **Save** on the toolbar to enable the logic app.
 
@@ -2157,6 +2196,377 @@ The advantages of using Logic Apps include the following:
 
     ![The Workflow diagram begins with Recurrence, then flows to Execute stored procedure, then to Condition. The Condition fields are as follows: Object Name, ReturnCode; Relationship, is greater than; Value, 0. Below the Workflow diagram is an If Yes box, with a workflow that begins wtih Execute stored procedure 2, and flows to forEach email. There is also an If No, Do Nothing box.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image305.png "Workflow diagram")
 
+## Exercise 6: Automate deployments using GitHub actions
+
+The Contoso Sports League would like to move their existing source control to GitHub. In addition to this, they wish to implement automatic deployments of their projects into production. The desired workflow is that features are developed in their own branch and once complete, pull requests are issued to the master branch. The pull requests are then reviewed for quality assurance, and once approved, the pull request is then merged into the master branch of the repository. Upon this merge, the projects in the solution should be automatically released into the production Azure environment using the code from the master branch. In this exercise, you will learn how to deploy code to Azure from GitHub Actions in two different ways: via a Service Principal created in Active Directory, as well as via Application Service Publish Profiles.
+
+### Task 1: Create a Github repository
+
+1. Open a web browser, and navigate to <https://www.github.com>. Log in using your GitHub account credentials.
+
+2. In the upper-right corner, the user drop down menu and select **Your repositories**.
+
+    ![The user menu is expanded with the Your repositories item selected.](media/github_yourrepositoriesmenu.png)
+
+3. Next to the search criteria, locate and select the **New** button.
+
+    ![The GitHub Find a repository search criteria is shown with the New button selected.](media/github_newbutton.png)
+
+4. On the **Create a new repository** screen, name the repository **ContosoSports** and select the **Create repository** button.
+
+    ![The Create a new repository screen is shown with the Repository name set to ContosoSports and the Create repository button is highlighted.](media/github_createrepositoryform.png)
+
+5. On the **Quick setup** screen, copy the **HTTPS** GitHub URL for your new repository, paste this in notepad for future use.
+
+    ![The Quick setup screen is displayed with the copy button next to the GitHub URL textbox selected.](media/github_copygithuburl.png)
+
+### Task 2: Commit the existing lab files to source control
+
+1. Open a command prompt and change directory to the folder that contains the lab files solution file (Contoso.Apps.SportsLeague.sln).
+
+2. At the command prompt, issue the following command to initialize the git repository:
+
+    ```shell
+    git init
+    ```
+
+3. Set the remote origin to the GitHub Url from the previous task by executing the following command (replace the URL with your own):
+
+   ```shell
+   git remote add origin <your GitHub Url>
+   ```
+
+4. Commit the initial code, and push it to the master branch by issuing the following commands:
+
+    ```shell
+    git add -a
+    git commit -m "initial commit"
+    git push -u origin master
+    ```
+
+### Task 3: Create a service principal in Active Directory
+
+One method to deploy code using GitHub actions is to create a Service Principal that has the necessary access to deploy the web applications in the solution. In this exercise, we will be releasing the Call Center Admin Portal application using this service principal. This service principal is created in Azure Active Directory, and is granted the Contributor role to the deployed lab resources, scoped by the resource group.
+
+1. In the Azure portal, select the icon to open the Cloud Shell located on the top toolbar.
+
+    ![A portion of the Azure Portal top toolbar is displayed with the Cloud Shell menu item highlighted.](media/azureportal_cloudshellmenuitem.png)
+
+    >> **Note**: You may be prompted to create a storage account to support cloud shell activities, this is required in order to utilize the cloud shell.
+
+2. Obtain the Subscription ID and Resource Group name by opening the resource group where you have deployed all of the applications in this lab. The Subscription ID is available in the Overview pane.
+
+3. In the Cloud Shell, execute the following to create the service principal scoped by the resource group we've been using in this lab (replace Subscription ID and resource group name):
+
+    ```PowerShell
+    az ad sp create-for-rbac --name 'mcw-modern-cloud-apps' --role contributor --scopes /subscriptions/<Subscription ID>/resourceGroups/<Resource Group Name> --sdk-auth
+    ```
+
+4. This will output a JSON data result, copy and paste this result and save it for a future step in this lab.
+
+    ![The output of the previous command is displayed with the JSON result highlighted.](media/azurecloudshell_serviceprincipaljson.png)
+
+### Task 4: Create repository secrets
+
+You have the ability to add secrets to the repository in GitHub. Secrets contain sensitive information that should never be checked into source control. These secrets are kept encrypted by GitHub and are made available to GitHub actions through the **secrets** collection (which you will see in the next task). We will be creating many secrets, as we have five projects that we are configuring for auto-deployment.
+
+#### Subtask 1: Create the service principal credentials secret
+
+1. In GitHub, return to the **ContosoSports** repository screen and select the **Settings** tab.
+
+2. From the left menu, select **Secrets**.
+
+3. Select the **New secret** button.
+
+   ![The Settings tab of the ContosoSports repository is shown with the Secrets menu item and the New secret button highlighted.](media/github_newsecretbutton.png)
+
+4. In the New secret form, enter the name **AZURE_CREDENTIALS**, and for the value, paste in the JSON data obtained when creating the Service Principal in the previous task. Select **Add secret**.
+
+#### Subtask 2: Create the web portal publish profile secret
+
+1. In the Azure Portal, open the web portal application service, it is the one named contosoapp{randomcharacters}.
+
+2. From the top toolbar of the App Service screen, select **Get publish profile** item. This will download a file. Open this file in a text editor.
+
+    ![On the App service screen, the Get publish profile button is highlighted on the toolbar menu.](media/azureportal_appservice_getpublishprofile.png)
+
+3. Return to the ContosoSports repository GitHub Secrets screen, and add a new secret named **AZURE_WEBAPP_PUBLISH_PROFILE**, for the value, paste the contents of the publish profile from the previous step, then select the **Add secret** button.
+
+#### Subtask 3: Create publish profile secrets for the remaining projects
+
+Repeat Subtask 2 for the remaining projects by obtaining the publish profiles from the Azure Portal. Create the secrets as follows:
+
+| Secret Name | Value |
+|-------------|--------------------------|
+| AZURE_API_PAYMENT_PUBLISH_PROFILE | Contents of the publish profile for the Payments API |
+| AZURE_API_OFFERS_PUBLISH_PROFILE | Contents of the publish profile for the Offers API |
+| AZURE_FUNCTIONAPP_PUBLISH_PROFILE | Contents of the publish profile for the Receipt Function Application |
+
+![The GitHub repository secrets screen is displayed with a table containing all the secrets added in this lab.](media/github_secretslisting.png)
+
+### Task 3: Define the production deployment workflow
+
+1. In the web browser, return to the ContosoSports repository on GitHub, and select the **Actions** tab.
+
+    ![On the ContosoSports repository screen, the Actions tab is selected.](media/github_actionstab.png)
+
+2. Beneath the **Get started with GitHub Actions** heading, select the **set up a workflow yourself** link.
+
+3. Above the editor, name the workflow **productiondeployment.yml**. Remove all code in the file editor.
+
+    ![The Actions workflow editor is displayed with an empty code listing with the name productiondeployment.yml highlighted.](media/github_actions_namedandempty.png)
+
+4. Copy and paste the following workflow to the text editor. The code is documented inline.
+
+    ```yml
+    name: Contoso Sports Production Deployment
+
+    # This workflow is triggered on push to the master branch of the repository
+    on:
+    push:
+        branches:
+        - master
+
+    # Environment variables are defined so that they can be used throughout the job definitions.
+    # Be sure to replace the tokens in the AZURE_*_NAME variables with the names of the resources in Azure
+    env:  
+    AZURE_WEBAPP_NAME: '<E-Commerce Web Application Name - named similar to contosoapp{random characters}>'
+    AZURE_WEBAPP_PROJECT_NAME: 'Contoso.Apps.SportsLeaque.Web'  
+    AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
+    AZURE_ADMINAPP_NAME: '<The name of the Call Center admin App Service in Azure>'
+    AZURE_ADMINAPP_PROJECT_NAME: 'Contoso.Apps.SportsLeague.Admin'
+
+    AZURE_API_PAYMENT_NAME: '<The name of the Payments API App Service in Azure>'
+    AZURE_API_PAYMENT_PROJECT_NAME: 'Contoso.Apps.PaymentGateway'
+    AZURE_API_PAYMENT_PUBLISH_PROFILE: ${{ secrets.AZURE_API_PAYMENT_PUBLISH_PROFILE }}
+
+    AZURE_API_OFFERS_NAME: '<The name of the Offers API App Service in Azure>'
+    AZURE_API_OFFERS_PROJECT_NAME: 'Contoso.Apps.SportsLeague.Offers'
+    AZURE_API_OFFERS_PUBLISH_PROFILE: ${{ secrets.AZURE_API_OFFERS_PUBLISH_PROFILE }}
+
+    AZURE_FUNCTIONAPP_NAME: '<The name of the Function App in Azure>'
+    AZURE_FUNCTIONAPP_PROJECT_NAME: 'Contoso.Apps.FunctionApp'
+    AZURE_FUNCTIONAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+
+    DOTNET_VERSION: '3.1.102'
+
+    # Jobs define the actions that take place when code is pushed to the master branch
+    jobs:
+
+    # Build and deploy the E-Commerce Web Application using the Publish Profile
+    build-and-deploy-webapp:
+        runs-on: ubuntu-latest
+        steps:
+        # Checkout the repo
+        - uses: actions/checkout@master
+
+        # Setup .NET Core SDK
+        - name: Setup .NET Core
+            uses: actions/setup-dotnet@v1
+            with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+
+        # Run dotnet build and publish on the project
+        - name: dotnet build web portal and publish
+            run: |
+            dotnet build ${{ env.AZURE_WEBAPP_PROJECT_NAME }} --configuration Release
+            dotnet publish ${{ env.AZURE_WEBAPP_PROJECT_NAME }} -c Release -o './webdeploy'
+
+        # Deploy to Azure Application Service
+        - name: 'Deploy public web portal'
+            uses: azure/webapps-deploy@v2
+            with:
+            app-name: ${{ env.AZURE_WEBAPP_NAME }}
+            publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+            package: './webdeploy'
+
+    # Build and deploy the Call Center admin using the Service Principal credentials
+    build-and-deploy-admin:
+        runs-on: ubuntu-latest
+        steps:
+        # Checkout the repo
+        - uses: actions/checkout@master
+
+        # Setup .NET Core SDK
+        - name: Setup .NET Core
+            uses: actions/setup-dotnet@v1
+            with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+
+        # Run dotnet build and publish
+        - name: dotnet build web portal and publish on the project
+            run: |
+            dotnet build ${{ env.AZURE_ADMINAPP_PROJECT_NAME }} --configuration Release
+            dotnet publish ${{ env.AZURE_ADMINAPP_PROJECT_NAME }} -c Release -o './admindeploy'
+
+        # Login to Azure
+        - name: Login via Az module
+            uses: azure/login@v1.1
+            with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        # Deploy to Azure Application Service
+        - name: 'Deploy admin web portal'
+            uses: azure/webapps-deploy@v2
+            with:
+            app-name: ${{ env.AZURE_ADMINAPP_NAME }}
+            credentials: ${{ secrets.AZURE_CREDENTIALS }}
+            package: './admindeploy'
+
+        ##Azure logout
+        - name: logout
+            run: |
+            az logout
+
+    # Build and deploy the Payments API using the Publish Profile
+    build-and-deploy-payment-api:
+        runs-on: ubuntu-latest
+        steps:
+        # Checkout the repo
+        - uses: actions/checkout@master
+
+        # Setup .NET Core SDK
+        - name: Setup .NET Core
+            uses: actions/setup-dotnet@v1
+            with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+
+        # Run dotnet build and publish on the project
+        - name: dotnet build web portal and publish
+            run: |
+            dotnet build ${{ env.AZURE_API_PAYMENT_PROJECT_NAME }} --configuration Release
+            dotnet publish ${{ env.AZURE_API_PAYMENT_PROJECT_NAME }} -c Release -o './paymentapideploy'
+
+        # Deploy to Azure App Service 
+        - name: 'Deploy payments API'
+            uses: azure/webapps-deploy@v2
+            with: 
+            app-name: ${{ env.AZURE_API_PAYMENT_NAME }}
+            publish-profile: ${{ env.AZURE_API_PAYMENT_PUBLISH_PROFILE }}
+            package: './paymentapideploy'
+
+    # Build and deploy the Offer API using the Publish Profile
+    build-and-deploy-offer-api:
+        runs-on: ubuntu-latest
+        steps:
+        # Checkout the repo
+        - uses: actions/checkout@master
+
+        # Setup .NET Core SDK
+        - name: Setup .NET Core
+            uses: actions/setup-dotnet@v1
+            with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+
+        # Run dotnet build and publish on the project
+        - name: dotnet build web portal and publish
+            run: |
+            dotnet build ${{ env.AZURE_API_OFFERS_PROJECT_NAME }} --configuration Release
+            dotnet publish ${{ env.AZURE_API_OFFERS_PROJECT_NAME }} -c Release -o './offerapideploy'
+
+        # Deploy to Azure App Service
+        - name: 'Deploy offers API'
+            uses: azure/webapps-deploy@v2
+            with:
+            app-name: ${{ env.AZURE_API_OFFERS_NAME }}
+            publish-profile: ${{ env.AZURE_API_OFFERS_PUBLISH_PROFILE }}
+            package: './offerapideploy'
+
+    # Build and deploy the PDF receipt generation function app using the publish profile
+    build-and-deploy-pdffunctionapp:
+        runs-on: ubuntu-latest
+        steps:
+        # Checkout the repo
+        - uses: actions/checkout@master
+
+        # Setup .NET Core SDK
+        - name: Setup .NET Core
+            uses: actions/setup-dotnet@v1
+            with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+
+        # Run dotnet build and publish on the project
+        - name: dotnet build web portal and publish
+            run: |
+            dotnet build ${{ env.AZURE_FUNCTIONAPP_PROJECT_NAME  }} --configuration Release
+            dotnet publish ${{ env.AZURE_FUNCTIONAPP_PROJECT_NAME  }} -c Release -o './pdfappdeploy'
+
+        - name: 'Deploy to Azure Function App service'
+            uses: Azure/functions-action@v1
+            with:
+            app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+            package: './pdfappdeploy'
+            publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+    ```
+
+5. Select the **Start commit** button to commit the workflow to the repository.
+
+6. Enter a commit title and comment, and select **Commit new file**.
+
+    ![The Commit new file dialog is shown with the title and description populated.](media/github_commitworkflowform.png)
+
+7. Committing this file is a push to the master branch. This means that the workflow that we just created is triggered. Select the **Actions** tab to view the currently running/historical record of workflow executions.
+
+    ![The workflow we just defined is triggered and is displayed on the Actions tab.](media/github_workflowsstatus.png)
+
+8. You are able to drill into each workflow, and each job executed by the workflow. Furthermore, as you drill into the job, you are able to see the output of each step contained in the job by expanding the section in the console runner window.
+
+    ![The workflow is currently running, the workflow run displays the current status each job.](media/github_runningworkflowsteps.png)
+
+    ![A completed workflow job console is shown with one of the steps expanded so that the output of the step is displayed.](media/github_jobstepexpanded.png)
+
+#### Subtask 4: Trigger the Production Deployment Workflow
+
+In this task, we will be making a modification to the e-commerce web application in a branch and issuing a pull request to the master branch. We will manually merge the pull request into the master branch to trigger the production deployment workflow.
+
+1. Open a command prompt, and change directory to where the Visual Studio solution file is found.
+
+2. Execute the following commands to create a branch for this modification. Keep this command window open.
+
+    ```shell
+    git pull
+    git branch textchange
+    git checkout textchange
+    ```
+
+3. In Visual Studio, expand the e-commerce website project (Web/Contoso.Apps.SportsLeaque.Web), and edit and save the **Views/Home/Index.cshtml** file.
+
+    ![The code listing for Views/Home/Index.cshtml is shown with some modified text highlighted.](media/visualstudio_edithomeindex.png)
+
+4. Return to the command window, and execute the following commands to commit the text change to the branch.
+
+    ```shell
+    git commit -am "Changed some text"
+    git push --set-upstream origin textchange
+    ```
+
+5. In a web browser, return to the ContosoSports source code repository.
+
+6. Above the file listing table, you should see a notification that **textchange had recent pushes**. Select the **Compare &amp; pull request** button.
+
+    ![The textchange had recent pushes notification is shown with the Compare and pull request button highlighted.](media/github_compareandpullrequest.png)
+
+7. On the **Open a pull request** form, feel free to write a comment, and select the **Create pull request** button.
+
+8. You should now see a message indicating that there are no conflicts with the base branch.
+
+    ![A message indicating there are no conflicts is shown.](media/github_pullrequest_noconflicts.png)
+
+9. Select the **Actions** tab of the repository to verify that the deployment workflow has not been triggered by the recent file commits on the textchange branch.
+
+10. Return to the pull request that was just created, by selecting the **Pull requests** tab, and selecting the pull request in the list.
+
+11. Select the **Merge pull request** button on the pull request, then select **Confirm merge**.
+
+12. Return to the **Actions** tab, and you should see that the workflow has been triggered (merging pushes new code to the branch, thus the production workflow is triggered).
+
+    ![The workflows list is displayed with an in progress workflow that has been triggered by the merge of the pull request.](media/github_mergeworkflowtriggered.png)
+
+13. Once the deployment workflow has completed. Navigate to the E-commerce web application and ensure the changes you made are visible.
+
+    ![A portion of the e-commerce website is shown with the textual change highlighted.](media/ecommerce_textchangevisible.png)
+
 ## After the hands-on lab
 
 Duration: 10 minutes
@@ -2164,5 +2574,7 @@ Duration: 10 minutes
 ### Task 1: Delete resources
 
 1. Since the HOL is now complete, go ahead and delete all the Resource Groups that were created for this HOL. You will no longer need those resources and it will be beneficial to clean up your Azure Subscription.
+
+2. In GitHub, open the ContosoSports repository and select **Settings**. Scroll to the bottom of the screen, and select the **Delete this repository** button in the **Danger Zone** section.
 
 You should follow all steps provided *after* attending the hands-on lab.
