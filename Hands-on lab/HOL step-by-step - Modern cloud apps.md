@@ -96,8 +96,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
       - [Subtask 1: Create the service principal credentials secret](#subtask-1-create-the-service-principal-credentials-secret)
       - [Subtask 2: Create the web portal publish profile secret](#subtask-2-create-the-web-portal-publish-profile-secret)
       - [Subtask 3: Create publish profile secrets for the remaining projects](#subtask-3-create-publish-profile-secrets-for-the-remaining-projects)
-    - [Task 3: Define the production deployment workflow](#task-3-define-the-production-deployment-workflow)
-      - [Subtask 4: Trigger the Production Deployment Workflow](#subtask-4-trigger-the-production-deployment-workflow)
+    - [Task 5: Define the production deployment workflow](#task-5-define-the-production-deployment-workflow)
+    - [Task 6: Trigger the Production Deployment Workflow](#task-6-trigger-the-production-deployment-workflow)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete resources](#task-1-delete-resources)
 
@@ -2304,7 +2304,7 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
 
 ![The GitHub repository secrets screen is displayed with a table containing all the secrets added in this lab.](media/github_secretslisting.png)
 
-### Task 3: Define the production deployment workflow
+### Task 5: Define the production deployment workflow
 
 1. In the web browser, return to the ContosoSports repository on GitHub, and select the **Actions** tab.
 
@@ -2441,7 +2441,7 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
         # Deploy to Azure App Service 
         - name: 'Deploy payments API'
             uses: azure/webapps-deploy@v2
-            with: 
+            with:
             app-name: ${{ env.AZURE_API_PAYMENT_NAME }}
             publish-profile: ${{ env.AZURE_API_PAYMENT_PUBLISH_PROFILE }}
             package: './paymentapideploy'
@@ -2516,7 +2516,7 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
 
     ![A completed workflow job console is shown with one of the steps expanded so that the output of the step is displayed.](media/github_jobstepexpanded.png)
 
-#### Subtask 4: Trigger the Production Deployment Workflow
+### Task 6: Trigger the Production Deployment Workflow
 
 In this task, we will be making a modification to the e-commerce web application in a branch and issuing a pull request to the master branch. We will manually merge the pull request into the master branch to trigger the production deployment workflow.
 
