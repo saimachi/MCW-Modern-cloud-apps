@@ -2204,7 +2204,7 @@ The Contoso Sports League would like to move their existing source control to Gi
 
 1. Open a web browser, and navigate to <https://www.github.com>. Log in using your GitHub account credentials.
 
-2. In the upper-right corner, the user drop down menu and select **Your repositories**.
+2. In the upper-right corner, expand the user drop down menu and select **Your repositories**.
 
     ![The user menu is expanded with the Your repositories item selected.](media/github_yourrepositoriesmenu.png)
 
