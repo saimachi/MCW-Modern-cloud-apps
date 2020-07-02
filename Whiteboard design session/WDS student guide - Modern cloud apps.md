@@ -78,6 +78,8 @@ They have reached a point where managing their server infrastructure is becoming
 
 One example is in how they manage the usernames and passwords for call center operators and support staff, as applied to the call center admin website. Today they have a homegrown solution that stores usernames and passwords in the same database used for storing merchandise information. They have experimented with other third-party solutions in the past, and their employees found it jarring to see another company's logo displayed when logging into their own call center website. In creating their identity solution, they want to ensure they can brand the login screens with their own logo. Additionally, Contoso is concerned about hackers from foreign countries/regions gaining access to the administrator site. Before they choose an identity solution, they would like to see how it indicates such attempts.
 
+Contoso is interested in achieving automation surrounding their currently manual release processes. They wish to have features developed in their own branch. Once the feature is complete, a pull request is issued to the master branch. The pull request code is then reviewed for quality assurance, and once approved, the code is merged into the master branch. The merge of the code should trigger an automated deployment to release the new application code into production.
+
 There is one architectural enhancement Contoso would like to make in the transition to a PaaS solution. When a visitor loads the home page, it gets the list of featured products on offer (consisting of the product image, title, and URL) from the Offers service. The home page does it using a client-side GET request against an ASP.NET Web API service that is executed as the page loads in the browser. Contoso anticipates growing the functionality of this service and would like to scale it independently of the website.
 
 Contoso is also looking to augment their data analytics story by introducing a data warehouse to enable them to analyze their historical data over time, particularly as their number of transactions soars in the cloud. They would like to plan for a solution that moves the data from their OLTP database into their data warehouse on a nightly basis, ideally with the minimum amount of infrastructure or development effort.
@@ -99,6 +101,8 @@ Contoso is also looking to augment their data analytics story by introducing a d
 7. Provide a regional database failover plan that will enable the customer to initiate the failover to another region, allowing their various web applications and other hosted services to roll over to a synchronized database at minimal cost.
 
 8. A data warehouse for analyzing their transaction history.
+
+9. Automated deployment of applications code.
 
 ### Customer objections
 
@@ -195,6 +199,12 @@ Directions: With all participants at your table, respond to the following questi
 1. How would you recommend Contoso implement their data warehouse?
 
 2. How would Contoso schedule nightly data transfers from their OLTP database to their data warehouse?
+
+*Automated deployment*
+
+1. How would you recommend Contoso implement their automated deployments?
+
+2. How would Contoso implement the trigger for the automated deployment?
 
 **Prepare**
 
