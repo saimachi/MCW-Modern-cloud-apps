@@ -49,6 +49,7 @@ By the end of this hands-on lab, you will have learned how to use several key se
 - Azure Application Insights
 - Visual Studio 2019 Community Edition or later
 - Twilio (third-party service to send SMS messages)
+- GitHub
 
 ## Azure solutions
 
