@@ -24,7 +24,7 @@ namespace Contoso.Apps.SportsLeague.Offers
             services.AddControllers();
 
             services.AddDbContext<ProductContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContosoSportsLeague")));
+                options.UseSqlServer(Configuration["ConnectionStrings:SportsDB"]));
 
             services.AddAutoMapper(typeof(AutoMapping));
 

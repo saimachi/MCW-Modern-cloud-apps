@@ -57,7 +57,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
       - [Subtask 2: Configure Cross-Origin Resource Sharing (CORS)](#subtask-2-configure-cross-origin-resource-sharing-cors)
       - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
       - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
-    - [Task 6: Update and deploy the e-commerce website](#task-6-update-and-deploy-the-e-commerce-website)
+    - [Task 6: Add API endpoint configuration settings](#task-6-add-api-endpoint-configuration-settings)
       - [Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project](#subtask-1-update-the-application-settings-for-the-web-app-that-hosts-the-contosoappssportsleagueweb-project)
       - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
@@ -429,31 +429,27 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
     ![In Solution Explorer, under Solution \'Contoso.Apps.SportsLeague\' (7 projects), Web is expanded, and under Web, Contoso.Apps.SportsLeague.Web is selected.](media/2019-04-19-14-03-04.png "Solution Explorer")
 
-12. On the Publish dialag, select **Start** in the **Publish** section.
+12. On the Publish dialog, select **Start** in the **Publish** section.
 
 13. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
 
     ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
 
-14. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
-
-    ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
-
-15. In the App Service dialog, expand the resource group, and select the **contosoapp** from the list, then choose **OK**.
+14. In the App Service dialog, expand the resource group, and select the **contosoapp** from the list, then choose **OK**.
     
     ![The App Service dialog is shown with the resource group expanded and the contosoapp application service selected in the list. The OK button is highlighted.](media/deploywebapp_serviceselection.png)
 
-16. Select **Publish** to publish the Web application.
+15. Select **Publish** to publish the Web application.
 
     ![Publish profile is displayed with the Publish button highlighted.](media/2020-06-15-16-53-15.png "Publish profile")
 
-17. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
+16. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
 
     ![Screenshot of the Visual Studio Output view, with the Publish Succeeded message circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image50.png "Visual Studio Output view")
 
     >**Note**: Your URL will differ from the one shown in the Output screenshot because it must be globally unique.
 
-18. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
+17. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
 
     ![Screenshot of the Store link.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image51.png "Store link")
 
@@ -778,8 +774,8 @@ In this exercise, you will provision a website via the Azure Web App template us
    
 14. Select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
 
-    ![Publish dialog with the Azure App Service web app highlighted](media/2020-06-19-22-20-53.png "Publish dialog")
-
+    ![The App Service dialog is shown with the resource group expanded and the call center app service selected.](media/appsvcdeploy_selectcallcenterappdialog.png)
+    
 15. Select **OK**.
 
 16. Select **Publish** to publish the Web application.
@@ -802,8 +798,6 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 2. Select **+ Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
 
-    ![In the Azure Portal left menu, New is selected. In the New blade, the search field is set to API App.](media/2019-03-28-07-57-54.png "Azure Portal - Create API App")
-
 3. On the new **API App** blade, create the following values:
 
    - **App name:** Specify a unique name for the App Name.
@@ -824,31 +818,27 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![In Solution Explorer, Contoso.Apps.PaymentGateway is selected, and in its right-click menu, Publish is selected.](media/2019-04-19-14-52-22.png "Solution Explorer")
 
-3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
+3. On the Publish dialog, select **Start** in the **Publish** section.
 
-    ![Publish dialog with Azure selected](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
+4. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
 
-4. For the Specific target, choose **Azure App Service (Windows), then select **Next**.
+    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
 
-     ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
+5. In the App Service dialog, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **OK**.
 
-5. Select the **API App** that was created previously.
+    ![The App Service dialog is shown with the payment gateway api selected.](media/deployment_selectpaymentapiappservice.png)
 
-    ![API App is highlighted](media/2020-06-19-22-32-33.png "API App is highlighted")
-
-6. Select **Finish**.
-
-7. Select **Publish** to publish the API App.
+6. Select **Publish** to publish the API App.
 
     ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
 
-8. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
+7. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
     ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
 
-9. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
+8. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
 
-10. Viewing the Web App in a browser will display the Swagger UI for the API.
+9. Viewing the Web App in a browser will display the Swagger UI for the API.
 
    ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-04-58-04.png "Swagger UI")
 
@@ -860,17 +850,15 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal (<http://portal.azure.com>).
 
-2. Select **+Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
+2. Select **+ Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
 
-3. On the new **API App** blade, specify a unique name for the **API App**, and ensure the previously used Resource Group and App Service Plan are selected.
+3. On the new **API App** blade, specify a unique name for the **API App**, and ensure the previously used Resource Group and the **ContosoSportsPlan** App Service Plan are selected. You may also disable **Application Insights**.
 
     ![In the API App blade, offersapith is typed in the App name field. App configuration fields displayed.](media/2019-04-11-05-03-33.png "API App blade")
 
 4. After the values are accepted, select the **Create** button.
 
-5. When the Web App template has completed provisioning, open the new API App by, in the navigation menu to the left, select **App Services** and then the Offer API app you just created.
-
-   ![In the Azure Portal, on the left More services is selected, and on the right under App Services displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image101.png "App Services")
+5. When the Web App template has completed provisioning, return to the resource group, then select the new API App from the list of resources.
 
 #### Subtask 2: Configure Cross-Origin Resource Sharing (CORS)
 
@@ -890,83 +878,141 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
 
-2. In the **Connection Strings** section, add a new **Connection string** with the following values:
+3. Scroll down, and locate the **Connection strings** section.
 
-      - Name: `ContosoSportsLeague`
+4. Add a new **Connection String** with the following values, and select **OK**:
 
-      - Value: **Enter the Connection String for the SQL Database Failover Group Read-only Listener Endpoint**.
+   - Name: **AppConfig**
 
-      - Type: `SQLAzure`
+   - Value: **Enter the Connection String for the App Configuration Store**.
 
-        ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
+   - Type: Select **Custom**.
 
-        >**Note**: The Connection String for the SQL Database Failover Group Read-only Listener Endpoint will be in the following format:
-        >
-        > ```
-        > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID={your_username};Password={your_password_here};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-        > ```
-        >
-        > Ensure you replace the string placeholder values **{your\_username}**, **{your\_password\_here}**, and **{failover_group_endpoint}** with the username, password, and Failover Group Read-only Listener Endpoint you respectively setup during creation (demouser & demo@pass123).
-        >
-        > ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder value")
-        >
-        > The SQL Failover Group Read-only Listener Endpoint will be the DNS name that ends in `.secondary.database.windows.net`. You will have copied this previously when setting up the SQL Failover Group.
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
 
-3. Select the **Ok** button.
+5. Select the **Ok** button.
 
-4. Select the **Save** button.
+6. Select the **Save** button.
 
-    ![The Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
+    ![the Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
+
+7. The offers api resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
+
+8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+    
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+
+9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
+
+10. Select the **+ Add Access Policy** link.
+
+11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+
+12. In the **Select principal** blade, search for the name of the offers api application you just created and choose its managed identity.
+
+13. Select **Add** (this image is provided as an example, the principal selected is the offers api system managed identity).
+    
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+
+14. Select **Save** on the Access policies screen to commit the changes.
 
 #### Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Offers** project located in the **APIs** folder using the **Solution Explorer** in Visual Studio.
 
-2. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Publish**.
+2. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Edit Project File**.
+
+3. In the **PropertyGroup** element, add the following XML beneath the TargetFramework item and save the file:
+   
+    ```xml
+    <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
+    ```
+
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+
+4. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Manage Nuget Packages**.
+
+5. Select the **Browse** tab, and search for **Microsoft.Azure.AppConfiguration.AspNetCore**.
+
+6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
+
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+
+7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
+
+8. Now we are ready to configure this application to use the App Configuration in Azure. Under the **Contoso.Apps.SportsLeague.Offers** project, open the **Program.cs** file.
+
+9. Uncomment the following **using** statements at the top of the file:
+    
+    ```C#
+    using Microsoft.Extensions.Configuration;
+    using Azure.Identity;
+    ```
+
+10. In the **CreateHostBuilder** method, uncomment the following code - this tells the application to utilize the AppConfig connection string that you've already setup on the API application service to point to the centralized App Configuration resource.
+    
+    ```C#
+    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+    {
+        var settings = config.Build();
+
+        config.AddAzureAppConfiguration(options =>
+        {
+            options.Connect(settings["ConnectionStrings:AppConfig"])
+                    .ConfigureKeyVault(kv =>
+                    {
+                        kv.SetCredential(new DefaultAzureCredential());
+                    });
+        });
+    })
+    .UseStartup<Startup>();
+    ```
+
+11. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Publish**.
 
     ![In Solution Explorer, from the Contoso.Apps.SportsLeague.Admin right-click menu, Publish is selected.](media/2019-04-19-15-03-45.png "Solution Explorer")
 
-3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
+12. On the Publish dialog, select **Start** in the **Publish** section.
 
-    ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
+13. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
 
-4. For the **Specific target**, choose **Azure App Service (Windows)**, then select **Next**.
+    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
 
-    ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
+14. In the App Service dialog, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **OK**.
 
-5. Select the Offers API app created previously.
+    ![The App Service dialog is shown with the offers api selected.](media/deployment_selectoffersapiservice.png)
+   
+15. Select **Publish** to publish the API App.
 
-    ![In the App Service section, the contososports folder is expanded, and OffersAPI4 is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image110.png "App Service section")
+    ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
 
-6. Select **Finish**.
+16. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
-7. Select **Publish** to publish the Offers API.
+    ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
 
-    ![Publish button is highlighted](media/2020-06-19-22-50-46.png "Publish button is highlighted")
+17. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
 
-8. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
+18. Viewing the Web App in a browser will display the Swagger UI for the API.
 
-9. Record the value of the deployed API app URL into Notepad for later use.
+19. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
 
-10. Viewing the Web App in a browser will display the Swagger UI for the API.
+20. Record the value of the deployed API app URL into Notepad for later use.
+
+21. Viewing the Web App in a browser will display the Swagger UI for the API.
 
     ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-05-20-40.png "Swagger UI")
 
-11. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
+22. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
 
     ![Swagger UI displaying API call response.](media/2020-03-17-20-56-31.png "Swagger UI")
 
-### Task 6: Update and deploy the e-commerce website
+### Task 6: Add API endpoint configuration settings
 
 #### Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project
 
-1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
+1. In the Azure Portal, return to the lab resource group.
 
-2. Select **Resource groups** then the **contososports** resource group.
-
-3. Select the **App Service Web App** for the front-end web application.
-
-    ![In the Resource Group blade on the right, under Name, contosoapp is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image113.png "Resource Group blade")
+3. Select the **contosoconfig** App Configuration resource from the list.
 
 4. On the **App Service** blade, scroll down, and select **Configuration** in the left pane.
 
