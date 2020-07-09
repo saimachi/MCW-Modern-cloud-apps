@@ -702,9 +702,9 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
 
-12. In the **Select principal** blade, search for the name of the call center application you just created and choose the managed identity that was just created.
+12. In the **Select principal** blade, search for the name of the call center application you just created and choose the managed identity.
 
-13. Select **Add** (this image is provided as an example, the principal selected is the call center app service system managed identity).
+13. Select **Add**.
     
     ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
 
@@ -910,7 +910,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 12. In the **Select principal** blade, search for the name of the offers api application you just created and choose its managed identity.
 
-13. Select **Add** (this image is provided as an example, the principal selected is the offers api system managed identity).
+13. Select **Add**.
     
     ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
 
@@ -1916,37 +1916,35 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
     ![Display Contoso Function App, with the Configuration link highlighted.](media/2020-06-21-11-19-23.png "Contoso Function App Application Settings")
 
-8. Scroll down, and locate the **Application Settings** section.
-
-9. Add a new **Application Setting** with the following values, and select **OK**:
+8. Add a new **Application Setting** with the following values, and select **OK**:
 
    - Name: **AppConfigConnectionString**
 
    - Value: **Enter the Connection String for the App Configuration Store**.
   
-10. Select the **OK** button.
+9.  Select the **OK** button.
 
-11. Select the **Save** button.
+10. Select the **Save** button.
 
-12. The function application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
+11. The function application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
 
-8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+12. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
     
     ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
 
-9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
+13. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
-10. Select the **+ Add Access Policy** link.
+14. Select the **+ Add Access Policy** link.
 
-11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+15. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
 
-12. In the **Select principal** blade, search for the name of the function application you just created and choose the managed identity.
+16. In the **Select principal** blade, search for the name of the function application you just created and choose the managed identity.
 
-13. Select **Add** (this image is provided as an example, the principal selected is the function app system managed identity).
+17. Select **Add**.
     
     ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
 
-14. Select **Save** on the Access policies screen to commit the changes. 
+18. Select **Save** on the Access policies screen to commit the changes. 
 
 Task 2: Configure and deploy the Function App
 
@@ -1983,39 +1981,44 @@ Task 2: Configure and deploy the Function App
         Configuration = builder.Build();
     }
     ```
-7. To publish the Function App, open the Visual Studio solution, Right-click on the **Contoso.Apps.FunctionApp** project, then select **Publish**.
+7. In the **ProcessOrder** method, uncomment the following line of code:
 
-8. On the **Publish** dialog, select **Start**.
+    ```C#
+    Order.ReceiptUrl = await StorageMethods.UploadPdfToBlob(receipt, fileName, Configuration, log);
+    ```
+8. To publish the Function App, open the Visual Studio solution, Right-click on the **Contoso.Apps.FunctionApp** project, then select **Publish**.
+
+9.  On the **Publish** dialog, select **Start**.
    
-9. On the **Pick a publish target** dialog, choose the target of **Azure App Service Plan**, then select **Select Existing**. Select **Create Profile**.
+10. On the **Pick a publish target** dialog, choose the target of **Azure App Service Plan**, then select **Select Existing**. Select **Create Profile**.
 
     ![The Pick a publish target dialog is shown with Azure App Service Plan and Select existing chosen. The Create Profile button is highlighted.](media/functiondeployment_createprofile.png)
 
-10. Expand the lab resource group and elect the **Function App**, then select **OK**.
+11. Expand the lab resource group and elect the **Function App**, then select **OK**.
 
     ![The App Service dialog is shown with the resource group expanded and the Function App selected.](media/deployment_appservice_functionselection.png)
    
-11. Select **Publish**.
+12. Select **Publish**.
 
     The publish should only take a minute or so. You can check the **Output** window for any errors that may occur.
 
     ![The build Output window is displayed. Publish succeeded message is shown.](media/2019-04-15-15-33-20.png "Output window.")
 
-12. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
+13. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
 
     ![The Azure Functions shows the ContosoMakePDF function listed.](media/2020-06-21-11-25-59.png "Azure Functions")
 
-13. Select the **Code + Test** link, then select the **Test/Run** button.
+14. Select the **Code + Test** link, then select the **Test/Run** button.
 
     ![The Code + Test link and Test/Run button are highlighted](media/2020-06-21-11-27-28.png "Function Test link")
 
-14. Select **POST** for the HTTP method.
+15. Select **POST** for the HTTP method.
 
-15. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
+16. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
 
     ![A small screenshot of Windows Explorer is shown emphasizing the file path to the sample.dat file.](media/2019-04-15-15-47-39.png "Sample.dat File")
 
-16. Select the **Run** button located at the bottom of the blade.
+17. Select the **Run** button located at the bottom of the blade.
 
     ![The screenshot displays the Test blade with sample.dat contents. The Request body field shows the Order JSON. There is an arrow pointing to Run button.](media/2020-06-21-11-29-48.png "Display Test blade with sample.dat contents")
 
@@ -2025,22 +2028,22 @@ Task 2: Configure and deploy the Function App
 
     ![There is a screenshot displaying the Function App test result log.  A status code of 200 OK is displayed on the right side pane.](media/2020-06-21-11-30-54.png "Function App test result log.")
 
-17. Check your receipt PDF in the storage account blob.
+18. Check your receipt PDF in the storage account blob.
 
     - Navigate to the ContosoSports storage account.
     - Select the **Blobs** link.
 
     ![The Settings options are displayed. There is an arrow pointing to the Blobs link.](media/2020-06-21-11-32-12.png "Containers link")
 
-18. Choose the newly created **receipts** blob container.
+19. Choose the newly created **receipts** blob container.
 
     ![The storage account blobs are listed. The receipts blob container is highlighted.](media/2019-04-15-16-08-35.png "Click the Blobs link")
 
-19. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
+20. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
 
     ![There is a screenshot displaying a list of the newly created PDF receipts. An arrow pointing to the Download link is located on the right side of the screen.](media/2019-04-15-16-11-24.png "PDF Receipts")
 
-20. Open the `...` link and choose download menu item.
+21. Open the `...` link and choose download menu item.
 
     ![A sample Contoso Sports League PDF receipt is displayed.](media/2019-04-15-16-15-06.png "Sample PDF receipt")
 

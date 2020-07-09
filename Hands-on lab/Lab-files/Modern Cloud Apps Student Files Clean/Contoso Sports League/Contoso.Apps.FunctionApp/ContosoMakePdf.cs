@@ -6,28 +6,28 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Configuration;
-using Azure.Identity;
+//using Microsoft.Extensions.Configuration;
+//using Azure.Identity;
 
 namespace ContosoFunctionApp
 {
     public static class ContosoMakePdf
     {
-        private static IConfiguration Configuration { set; get; }
+        //private static IConfiguration Configuration { set; get; }
 
-        static ContosoMakePdf()
-        {
-            var builder = new ConfigurationBuilder();            
-            builder.AddAzureAppConfiguration(options =>
-            {
-               options.Connect(Environment.GetEnvironmentVariable("AppConfigConnectionString"))               
-                        .ConfigureKeyVault(kv =>
-                        {
-                            kv.SetCredential(new DefaultAzureCredential());
-                        });
-            });
-            Configuration = builder.Build();
-        }
+        //static ContosoMakePdf()
+        //{
+        //    var builder = new ConfigurationBuilder();            
+        //    builder.AddAzureAppConfiguration(options =>
+        //    {
+        //       options.Connect(Environment.GetEnvironmentVariable("AppConfigConnectionString"))               
+        //                .ConfigureKeyVault(kv =>
+        //                {
+        //                    kv.SetCredential(new DefaultAzureCredential());
+        //                });
+        //    });
+        //    Configuration = builder.Build();
+        //}
 
         [FunctionName("ContosoMakePDF")]
         public static async Task<IActionResult> Run(
@@ -73,7 +73,7 @@ namespace ContosoFunctionApp
 
             var receipt = await PdfUtility.CreatePdfReport(Order, fileName, log);
             log.LogInformation("PDF generated. Saving to blob storage...");
-            Order.ReceiptUrl = await StorageMethods.UploadPdfToBlob(receipt, fileName, Configuration, log);
+            //Order.ReceiptUrl = await StorageMethods.UploadPdfToBlob(receipt, fileName, Configuration, log);
             log.LogInformation($"Using Order.ReceiptUrl {Order.ReceiptUrl}");
             return Order;
         }

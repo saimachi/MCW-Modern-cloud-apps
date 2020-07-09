@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using Azure.Identity;
+//using Microsoft.Extensions.Configuration;
+//using Azure.Identity;
 
 namespace Contoso.Apps.SportsLeague.Web
 {
@@ -16,19 +16,19 @@ namespace Contoso.Apps.SportsLeague.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
-                    {
-                        var settings = config.Build();
+                    webBuilder//.ConfigureAppConfiguration((hostingContext, config) =>
+                    //{
+                    //    var settings = config.Build();
 
-                        config.AddAzureAppConfiguration(options =>
-                        {
-                            options.Connect(settings["ConnectionStrings:AppConfig"])
-                                    .ConfigureKeyVault(kv =>
-                                    {
-                                        kv.SetCredential(new DefaultAzureCredential());
-                                    });
-                        });
-                    })
+                    //    config.AddAzureAppConfiguration(options =>
+                    //    {
+                    //        options.Connect(settings["ConnectionStrings:AppConfig"])
+                    //                .ConfigureKeyVault(kv =>
+                    //                {
+                    //                    kv.SetCredential(new DefaultAzureCredential());
+                    //                });
+                    //    });
+                    //})
                     .UseStartup<Startup>();
                 });
     }
