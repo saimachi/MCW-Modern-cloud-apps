@@ -58,7 +58,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
       - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
       - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
     - [Task 6: Add API endpoint configuration settings](#task-6-add-api-endpoint-configuration-settings)
-      - [Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project](#subtask-1-update-the-application-settings-for-the-web-app-that-hosts-the-contosoappssportsleagueweb-project)
+      - [Subtask 1: Add the API endpoint configuration settings](#subtask-1-add-the-api-endpoint-configuration-settings)
       - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
     - [Task 1: Enable Azure AD Premium Trial](#task-1-enable-azure-ad-premium-trial)
@@ -86,8 +86,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
-    - [Task 2: Create an Azure Logic App to Process Orders](#task-2-create-an-azure-logic-app-to-process-orders)
-    - [Task 3: Use Twilio to send SMS Order Notifications](#task-3-use-twilio-to-send-sms-order-notifications)
+    - [Task 3: Create an Azure Logic App to Process Orders](#task-3-create-an-azure-logic-app-to-process-orders)
+    - [Task 4: Use Twilio to send SMS Order Notifications](#task-4-use-twilio-to-send-sms-order-notifications)
       - [Subtask 1: Configure your Twilio trial account](#subtask-1-configure-your-twilio-trial-account)
       - [Subtask 2: Create a new logic app](#subtask-2-create-a-new-logic-app)
   - [Exercise 6: Automate deployments using GitHub actions](#exercise-6-automate-deployments-using-github-actions)
@@ -1008,41 +1008,39 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 ### Task 6: Add API endpoint configuration settings
 
-#### Subtask 1: Update the Application Settings for the Web App that hosts the Contoso.Apps.SportsLeague.Web project
+#### Subtask 1: Add the API endpoint configuration settings
 
 1. In the Azure Portal, return to the lab resource group.
 
-3. Select the **contosoconfig** App Configuration resource from the list.
+2. Select the **contosoconfig** App Configuration resource from the list.
+   
+    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png)
 
-4. On the **App Service** blade, scroll down, and select **Configuration** in the left pane.
+3. On the left menu, in the **Operations** section, select **Configuration explorer**.
 
-    ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
+4. Expand the **+ Create** button, and select **Key-value**. This API endpoint does not contain any secret values, thus is not required to be stored as a Key Vault value.
+    
+    ![The + Create button is expanded with the Key-value item selected.](media/appconfig_createkeyvaluemenu.png)
 
-5. Scroll down, and locate the **Applications settings** section.
+5. Create the new key-value entry with the following values:
 
-6. Add a new **Application Setting** with the following values:
+   - Name: `APIEndpoints:PaymentsAPI`
 
-   - App Setting Name: `paymentsAPIUrl`
-
-   - Value: Enter the **HTTPS** URL for the Payments API App with `/api/nvp` appended to the end.
+   - Value: Enter the **HTTPS** URL for the Payments API App with `/api/nvp` appended to the end. This is the value that you recorded when deploying the API. Alternatively, this value can be retrieved by opening the API resource in the Azure Portal and copying the URL value on the Overview screen.
 
         >**Example**: `https://paymentsapi0.azurewebsites.net/api/nvp`
 
-    ![In the Application settings section of the App Service blade, the previously defined application setting values are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image116.png "App settings")
+6. Create another Key-value setting with the following values:
 
-7. Add another **Application Setting** with the following values:
+   - App Setting Name: `APIEndpoints:OffersAPI`
 
-   - App Setting Name: `offersAPIUrl`
-
-   - Value: Enter the **HTTPS** URL for the Offers API App with `/api/get` appended to the end.
+   - Value: Enter the **HTTPS** URL for the Offers API App with `/api/get` appended to the end. This is the value that you recorded when deploying the API. Alternatively, this value can be retrieved by opening the API resource in the Azure Portal and copying the URL value on the Overview screen.
 
     >**Example**: `https://offersapi4.azurewebsites.net/api/get`
 
-    ![In the Application settings section of the App Service blade, the previously defined application setting values are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image117.png "App settings section")
-
     >**Note**: Ensure both API URLs are using **SSL** (https://), or you will see a CORS errors.
 
-8. Select **Save**.
+    ![The list of Configuration settings is shown with the two new API endpoint settings highlighted.](media/appconfig_listofsettingswithAPIendpointshighlighted.png)
 
 #### Subtask 2: Validate App Settings are correct
 
@@ -1052,7 +1050,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 2. In the **Overview** pane, select the **URL** for the Web App to open it in a new browser tab.
 
-    ![On the right side of the App Service blade, under Essentials, the URL (http://contososportsweb2101.azurewebsites.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image120.png "App Service blade")
+    ![On the right side of the App Service overview screen, the URL (http://contososportsweb2101.azurewebsites.net) link is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image120.png "App Service blade")
 
 3. On the homepage, you should see the latest offers populated from the Offers API.
 
@@ -1733,28 +1731,28 @@ To configure the application for logging and diagnostics, you have been asked to
 
 4. Within the **NuGet Package Manager**, select the **Browse** tab, then search for and install the following NuGet package:
 
-    - **Microsoft.ApplicationInsights**
-    - **Microsoft.ApplicationInsights.Web**
-
+    - **Microsoft.ApplicationInsights.AspNetCore**
+    
 5. Open the file `\Helpers\TelemetryHelper.cs` located in the **Contoso.Apps.SportsLeague.Web** project.
 
-6. Add the following using statement to the top of the file:
+6. Add the following using statements to the top of the file:
 
     ```csharp
     using Microsoft.ApplicationInsights;
+    using Microsoft.ApplicationInsights.Extensibility;
     ```
 
 7. Add the following code to the **TrackException** method to instantiate the telemetry client and track exceptions:
 
     ```csharp
-    var client = new TelemetryClient();
+    var client = new TelemetryClient(TelemetryConfiguration.CreateDefault());
     client.TrackException(new Microsoft.ApplicationInsights.DataContracts.ExceptionTelemetry(exc));
     ```
 
 8. Add the following code to the **TrackEvent** method to instantiate the telemetry client and track event data:
 
     ```csharp
-    var client = new TelemetryClient();
+    var client = new TelemetryClient(TelemetryConfiguration.CreateDefault());
     client.TrackEvent(eventName, properties);
     ```
 
@@ -1862,9 +1860,8 @@ To configure the application for logging and diagnostics, you have been asked to
 
 8. Select **View More Insights**, then scroll down to see event list.
 
-    ![In the Custom events section, event metrics are displayed for users and sessions. Different web pages are listed. e.g. OrderCompleted and SuccessfulPaymentAuth.](media/2019-03-29-11-35-33.png "Event Statistics")
-    ![](media/2020-06-21-11-09-04.png)
-
+    ![In the Custom events section, event metrics are displayed for users and sessions. Different web pages are listed. e.g. OrderCompleted and SuccessfulPaymentAuth.](media/2020-06-21-11-09-04.png "Event Statistics")
+    
 ## Exercise 5: Automating backend processes with Azure Functions and Logic Apps
 
 Duration: 45 Minutes
@@ -1879,80 +1876,146 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 ### Task 1: Create an Azure Function to Generate PDF Receipts
 
-1. Select the **+Create a resource** button found on the upper left-hand corner of the Azure portal and then select **Compute \> Function App**. Select **Create** button at the bottom.
+1. Open the Azure Management Portal (<http://portal.azure.com>).
+   
+2. Select the **+ Create a resource** tile, then select **Compute \> Function App**. Select **Create** button at the bottom.
 
-    ![On the left side of the Portal, the Create a resource button is selected. In the middle, under New, Compute is selected. On the right, under Compute, Function App is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image221.png "Azure Portal")
-
-2. Provision and deploy the new function app, with the following settings:
+    ![The New resource screen is shown with Compute and Function app selected.](media/newcomputefunctionapp.png)
+   
+3. Provision and deploy the new function app, with the following settings:
 
     - **Resource Group**: Use the existing resource group, **contososports**.
 
     - **Function App name**: _Choose a unique name_.
 
-    - **Publish**: Code
+    - **Publish**: Select **Code**.
 
-    - **Runtime Stack**: .NET Core.
+    - **Runtime Stack**: Select **.NET Core**.
+    
+    - **Version**: Select **3.1**.
 
     - **Region**: _Choose the same region used for the e-commerce web apps in this lab_.
 
-3. Select **Next: Hosting >**.
+4. Select **Next: Hosting >**.
 
-4. On the **Hosting** tab, select the following values, then select **Review + create**:
+5. On the **Hosting** tab, select the following values, then select **Review + create**:
 
-    - **Operating System**: Windows
+    - **Storage account**: Select the lab storage account, prefixed with **contoso**.
+  
+    - **Operating System**: Select **Windows**.
 
-    - **Plan type**: App service plan
+    - **Plan type**: Select **App service plan**.
 
-    - **Windows Plan**: Choose the App Service Plan used for the e-commerce web app.
+    - **Windows Plan**: Select **ContosoSportsPlan**.
+    
+    - **Sku and size**: Select **Standard S1**. 
 
-5. Select **Review + create**, then **Create**.
-
-6. Navigate to the Storage Account in the **contososports** resource group, go to **Access Keys** and copy the **Connection String** for the Storage Account. Paste your storage account connection string into Notepad to save for later.
-
-    ![Display storage account list.  Pointing to Access keys.](media/2019-04-15-15-07-15.png "Storage Account Access keys")
+6. Select **Review + create**, then **Create**.
 
 7. Navigate to the **Function App** that was just created, and select **Configuration**.
 
     ![Display Contoso Function App, with the Configuration link highlighted.](media/2020-06-21-11-19-23.png "Contoso Function App Application Settings")
 
-8. Add a new Application Setting with the following values, then select **Save**:
+8. Scroll down, and locate the **Application Settings** section.
 
-    - **Name**: `contososportsstorage`
-    - **Value**: Enter the Connection String for your storage account.
+9. Add a new **Application Setting** with the following values, and select **OK**:
 
-    ![Updated Function App Application settings. Showing final values.](media/2019-04-15-16-18-36.png "Updated Function App Application settings.")
+   - Name: **AppConfigConnectionString**
 
-9. To publish the Function App, open the Visual Studio solution, Right-click on the **ContosoFunctionApp** project, then select **Publish**.
+   - Value: **Enter the Connection String for the App Configuration Store**.
+  
+10. Select the **OK** button.
 
-    ![Visual Studio Solution Explorer is open. Menu is displayed for Contoso Function App. Selecting function app publish.](media/2019-04-15-15-31-03.png "Selecting function app publish")
+11. Select the **Save** button.
 
-10. On the **Publish** dialog, choose the target of **Azure**, then **Azure Function App (Windows)**.
+12. The function application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
 
-11. Select the **Function App**, then select **Finish**.
+8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+    
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
 
-    ![Azure function app tree displayed. The Contoso Function App is selected.](media/2020-06-21-11-22-17.png "Azure function app tree displayed")
+9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
-12. Select **Publish**.
+10. Select the **+ Add Access Policy** link.
+
+11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+
+12. In the **Select principal** blade, search for the name of the function application you just created and choose the managed identity.
+
+13. Select **Add** (this image is provided as an example, the principal selected is the function app system managed identity).
+    
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+
+14. Select **Save** on the Access policies screen to commit the changes. 
+
+Task 2: Configure and deploy the Function App
+
+1. In Visual Studio, expand the **Web** folder and right click on the **Contoso.Apps.FunctionApp** project, and select **Manage NuGet Packages**.
+
+2. On the **Browse** tab, search for and select **Microsoft.Extensions.Configuration.AzureAppConfiguration**. In the right pane, select **Install**.
+
+3. Repeat step 2, this time for the package **Azure.Identity**.
+
+4. Within the **Contoso.Apps.FunctionApp** project, locate and open the **ContosoMakePdf.cs** source file.
+
+5. Uncomment the following **using** statements:
+
+    ```C#
+    using Microsoft.Extensions.Configuration;
+    using Azure.Identity;
+    ```  
+6. Inside the static class **ContosoMakePdf**, uncomment the following code that sets up a connection to the App Configuration store and the Key Vault credential pass-through:
+   
+    ```C#
+    private static IConfiguration Configuration { set; get; }
+
+    static ContosoMakePdf()
+    {
+        var builder = new ConfigurationBuilder();            
+        builder.AddAzureAppConfiguration(options =>
+        {
+            options.Connect(Environment.GetEnvironmentVariable("AppConfigConnectionString"))               
+                    .ConfigureKeyVault(kv =>
+                    {
+                        kv.SetCredential(new DefaultAzureCredential());
+                    });
+        });
+        Configuration = builder.Build();
+    }
+    ```
+7. To publish the Function App, open the Visual Studio solution, Right-click on the **Contoso.Apps.FunctionApp** project, then select **Publish**.
+
+8. On the **Publish** dialog, select **Start**.
+   
+9. On the **Pick a publish target** dialog, choose the target of **Azure App Service Plan**, then select **Select Existing**. Select **Create Profile**.
+
+    ![The Pick a publish target dialog is shown with Azure App Service Plan and Select existing chosen. The Create Profile button is highlighted.](media/functiondeployment_createprofile.png)
+
+10. Expand the lab resource group and elect the **Function App**, then select **OK**.
+
+    ![The App Service dialog is shown with the resource group expanded and the Function App selected.](media/deployment_appservice_functionselection.png)
+   
+11. Select **Publish**.
 
     The publish should only take a minute or so. You can check the **Output** window for any errors that may occur.
 
     ![The build Output window is displayed. Publish succeeded message is shown.](media/2019-04-15-15-33-20.png "Output window.")
 
-13. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
+12. To test your newly published Function App, start by navigating back to your Contoso Function App in the Azure Portal. Select the newly created **ContosoMakePDF** function listed in the functions.
 
     ![The Azure Functions shows the ContosoMakePDF function listed.](media/2020-06-21-11-25-59.png "Azure Functions")
 
-14. Select the **Code + Test** link, then select the **Test/Run** button.
+13. Select the **Code + Test** link, then select the **Test/Run** button.
 
     ![The Code + Test link and Test/Run button are highlighted](media/2020-06-21-11-27-28.png "Function Test link")
 
-15. Select **POST** for the HTTP method.
+14. Select **POST** for the HTTP method.
 
-16. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
+15. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
 
     ![A small screenshot of Windows Explorer is shown emphasizing the file path to the sample.dat file.](media/2019-04-15-15-47-39.png "Sample.dat File")
 
-17. Select the **Run** button located at the bottom of the blade.
+16. Select the **Run** button located at the bottom of the blade.
 
     ![The screenshot displays the Test blade with sample.dat contents. The Request body field shows the Order JSON. There is an arrow pointing to Run button.](media/2020-06-21-11-29-48.png "Display Test blade with sample.dat contents")
 
@@ -1962,26 +2025,26 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
     ![There is a screenshot displaying the Function App test result log.  A status code of 200 OK is displayed on the right side pane.](media/2020-06-21-11-30-54.png "Function App test result log.")
 
-18. Check your receipt PDF in the storage account blob.
+17. Check your receipt PDF in the storage account blob.
 
     - Navigate to the ContosoSports storage account.
     - Select the **Blobs** link.
 
     ![The Settings options are displayed. There is an arrow pointing to the Blobs link.](media/2020-06-21-11-32-12.png "Containers link")
 
-19. Choose the newly created **receipts** blob container.
+18. Choose the newly created **receipts** blob container.
 
     ![The storage account blobs are listed. The receipts blob container is highlighted.](media/2019-04-15-16-08-35.png "Click the Blobs link")
 
-20. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
+19. Open **ContosoSportsLeague-Store-Receipt-XX.pdf** link.
 
     ![There is a screenshot displaying a list of the newly created PDF receipts. An arrow pointing to the Download link is located on the right side of the screen.](media/2019-04-15-16-11-24.png "PDF Receipts")
 
-21. Open the `...` link and choose download menu item.
+20. Open the `...` link and choose download menu item.
 
     ![A sample Contoso Sports League PDF receipt is displayed.](media/2019-04-15-16-15-06.png "Sample PDF receipt")
 
-### Task 2: Create an Azure Logic App to Process Orders
+### Task 3: Create an Azure Logic App to Process Orders
 
 Without writing any code, you can automate business processes more easily and quickly when you create and run workflows with Azure Logic Apps. Logic Apps provide a way to simplify and implement scalable integrations and workflows in the cloud. It provides a visual designer to model and automate your process as a series of steps known as a workflow. There are [many connectors](https://docs.microsoft.com/en-us/azure/connectors/apis-list) across the cloud and on-premises to quickly integrate across services and protocols.
 
@@ -2170,7 +2233,7 @@ The advantages of using Logic Apps include the following:
 
     ![In the Logic app, all steps have green checkmarks.](media/2020-03-18-19-05-39.png "Logic app")
 
-### Task 3: Use Twilio to send SMS Order Notifications
+### Task 4: Use Twilio to send SMS Order Notifications
 
 #### Subtask 1: Configure your Twilio trial account
 
