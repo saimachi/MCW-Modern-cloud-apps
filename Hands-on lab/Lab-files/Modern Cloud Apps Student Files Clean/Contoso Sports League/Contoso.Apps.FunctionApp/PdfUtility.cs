@@ -44,7 +44,7 @@ namespace ContosoFunctionApp
                 };
 
                 var converter = new SynchronizedConverter(new PdfTools());
-                return converter.Convert(doc);
+                return await Task.FromResult(converter.Convert(doc));
             }
             catch (Exception ex)
             {

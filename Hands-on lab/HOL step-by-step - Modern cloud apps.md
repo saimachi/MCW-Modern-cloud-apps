@@ -36,8 +36,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
       - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
       - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-retrieve-storage-account-access-keys)
       - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
-      - [Subtask 4: Update the configuration in the starter project](#subtask-4-update-the-configuration-in-the-starter-project)
-      - [Subtask 5: Deploy the e-commerce Web App from Visual Studio](#subtask-5-deploy-the-e-commerce-web-app-from-visual-studio)
+      - [Subtask 4: Create secrets in Azure Key Vault](#subtask-4-create-secrets-in-azure-key-vault)
+      - [Subtask 5: Centralize secrets for multiple projects using an App Configuration store](#subtask-5-centralize-secrets-for-multiple-projects-using-an-app-configuration-store)
+      - [Subtask 6: Update the configuration in the starter project](#subtask-6-update-the-configuration-in-the-starter-project)
+      - [Subtask 7: Configure and deploy the e-commerce Web App from Visual Studio](#subtask-7-configure-and-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
       - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
       - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
@@ -155,13 +157,13 @@ The Cloud Workshop: Modern Cloud Apps lab is a hands-on exercise that will chall
 | Logic Apps Docs | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-what-are-logic-apps> |
 | Azure Functions -- create first function | <https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-azure-function> |
 | Azure Functions docs | <https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-azure-functions> |
-| GitHub | <https://github.com/> |
+| Deploy to Azure with GitHub Actions | <https://docs.microsoft.com/en-us/azure/developer/github/github-actions> |
 
 ## Exercise 1: Proof of concept deployment
 
 Duration: 60 minutes
 
-Contoso has asked you to create a proof of concept deployment in Microsoft Azure by deploying the web, database, and API applications for the solution as well as validating that the core functionality of the solution works. Ensure all resources use the same resource group previously created for the App Service Environment.
+Contoso has asked you for a proof of concept in Microsoft Azure by deploying the web, database, and API applications for the solution as well as validating that the core functionality of the solution works. Ensure all resources use the same resource group previously created for the App Service Environment.
 
 ### Task 1: Deploy the e-commerce website, SQL Database, and storage
 
@@ -181,7 +183,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![On the SQL Database blade, in the left pane, Overview is selected. In the right pane, under Essentials, the Connection strings (Show database connection strings) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image23.png "SQL Database blade")
 
-5. On the **Database connection strings** blade, select and copy the **ADO.NET** connection string. Then, save it in **Notepad** for use later, being sure to replace the placeholders with your username and password with **demouser** and **demo@pass123**, respectively.
+5. On the **Database connection strings** blade, select and copy the **ADO.NET** connection string. Then, save it in **Notepad** for use later, being sure to replace the password placeholder with **demo@pass123**
 
     ![In the Database connection strings blade, the ADO.NET connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image24.png "Database connection strings blade")
 
@@ -249,7 +251,73 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![Primary Connection String is highlighted](media/2020-03-18-10-54-39.png "Primary Connection String is highlighted")
 
-#### Subtask 4: Update the configuration in the starter project
+#### Subtask 4: Create secrets in Azure Key Vault
+
+You've retrieved multiple access keys and connection strings in this task. To properly secure them, and to keep these values out of application code, we need a secure place to store them. This place is the Azure Key Vault.
+
+1. Go back to the **contososports** resource group blade, and select the **contosokv** Key Vault resource.
+
+    ![The resource listing is displayed with the key vault item selected.](media/rg_selectkeyvault.png)
+
+2. Beneath **Settings**, select **Access Policies**.
+
+3. In order to add, edit, or view secrets, you must be granted access through a new Access policy. Select the **+ Add Access Policy** link.
+    
+    ![A portion of the Access Policies screen is shown with the + Add Access Policy link selected.](media/add_access_policy_link.png)
+
+4. Expand the **Secret permissions** drop down, and check the **Select all** checkbox.
+
+5. For **Select principal**, select your Azure user account, and select **Add**.
+
+    ![The Add access policy form is displayed with the Secret Permissions and Select principal fields highlighted.](media/kv_add_access_policy_form.png)
+
+6. Press **Save** on the **Access policies** screen to save the changes.
+
+7. Beneath **Settings**, select **Secrets** then **Generate/Import**.
+
+8. Create the following secret values by filling out **Name** and **Value** (retaining the defaults for all other fields):
+
+    | Name | Value |
+    |------|-------|
+    | AzureQueueConnectionString | {the primary connection string you recorded for the queue} |
+    | ContosoSportsLeague | {the database connection string} |
+    | contososportsstorage | {the primary connection string you recorded for the storage account} |
+
+    ![The Create a secret form is displayed with the Name and Value fields highlighted.](media/kv_createasecret.png)
+
+#### Subtask 5: Centralize secrets for multiple projects using an App Configuration store
+
+The Contoso Sports solution contains multiple projects, each of which access the same Azure resources. In this subtask, we will be centralizing the configuration of the solution applications via the deployed Azure **App Configuration** resource.
+
+1. Go back to the **contososports** resource group blade, and select the **contosoconfig** App Configuration resource.
+
+    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png)
+
+2. Select **Configuration explorer** found beneath the **Operations** section of the left menu.
+
+3. On the **Configuration explorer** screen, expand **+ Create** and select **Key Vault reference**.
+   
+   ![The + Create button is expanded with the Key Vault reference item highlighted.](media/ac_createkeyvaultreference_menu.png)
+
+4. On the **Create** form, be sure to select the appropriate **Subscription**, **Resource group**, and the **contosokv** Key Vault. Create the following Key Vault references:
+
+    | Key | Secret | Secret version |
+    |-----|--------|----------------|
+    | ConnectionStrings:ReceiptQueue | Select **AzureQueueConnectionString** | Select **Latest version** |
+    | ConnectionStrings:ReceiptStorage | Select **contososportsstorage** | Select **Latest version** |
+    | ConnectionStrings:SportsDB | Select **ContosoSportsLeague** | Select **Latest version** |
+
+    ![The Create new Key vault reference form is displayed populated with the ConnectionStrings:ReceiptQueue values.](media/ac_createkeyvaultref_form.png)
+
+5. From the left menu, select **Access keys** located in the **Settings** section.
+
+6. Select the **Read-only keys** tab. 
+
+7. Copy the **Primary key Connection string** value, and paste it into notepad. This value is needed to connect the deployed applications to the App Configuration store. 
+    
+    ![A portion of the Access keys screen is displayed. The Read-only keys tab is highlighted and the copy button next to the Primary key Connection string textbox is selected.](media/ac_connectionstringcopy.png)
+
+#### Subtask 6: Update the configuration in the starter project
 
 1. Go back to the **contososports** resource group blade.
 
@@ -268,73 +336,128 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
 
-5. Add a new **Application setting** with the following values:
-
-   - Key: `AzureQueueConnectionString`
-
-   - Value: Enter the Connection String for the **Azure Service Bus Queue** just created.
-
-    ![In the App settings section for the App Service blade, the new entry for AzureQueueConnectionString is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image40.png "App settings section")
-
-6. Locate **Connection Strings** section below **Application Settings**.
+5. Locate **Connection Strings** section below **Application Settings**.
 
     ![The Connection Strings section for the App Service blade displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image41.png "Connection Strings section")
 
-7. Add a new **Connection String** with the following values:
+6. Add a new **Connection String** with the following values, and select **OK**:
 
-   - Name: `ContosoSportsLeague`
+   - Name: **AppConfig**
 
-   - Value: **Enter the Connection String for the SQL Database just created**.
+   - Value: **Enter the Connection String for the App Configuration Store**.
 
-   - Type: `SQLAzure`
+   - Type: Select **Custom**.
 
-    >**Important**: Ensure you replace the string placeholder values **{your\_username}** **{your\_password\_here}** with the username and password you setup previously.
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
 
-    ![The password string placeholder value displays: Password={your\_password\_here};](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image43.png "String placeholder value")
+7. Select **Save** to commmit the changes.
 
-8. Select **Save**.
+8. The e-commerce website application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
 
-#### Subtask 5: Deploy the e-commerce Web App from Visual Studio
+9. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+    
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+
+10. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
+
+11. Select the **+ Add Access Policy** link.
+
+12. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+
+13. In the **Select principal** blade, search for **contosoapp** and choose the managed identity that was just created.
+
+14. Select **Add**.
+    
+    ![The Add access policy form is displayed with the Get secret permission selected, and the contosoconfig principal selected.](media/kv_addaccesspolicy_forconfig.png)
+
+15. Select **Save** on the Access policies screen to commit the changes. 
+
+#### Subtask 7: Configure and deploy the e-commerce Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** of Visual Studio.
 
-2. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Publish**.
+2. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Edit Project File**.
+
+    ![In the solution explorer, the Contoso.Apps.SportsLeague.Web project is highlighted with its context menu expanded. The Edit Project File option is selected from the menu.](media/web_editprojfile_menu.png)
+
+3. In the **PropertyGroup** element, add the following XML beneath the TargetFramework item and save the file:
+   
+    ```xml
+    <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
+    ```
+
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+
+4. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Manage Nuget Packages**.
+
+5. Select the **Browse** tab, and search for **Microsoft.Azure.AppConfiguration.AspNetCore**.
+
+6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
+
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+
+7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
+
+8. Now we are ready to configure this application to use the App Configuration in Azure. Under the **Contoso.Apps.SportsLeague.Web** project, open the **Program.cs** file.
+
+9. Uncomment the following **using** statements at the top of the file:
+    
+    ```C#
+    using Microsoft.Extensions.Configuration;
+    using Azure.Identity;
+    ```
+
+10. In the **CreateHostBuilder** method, uncomment the following code - this tells the application to utilize the AppConfig connection string that you've already setup on the **contosoapp** application service to point to the centralized App Configuration resource.
+    
+    ```C#
+    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+    {
+        var settings = config.Build();
+
+        config.AddAzureAppConfiguration(options =>
+        {
+            options.Connect(settings["ConnectionStrings:AppConfig"])
+                    .ConfigureKeyVault(kv =>
+                    {
+                        kv.SetCredential(new DefaultAzureCredential());
+                    });
+        });
+    })
+    .UseStartup<Startup>();
+    ```
+11. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Publish**.
 
     ![In Solution Explorer, under Solution \'Contoso.Apps.SportsLeague\' (7 projects), Web is expanded, and under Web, Contoso.Apps.SportsLeague.Web is selected.](media/2019-04-19-14-03-04.png "Solution Explorer")
 
-3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
+12. On the Publish dialag, select **Start** in the **Publish** section.
+
+13. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
+
+    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
+
+14. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
 
     ![On the Publish dialog, the Azure target option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
 
-4. For the **Specific target**, choose **Azure App Service (Windows)**, then select **Next**.
+15. In the App Service dialog, expand the resource group, and select the **contosoapp** from the list, then choose **OK**.
+    
+    ![The App Service dialog is shown with the resource group expanded and the contosoapp application service selected in the list. The OK button is highlighted.](media/deploywebapp_serviceselection.png)
 
-    ![The specific target of Azure App Service (Windows) is selected](media/2019-04-19-14-07-19.png "Publish dialog - Specific target")
-
-5. Select the **Contoso Sports Web App** (with the name that was created previously).
-
-    ![Under Subscriptions, under contososports, contosoapp Web App is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image49.png "Publish App Service")
-
-6. Select **Finish**.
-
-7. Select **Publish** to publish the Web application.
+16. Select **Publish** to publish the Web application.
 
     ![Publish profile is displayed with the Publish button highlighted.](media/2020-06-15-16-53-15.png "Publish profile")
 
-    >**Note**: If prompted with a warning about App Service supporting .NET Core 3.0.0, select **OK** to dismiss the warning.
-    >
-    > ![App Service .NET Core 3.0.0 support warning.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/2019-11-15-18-12-21.png "App Service .NET Core 3.0.0 support warning")
-
-8. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
+17. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
 
     ![Screenshot of the Visual Studio Output view, with the Publish Succeeded message circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image50.png "Visual Studio Output view")
 
     >**Note**: Your URL will differ from the one shown in the Output screenshot because it must be globally unique.
 
-9. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
+18. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
 
     ![Screenshot of the Store link.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image51.png "Store link")
 
-    >**Troubleshooting**: If the web site fails to show products, go back and double check all your connection string entries and passwords web application settings.
+    >**Troubleshooting**: If the web site fails to start up or show products, go back and double check all your connection string entries and passwords web application settings.
 
 ### Task 2: Setup SQL Database Geo-Replication
 
@@ -2331,7 +2454,7 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
     # Be sure to replace the tokens in the AZURE_*_NAME variables with the names of the resources in Azure
     env:  
     AZURE_WEBAPP_NAME: '<E-Commerce Web Application Name - named similar to contosoapp{random characters}>'
-    AZURE_WEBAPP_PROJECT_NAME: 'Contoso.Apps.SportsLeaque.Web'  
+    AZURE_WEBAPP_PROJECT_NAME: 'Contoso.Apps.SportsLeague.Web'  
     AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
 
     AZURE_ADMINAPP_NAME: '<The name of the Call Center admin App Service in Azure>'
@@ -2530,7 +2653,7 @@ In this task, we will be making a modification to the e-commerce web application
     git checkout textchange
     ```
 
-3. In Visual Studio, expand the e-commerce website project (Web/Contoso.Apps.SportsLeaque.Web), and edit and save the **Views/Home/Index.cshtml** file.
+3. In Visual Studio, expand the e-commerce website project (Web/Contoso.Apps.SportsLeague.Web), and edit and save the **Views/Home/Index.cshtml** file.
 
     ![The code listing for Views/Home/Index.cshtml is shown with some modified text highlighted.](media/visualstudio_edithomeindex.png)
 

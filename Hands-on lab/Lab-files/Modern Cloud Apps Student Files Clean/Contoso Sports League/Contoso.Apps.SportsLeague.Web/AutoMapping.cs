@@ -3,7 +3,7 @@ using Contoso.Apps.SportsLeague.Data.Models;
 using Contoso.Apps.SportsLeague.Web.Models;
 using System.Collections.Generic;
 
-namespace Contoso.Apps.SportsLeaque.Web
+namespace Contoso.Apps.SportsLeague.Web
 {
     public class AutoMapping : Profile
     {

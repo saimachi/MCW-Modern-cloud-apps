@@ -15,7 +15,7 @@ namespace Contoso.Apps.SportsLeague.Web.Helpers
         public AzureQueueHelper(IConfiguration config)
         {
             // Retrieve the Service Bus Queue from a connection string in the web.config file.
-            queueClient = new QueueClient(new ServiceBusConnectionStringBuilder(config.GetValue<string>("AzureQueueConnectionString")));
+            queueClient = new QueueClient(new ServiceBusConnectionStringBuilder(config["ConnectionStrings:ReceiptQueue"]));
         }
 
         /// <summary>

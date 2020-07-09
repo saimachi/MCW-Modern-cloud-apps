@@ -21,7 +21,7 @@ public class NVPAPICaller
         _httpContext = httpContext;
 
         cartId = new CartHelpers().GetCartId(_httpContext);
-        pEndPointURL = _config.GetValue<string>("paymentsAPIUrl");
+        pEndPointURL = _config["paymentsAPIUrl"];
     }
 
     private readonly IConfiguration _config;

@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Contoso.Apps.SportsLeague.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Contoso.Apps.SportsLeaque.Web
+namespace Contoso.Apps.SportsLeague.Web
 {
     public class Startup
     {
@@ -29,7 +24,7 @@ namespace Contoso.Apps.SportsLeaque.Web
             services.AddControllersWithViews();
 
             services.AddDbContext<ProductContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContosoSportsLeague")));
+                options.UseSqlServer(Configuration["ConnectionStrings:SportsDB"]));
             
             services.AddAutoMapper(typeof(AutoMapping));
 
@@ -67,13 +62,16 @@ namespace Contoso.Apps.SportsLeaque.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
-            // Make sure database is setup and seeded with data
             using (var serviceScope = app.ApplicationServices.CreateScope())
+
             {
+
                 var dbContext = serviceScope.ServiceProvider.GetService<ProductContext>();
-                ProductDatabaseInitializer.Configure(dbContext).Wait();
+
+                dbContext.Database.EnsureCreated();
+
             }
+
         }
     }
 }

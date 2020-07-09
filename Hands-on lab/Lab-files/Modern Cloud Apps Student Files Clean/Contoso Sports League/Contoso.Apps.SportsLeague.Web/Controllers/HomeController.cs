@@ -23,7 +23,7 @@ namespace Contoso.Apps.SportsLeague.Controllers
 
             var vm = new HomeModel();
 
-            ViewBag.offersAPIUrl = _config.GetValue<string>("offersAPIUrl");
+            ViewBag.offersAPIUrl = _config["offersAPIUrl"];
 
             return View(vm);
         }

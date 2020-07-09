@@ -1,6 +1,6 @@
 using System;
 
-namespace Contoso.Apps.SportsLeaque.Web.Models
+namespace Contoso.Apps.SportsLeague.Web.Models
 {
     public class ErrorViewModel
     {
