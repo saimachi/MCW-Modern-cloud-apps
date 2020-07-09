@@ -48,7 +48,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
       - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
       - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
-      - [Subtask 3: Deploy the call center admin Web App from Visual Studio](#subtask-3-deploy-the-call-center-admin-web-app-from-visual-studio)
+      - [Subtask 3: Configure and deploy the call center admin Web App from Visual Studio](#subtask-3-configure-and-deploy-the-call-center-admin-web-app-from-visual-studio)
     - [Task 4: Deploying the payment gateway](#task-4-deploying-the-payment-gateway)
       - [Subtask 1: Provision the payment gateway API app](#subtask-1-provision-the-payment-gateway-api-app)
       - [Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio](#subtask-2-deploy-the-contosoappspaymentgateway-project-in-visual-studio)
@@ -465,13 +465,13 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 #### Subtask 1: Add secondary database
 
-1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
+1. In the Azure Portal, navigate back to the lab resource group.
 
-2. Select **SQL databases** in the navigation menu to the left, and select the name of the SQL Database you created previously.
+2. From the list of resources, select the **ContosoSportsDB** SQL database resource.
 
-    ![Screenshot of SQL Databases menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "SQL Databases")
+    ![The resource listing is displayed with the ContosoSportsDB SQL database resource highlighted.](media/resourcelist_contososportsdb.png)
 
-3. Under the **SETTINGS** menu area, select **Geo-Replication**.
+3. Under the **Settings** menu area, select **Geo-Replication**.
 
     ![In the Settings section, Geo-Replication is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image53.png "Settings section")
 
@@ -511,17 +511,11 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
     > **Note**: The Geo-Replication will take a few minutes to complete.
 
-10. After the Geo-Replication has finished provisioning, select **SQL Databases** in the navigation menu to the left.
+10. After the Geo-Replication has finished provisioning, return to the resource group for the lab.
 
-    ![The SQL databases option in the Azure Portal navigation menu.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "SQL Databases")
+11. Select the name of the secondary SQL Server resource that you just created.
 
-11. Select the name of the Secondary SQL Database you just created.
-
-    ![In the list of Databases, the ContosoSportsDB secondary replication role is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image58.png "Database list")
-
-12. On the SQL database blade in the Essentials section, select the SQL Database Server name link.
-
-    ![On the SQL database blade in the Essentials section, the Server name (contososqlserver2.database.windows.net) link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image61.png "SQL database blade, Essentials section")
+    ![In the list of resources, the secondary SQL server resource is selected.](media/secondarydatabaseinresourcelist.png)
 
 13. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
 
@@ -545,72 +539,66 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feature can be used to enable "auto failover" scenarios for the SQL Database. This enables a single connection string endpoint to be used by the application, and SQL Database will automatically handle failing over from Primary to Secondary database in the event of a SQL Database outage / down time.
 
-1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
+1. In the Azure Portal, navigate back to the lab resource group.
 
-2. In the navigation menu to the left, select **SQL databases**, and select the name of the **Primary** SQL Database you created previously.
+2. From the list of resources, select the Primary SQL server resource.
+    
+    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png)
 
-    ![Screenshot of SQL Databases tile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
-
-3. On the **SQL database** blade, within the **Overview** pane, select the **Server name**.
-
-    ![SQL database blade with server name highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/primarysqldatabaseserverlink.png "SQL database blade with server name highlighted")
-
-4. On the **SQL server** blade, select **Failover groups** under **Settings**.
+3. On the **SQL server** blade, select **Failover groups** under **Settings**.
 
     ![Failover groups setting option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlserverfailovergroupslink.png "Failover groups setting option")
 
-5. On the **Failover groups** pane, select the **Add group** button.
+4. On the **Failover groups** pane, select the **Add group** button.
 
     ![Add group button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/failovergroupsaddgroupbutton.png "Add group buton")
 
-6. On the **Failover group** pane, enter a unique **Failover group name**.
+5. On the **Failover group** pane, enter a unique **Failover group name**.
 
     ![Failover group name field.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupname.png "Failover group name field")
 
-7. Select **Secondary server**, then choose the **Secondary SQL Database** that was previously created.
+6. Select **Secondary server**, then choose the **Secondary SQL Database** that was previously created.
 
     ![Secondary SQL Database is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondaryserver.png "Secondary SQL Database is highlighted")
 
-8. Select **Database within the group**, then choose the **ContosoSportsDB** database, then click **Select**.
+7. Select **Database within the group**, then choose the **ContosoSportsDB** database, then click **Select**.
 
     ![Steps to choose the ContosoSportsDB are highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondarydatabase.png "Steps to choose the ContosoSportsDB are highlighted")
 
-9. Select **Create** to create the SQL Failover Group.
+8. Select **Create** to create the SQL Failover Group.
 
-10. Once the Failover Group has been created, select it in the list.
+9.  Once the Failover Group has been created, select it in the list.
 
     ![Failover Group is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergrouplist.png "Failover Group is highlighted")
 
-11. Notice, on the **Failover group** pane, the map and display showing the _Primary_ and _Secondary_ SQL Database servers within the failover group. The _Primary_ database shows as **Automatic** failover for Read/Write of data, while the _Secondary_ database doesn't since it is currently Read only.
+10. Notice, on the **Failover group** pane, the map and display showing the _Primary_ and _Secondary_ SQL Database servers within the failover group. The _Primary_ database shows as **Automatic** failover for Read/Write of data, while the _Secondary_ database doesn't since it is currently Read only.
 
     ![Map display of Primary and Seconary databases.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupmap.png "Map display of Primary and Seconary databases")
 
-12. Scroll down, below the map, to where the **Read/write listener endpoint** and **Read-only listener endpoint** are displayed. These allow for applications to be configured to connect to the SQL Failover Group endpoints instead of the individual SQL Server endpoints.
+11. Scroll down, below the map, to where the **Read/write listener endpoint** and **Read-only listener endpoint** are displayed. These allow for applications to be configured to connect to the SQL Failover Group endpoints instead of the individual SQL Server endpoints.
 
     Copy both **Listener Endpoint** values for later reference.
 
     ![Read/Write and Read-only listener endpoints are displayed.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailovergroupendpoints.png "Read/Write and Read-only listener endpoints are displayed")
 
-13. Go back to the **contososports** resource group blade.
+12. Go back to the **contososports** resource group blade.
 
-14. Select the **contosoapp** web app (**App Service** type).
+13. Select the **contosokv** Key vault resource.
 
-    ![contosoapp is highlighted](media/2019-04-19-13-46-40.png "contosoapp is highlighted")
+14. Under the **Settings** menu, select **Secrets**.
 
-15. On the **App Service** blade, scroll down in the left pane. Under the **Settings** menu, select **Configuration**.
+15. Locate and select the **ContosoSportsLeague** secret.
 
-    ![Configuration option is highlighted.](media/2019-04-19-16-38-54.png "Configuration option is highlighted")
-
-16. Locate the **Connection Strings** section, and modify the value of the **ContosoSportsLeague** connection string to include the **Azure SQL Failover Group Read/Write Listener Endpoint** that was copied previously.
+16. On the **Versions** screen, select **+ New Version**.
+    
+17. Copy the original connection string to the **ContosoSportsDB**, but replace the server name with the **Azure SQL Failover Group Read/Write Listener Endpoint** that was copied previously, then select **Create**.
 
     > Note: The connection string will need to be in the following format:
     > ```
-    > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID={your_username};Password={your_password_here};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID=demouser;Password=demo@pass123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
     > ```
-    >
-    > Be sure to replace the string placeholder values **{your_username}**, **{your_password_here}**, and **{failover_group_endpoint}** with the username, password, and read/write listener endpoint for the SQL Database Failover Group. The username and password will remain the same as they were for the SQL Server.
 
-17. Select **Save**.
+    ![The ContosoSportsLeague secret Versions screen is shown with a current and older version present in the list. ](media/newvalueforsecret_keyvault.png)
 
 #### Subtask 3: Failover SQL Database Failover Group
 
@@ -618,15 +606,11 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
 Since the Replication and Failover process can take anywhere from 10 to 30 minutes to complete, you have the choice to skip Subtask 3 and 4, and go directly to Task 3. However, if you have the time, it is recommended that you complete these steps.
 
-1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
+1. In the Azure Portal, navigate back to the lab resource group.
 
-2. In the navigation menu to the left, select **SQL databases**, and select the name of the **Primary** SQL Database you created previously.
-
-    ![Screenshot of SQL Databases tile.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image52.png "Azure Portal")
-
-3. On the **Overview** pane, select the **Server name**.
-
-    ![Server name is highlighted.](images/2020-03-17-19-35-23.png "Server name is highlighted")
+2. From the list of resources, select the Primary SQL server resource.
+    
+    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png)
 
 4. On the **SQL server** blade, select **Failover groups** under Settings.
 
@@ -672,9 +656,9 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management portal <http://portal.azure.com>.
 
-2. Select **+Create a resource** then select **Web**, then **Web App**.
+2. Select **+ Create a resource** then select **Web**, then **Web App**.
 
-3. Specify a **unique URL** for the Web App, **resource group** you have used throughout the lab are selected. Also, specify **.NET Core 3.1 (LTS)** as the **Runtime stack**.
+3. Specify a **unique Name** for the Web App, **Resource Group** you have used throughout the lab are selected. Also, specify **.NET Core 3.1 (LTS)** as the **Runtime stack**.
 
     ![On the Web App blade, the App name field is set to contososportscallcentercp.](media/2019-03-28-05-29-59.png "Web App blade")
 
@@ -694,15 +678,15 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 3. Scroll down, and locate the **Connection strings** section.
 
-4. Add a new **Connection string** with the following values:
+4. Add a new **Connection String** with the following values, and select **OK**:
 
-    - Name: `ContosoSportsLeague`
+   - Name: **AppConfig**
 
-    - Value: **Enter the Connection String for the SQL Database Failover Group Read/Write Listener Endpoint**.
+   - Value: **Enter the Connection String for the App Configuration Store**.
 
-    - Type: `SQLAzure`
+   - Type: Select **Custom**.
 
-    ![The Connection Strings fields display the previously defined values.](media/2019-04-11-04-31-51.png "Connection Strings fields")
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
 
 5. Select the **Ok** button.
 
@@ -710,35 +694,103 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     ![the Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
 
-#### Subtask 3: Deploy the call center admin Web App from Visual Studio
+7. The call center web application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
+
+8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+    
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+
+9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
+
+10. Select the **+ Add Access Policy** link.
+
+11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+
+12. In the **Select principal** blade, search for the name of the call center application you just created and choose the managed identity that was just created.
+
+13. Select **Add** (this image is provided as an example, the principal selected is the call center app service system managed identity).
+    
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+
+14. Select **Save** on the Access policies screen to commit the changes. 
+    
+#### Subtask 3: Configure and deploy the call center admin Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Admin** project located in the **Web** folder using the **Solution Explorer** in Visual Studio.
 
-2. Right-click the **Contoso.Apps.SportsLeague.Admin** project, and select **Publish**.
+2. Right-click the **Contoso.Apps.SportsLeague.Admin** project, and select **Edit Project File**.
+
+3. In the **PropertyGroup** element, add the following XML beneath the TargetFramework item and save the file:
+   
+    ```xml
+    <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
+    ```
+
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+
+4. Right-click the **Contoso.Apps.SportsLeague.Admin** project, and select **Manage Nuget Packages**.
+
+5. Select the **Browse** tab, and search for **Microsoft.Azure.AppConfiguration.AspNetCore**.
+
+6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
+
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+
+7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
+
+8. Now we are ready to configure this application to use the App Configuration in Azure. Under the **Contoso.Apps.SportsLeague.Web** project, open the **Program.cs** file.
+
+9. Uncomment the following **using** statements at the top of the file:
+    
+    ```C#
+    using Microsoft.Extensions.Configuration;
+    using Azure.Identity;
+    ```
+
+10. In the **CreateHostBuilder** method, uncomment the following code - this tells the application to utilize the AppConfig connection string that you've already setup on the **contosoapp** application service to point to the centralized App Configuration resource.
+    
+    ```C#
+    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+    {
+        var settings = config.Build();
+
+        config.AddAzureAppConfiguration(options =>
+        {
+            options.Connect(settings["ConnectionStrings:AppConfig"])
+                    .ConfigureKeyVault(kv =>
+                    {
+                        kv.SetCredential(new DefaultAzureCredential());
+                    });
+        });
+    })
+    .UseStartup<Startup>();
+    ```
+
+11. Right-click the **Contoso.Apps.SportsLeague.Admin** project, and select **Publish**.
 
     ![In Solution Explorer, the right-click menu for Contoso.Apps.SportsLeague.Admin displays, and Publish is selected.](media/2019-04-19-14-30-03.png "Right-Click menu")
 
-3. On the Publish dialog, choose **Azure** as the publish target, then choose **Next**.
+12. On the Publish dialog, select **Start**.
 
-    ![Publish dialog with Azure selected](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image47.png "Publish dialog")
+13. On the **Pick a publish target** dialog, select **App Service Linux** and in the right pane, choose **Select Existing**, then select **Create Profile**.
 
-4. For the **Specific target**, choose **Azure App Service (Linux)", then select **Next**.
-
-    ![Publish dialog with Azure App Service (Linux) selected](media/2020-06-19-22-17-31.png "Publish dialog")
-
-5. Select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
+    ![The Pick a publish target window is shown with App Service Linux highlighted and Select Existing chosen. The Create Profile button is highlighted.](media/pickpublishtarget_linuxappservice.png)
+   
+14. Select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
 
     ![Publish dialog with the Azure App Service web app highlighted](media/2020-06-19-22-20-53.png "Publish dialog")
 
-6. Select **Finish**.
+15. Select **OK**.
 
-7. Select **Publish** to publish the Web application.
+16. Select **Publish** to publish the Web application.
 
     ![Publish button is highlighted](media/2020-06-19-22-25-36.png "Publish button")
 
-8. Once deployment is complete, navigate to the Web App. It should look like the following:
+17. Once deployment is complete, navigate to the Web App. It should look like the following:
 
     ![The Contoso website displays the Contoso Sports League Admin webpage, which says that orders that display below are sorted by date, and you can select an order to see its details. However, at this time, there is no data available under Completed Orders.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image89.png "Contoso website")
+
+    >**Note**: If you see a page that indicates the app service is running and asking about deploying code, refresh the browser window by selecting CTRL+F5.
 
 ### Task 4: Deploying the payment gateway
 
@@ -748,16 +800,16 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
 
-2. Select **+Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
+2. Select **+ Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
 
     ![In the Azure Portal left menu, New is selected. In the New blade, the search field is set to API App.](media/2019-03-28-07-57-54.png "Azure Portal - Create API App")
 
 3. On the new **API App** blade, create the following values:
 
    - **App name:** Specify a unique name for the App Name.
-   - **Subscription:** Your Azure MSDN subscription.
-   - **Resource Group:** Select **Use existing** option.
-   - **App Service Plan/Location** Select the same primary region used in previous steps.
+   - **Subscription:** Your Azure subscription.
+   - **Resource Group:** Select **Use existing** option, and choose the lab resource group.
+   - **App Service Plan/Location** Select the **ContosoSportsPlan**.
    - **Application Insights:** **Disabled**
 
     ![On the API App blade. Configuration fields are displayed.](media/2019-04-20-14-55-42.png "Configuration fields are displayed")
