@@ -5,7 +5,7 @@ Modern cloud apps
 </div>
 
 <div class="MCWHeader2">
-Hands-on lab step-by-steCp
+Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
@@ -526,7 +526,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
     ![Secondary SQL Database is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondaryserver.png "Secondary SQL Database is highlighted")
 
-7. Select **Database within the group**, then choose the **ContosoSportsDB** database, then click **Select**.
+7. Select **Database within the group**, then choose the **ContosoSportsDB** database, then **Select**.
 
     ![Steps to choose the ContosoSportsDB are highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/sqlfailoversecondarydatabase.png "Steps to choose the ContosoSportsDB are highlighted")
 
@@ -558,7 +558,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
     
 17. Copy the original connection string to the **ContosoSportsDB**, but replace the server name with the **Azure SQL Failover Group Read/Write Listener Endpoint** that was copied previously, then select **Create**.
 
-    > Note: The connection string will need to be in the following format:
+    > **Note**: The connection string will need to be in the following format:
     > ```
     > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID=demouser;Password=demo@pass123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
     > ```
@@ -653,7 +653,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
 
-5. Select the **Ok** button.
+5. Select the **OK** button.
 
 6. Select the **Save** button.
 
