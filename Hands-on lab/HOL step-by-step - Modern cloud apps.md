@@ -1254,9 +1254,9 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 2. In the new blade, select **Create a new Azure AD B2C Tenant**. Then, enter the name as **ContosoB2C** and a unique domain name and region. Select **Review + create**, then **Create**. After directory creation completes, select the link in the new information tile that reads **Click here to navigate to your new directory**.
 
-    ![Create a directory with the required fields filled in](media/2020-06-20-23-12-29.png "Create a directory")
+    ![Image of the Create a directory with the required fields filled in.](media/2020-06-20-23-12-29.png "Create a directory")
 
-    ![Directory creation was successful](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image157.png "Directory creation was successful")
+    ![Image showing the Directory creation was successful.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image157.png "Directory creation was successful")
 
 3. The new Azure AD Directory that was created will now be open in new browser tab. Keep this tab open for the next few steps.
 
@@ -1264,7 +1264,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     ![In the contososports resource group, the new B2C tenant is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
 
-5. In the new blade, select the **B2C Settings** tile for the new B2C tenant. You will be taken to the new subscription for this tenant.
+5. In the new blade, select the **Azure AD B2C Settings** tile for the new B2C tenant. You will be taken to the new subscription for this tenant.
 
     ![In the Azure AD B2C tenant window, on the left, All Settings is selected. In the bottom right section, the Azure AD B2C Settings tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image160.png "Azure AD B2C Settings window")
 
@@ -1278,7 +1278,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     - Name: **Contoso B2C Application**
 
-    - Supported account types: **Accounts in this organizational directory only**
+    - Supported account types: **Accounts in this organizational directory only**.
 
     - Redirect URI: Set to **Web**, then set the URL to the following format: `https://[your web url].azurewebsites.net/signin-oidc-b2c` _(This should be the HTTPS URL to the Contoso E-Commerce Site.)_
 
@@ -1522,7 +1522,7 @@ Your app is now properly configured to communicate with Azure AD B2C by using AS
 
     ![The Default controller method Index is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image179.png "Default controller method Index")
 
-    Replace the method with the following code, then **Save** the file:
+5. Replace the method with the following code:
 
     ```csharp
     // Controllers\AccountController.cs
@@ -1580,7 +1580,7 @@ Your app is now properly configured to communicate with Azure AD B2C by using AS
     }
     ```
 
-5. Save the file.
+6. Save the file.
 
 ### Task 8: Display user information
 
@@ -1778,7 +1778,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 5. In the portal, navigate to **How-to Guides** -> **Application Insights** -> **Code-based monitoring** -> **Web pages** -> **Client-side JavaScript**, then navigate to the **Snippet based setup** section under **Adding the JavaScript SDK** within the documentation page.
 
-    ![Screenshot of the MONITOR AND DIAGNOSE CLIENT SIDE APPLICATION arrow.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image197.png "MONITOR AND DIAGNOSE CLIENT SIDE APPLICATION ")
+    ![Screenshot of the Monitor and Diagnose Client Side Application arrow.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image197.png "Monitor and Diagnose Client Side Application")
 
     > **Note**: You can find the documentation page at the following URL: <https://docs.microsoft.com/azure/azure-monitor/app/javascript#snippet-based-setup>.
 
@@ -1809,7 +1809,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 8. Open **Views \> Shared \> \_Layout.cshtml**.
 
-    ![In Solution Explorer, under Views\\Shared, Layout.cshtml is selected](media/2019-04-19-15-45-29.png "Solution Explorer")
+    ![In Solution Explorer, under Views\\Shared, Layout.cshtml is selected.](media/2019-04-19-15-45-29.png "Solution Explorer")
 
 9. Paste in the code before the `</head>` tag. Insert your **Instrumentation Key** from Notepad into the JavaScript code ``instrumentationKey:`` value.
 
@@ -1827,9 +1827,9 @@ To configure the application for logging and diagnostics, you have been asked to
 
 3. Select **Publish** again when the Publish dialog appears.
 
-    Launch a browser **outside of Visual Studio** for testing if the page is loaded in Visual Studio.
+4. Launch a browser **outside of Visual Studio** for testing if the page is loaded in Visual Studio.
 
-4. Select a few links on the published E-Commerce website, and submit several orders to generate some sample telemetry.
+5. Select a few links on the published E-Commerce website, and submit several orders to generate some sample telemetry.
 
 ### Task 2: View the Application Insights logs
 
@@ -1949,7 +1949,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 ### Task 2: Configure and deploy the Function App
 
-1. In Visual Studio, expand the **Web** folder and right click on the **Contoso.Apps.FunctionApp** project, and select **Manage NuGet Packages**.
+1. In Visual Studio, expand the **Web** folder and right-click on the **Contoso.Apps.FunctionApp** project, and select **Manage NuGet Packages**.
 
 2. On the **Browse** tab, search for and select **Microsoft.Extensions.Configuration.AzureAppConfiguration**. In the right pane, select **Install**.
 
@@ -2001,7 +2001,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
    
 12. Select **Publish**.
 
-    The publish should only take a minute or so. You can check the **Output** window for any errors that may occur.
+    > **Note**: The publish should only take a minute or so. You can check the **Output** window for any errors that may occur.
 
     ![The build Output window is displayed. Publish succeeded message is shown.](media/2019-04-15-15-33-20.png "Output window.")
 
@@ -2065,6 +2065,7 @@ The advantages of using Logic Apps include the following:
 - Connect and synchronize disparate systems across on-premises and the cloud
 
 - Build off BizTalk server, API Management, Azure Functions, and Azure Service Bus with first-class integration support
+
 
 1. Next, we will create a Logic App that will trigger when an item is added to the **receiptgenerator** queue. In the Azure Management Portal, select the **+Create a resource** button, search for **Logic App**, select the returned Logic App result, and select **Create**.
 
@@ -2211,7 +2212,7 @@ The advantages of using Logic Apps include the following:
 
 28. Finally, let us add one more step to remove the message from the queue. Press **+New Step**. Select **Service Bus**, then select the **Complete the message in a queue** action.
 
-    ![In the Choose an action section, under Service Bus, the Complete the message in a queue is selected. ](media/2020-03-18-12-51-40.png "Choose an action section")
+    ![In the Choose an action section, under Service Bus, the Complete the message in a queue is selected.](media/2020-03-18-12-51-40.png "Choose an action section")
 
 29. Select the **receiptgenerator** queue from the list.
 
@@ -2540,7 +2541,7 @@ One method to deploy code using GitHub actions is to create a Service Principal 
 
     ![A portion of the Azure Portal top toolbar is displayed with the Cloud Shell menu item highlighted.](media/azureportal_cloudshellmenuitem.png)
 
-    >> **Note**: You may be prompted to create a storage account to support cloud shell activities, this is required in order to utilize the cloud shell.
+    > **Note**: You may be prompted to create a storage account to support cloud shell activities, this is required in order to utilize the cloud shell.
 
 2. Obtain the Subscription ID and Resource Group name by opening the resource group where you have deployed all of the applications in this lab. The Subscription ID is available in the Overview pane.
 
