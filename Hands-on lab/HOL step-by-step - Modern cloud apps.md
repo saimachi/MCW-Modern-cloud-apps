@@ -33,15 +33,39 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Help references](#help-references)
   - [Exercise 1: Proof of concept deployment](#exercise-1-proof-of-concept-deployment)
     - [Task 1: Deploy the e-commerce website, SQL Database, and storage](#task-1-deploy-the-e-commerce-website-sql-database-and-storage)
+      - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
+      - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-retrieve-storage-account-access-keys)
+      - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
+      - [Subtask 4: Create secrets in Azure Key Vault](#subtask-4-create-secrets-in-azure-key-vault)
+      - [Subtask 5: Centralize secrets for multiple projects using an App Configuration store](#subtask-5-centralize-secrets-for-multiple-projects-using-an-app-configuration-store)
+      - [Subtask 6: Update the configuration in the starter project](#subtask-6-update-the-configuration-in-the-starter-project)
+      - [Subtask 7: Configure and deploy the e-commerce Web App from Visual Studio](#subtask-7-configure-and-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
+      - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
+      - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
+      - [Subtask 3: Failover SQL Database Failover Group](#subtask-3-failover-sql-database-failover-group)
+      - [Subtask 4: Test e-commerce Web App after Failover](#subtask-4-test-e-commerce-web-app-after-failover)
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
+      - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
+      - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
+      - [Subtask 3: Configure and deploy the call center admin Web App from Visual Studio](#subtask-3-configure-and-deploy-the-call-center-admin-web-app-from-visual-studio)
     - [Task 4: Deploying the payment gateway](#task-4-deploying-the-payment-gateway)
+      - [Subtask 1: Provision the payment gateway API app](#subtask-1-provision-the-payment-gateway-api-app)
+      - [Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio](#subtask-2-deploy-the-contosoappspaymentgateway-project-in-visual-studio)
     - [Task 5: Deploying the Offers Web API](#task-5-deploying-the-offers-web-api)
+      - [Subtask 1: Provision the Offers Web API app](#subtask-1-provision-the-offers-web-api-app)
+      - [Subtask 2: Configure Cross-Origin Resource Sharing (CORS)](#subtask-2-configure-cross-origin-resource-sharing-cors)
+      - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
+      - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
     - [Task 6: Add API endpoint configuration settings](#task-6-add-api-endpoint-configuration-settings)
+      - [Subtask 1: Add the API endpoint configuration settings](#subtask-1-add-the-api-endpoint-configuration-settings)
+      - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
     - [Task 1: Enable Azure AD Premium Trial](#task-1-enable-azure-ad-premium-trial)
     - [Task 2: Create a new Contoso user](#task-2-create-a-new-contoso-user)
     - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-application)
+      - [Subtask 1: Enable Azure AD Authentication](#subtask-1-enable-azure-ad-authentication)
+      - [Subtask 2: Verify the call center administration website uses the access control logon](#subtask-2-verify-the-call-center-administration-website-uses-the-access-control-logon)
     - [Task 4: Apply custom branding for the Azure Active Directory logon page](#task-4-apply-custom-branding-for-the-azure-active-directory-logon-page)
     - [Task 5: Verify the branding has been successfully applied to the Azure Active Directory logon page](#task-5-verify-the-branding-has-been-successfully-applied-to-the-azure-active-directory-logon-page)
   - [Exercise 3: Enable Azure B2C for customer site](#exercise-3-enable-azure-b2c-for-customer-site)
@@ -56,17 +80,25 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 9: Run the sample app](#task-9-run-the-sample-app)
   - [Exercise 4: Enabling Telemetry with Application Insights](#exercise-4-enabling-telemetry-with-application-insights)
     - [Task 1: Configure the application for telemetry](#task-1-configure-the-application-for-telemetry)
+      - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
+      - [Subtask 2: Enable client side telemetry](#subtask-2-enable-client-side-telemetry)
+      - [Subtask 3: Deploy the e-commerce Web App from Visual Studio](#subtask-3-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
     - [Task 2: Configure and deploy the Function App](#task-2-configure-and-deploy-the-function-app)
-    - [Task 3: Create an Azure Logic App to Process Orders](#task-2-create-an-azure-logic-app-to-process-orders)
-    - [Task 4: Use Twilio to send SMS Order Notifications](#task-3-use-twilio-to-send-sms-order-notifications)
+    - [Task 3: Create an Azure Logic App to Process Orders](#task-3-create-an-azure-logic-app-to-process-orders)
+    - [Task 4: Use Twilio to send SMS Order Notifications](#task-4-use-twilio-to-send-sms-order-notifications)
+      - [Subtask 1: Configure your Twilio trial account](#subtask-1-configure-your-twilio-trial-account)
+      - [Subtask 2: Create a new logic app](#subtask-2-create-a-new-logic-app)
   - [Exercise 6: Automate deployments using GitHub actions](#exercise-6-automate-deployments-using-github-actions)
     - [Task 1: Create a GitHub repository](#task-1-create-a-github-repository)
     - [Task 2: Commit the existing lab files to source control](#task-2-commit-the-existing-lab-files-to-source-control)
     - [Task 3: Create a service principal in Active Directory](#task-3-create-a-service-principal-in-active-directory)
     - [Task 4: Create repository secrets](#task-4-create-repository-secrets)
+      - [Subtask 1: Create the service principal credentials secret](#subtask-1-create-the-service-principal-credentials-secret)
+      - [Subtask 2: Create the e-commerce web application publish profile secret](#subtask-2-create-the-e-commerce-web-application-publish-profile-secret)
+      - [Subtask 3: Create publish profile secrets for the remaining projects](#subtask-3-create-publish-profile-secrets-for-the-remaining-projects)
     - [Task 5: Define the production deployment workflow](#task-5-define-the-production-deployment-workflow)
     - [Task 6: Trigger the Production Deployment Workflow](#task-6-trigger-the-production-deployment-workflow)
   - [After the hands-on lab](#after-the-hands-on-lab)
@@ -160,9 +192,9 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![The contososports resource group with the contososports sql server highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/2019-11-15-17-47-46.png "Azure Portal")
 
-7. On the **Overview** screen of the **SQL Server** blade, select **Set server firewall** link at the top.
+7. On the **Overview** screen of the **SQL Server** blade, select the **Show firewall settings**.
 
-    ![In the SQL Server Blade, Overview section, the Set server firewall tile is in a box.](media/2019-03-31-14-37-31.png "SQL Server Blade, Essentials section")
+    ![On the SQL Server Overview screen with the Show firewall settings link highlighted.](media/2019-03-31-14-37-31.png "SQL Server Overview")
 
 8. On the **Firewall Settings** blade, specify a new rule named **My IP**, copy your **Client IP address**, and paste it into the **Start IP** and **End IP**. This will set the allowed IP Address range to just your IP address so you can connect to the database from this machine.
 
@@ -307,7 +339,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 5. Locate **Connection Strings** section below **Application Settings**.
 
-    ![The Connection Strings section for the App Service blade displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image41.png "Connection Strings section")
+    ![The App Service Configuration screen is displayed with the Connection Strings section title and + New connection string button highlighted.](media/image41.png "Connection Strings section")
 
 6. Add a new **Connection String** with the following values, and select **OK**:
 
@@ -324,7 +356,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 8. The e-commerce website application resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
 
 9. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
-    
+
     ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
 
 10. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
