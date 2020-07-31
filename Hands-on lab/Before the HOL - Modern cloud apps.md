@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-June 2020
+July 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -26,13 +26,13 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [Modern cloud apps before the hands-on lab setup guide](#Modern-cloud-apps-before-the-hands-on-lab-setup-guide)
-  - [Requirements](#Requirements)
-  - [Before the hands-on lab](#Before-the-hands-on-lab)
-    - [Task 1: Download GitHub resources](#Task-1-Download-GitHub-resources)
-    - [Task 2: Deploy Lab VM Resources to Azure](#Task-2-Deploy-Lab-VM-Resources-to-Azure)
-    - [Task 3: Deploy Environment Resources to Azure](#Task-3-Deploy-Environment-Resources-to-Azure)
-    - [Task 4: Explore the Contoso Sports League sample](#Task-4-Explore-the-Contoso-Sports-League-sample)
+- [Modern cloud apps before the hands-on lab setup guide](#modern-cloud-apps-before-the-hands-on-lab-setup-guide)
+  - [Requirements](#requirements)
+  - [Before the hands-on lab](#before-the-hands-on-lab)
+    - [Task 1: Download GitHub resources](#task-1-download-github-resources)
+    - [Task 2: Deploy Lab VM Resources to Azure](#task-2-deploy-lab-vm-resources-to-azure)
+    - [Task 3: Deploy Environment Resources to Azure](#task-3-deploy-environment-resources-to-azure)
+    - [Task 4: Explore the Contoso Sports League sample](#task-4-explore-the-contoso-sports-league-sample)
 
 <!-- /TOC -->
 
@@ -127,13 +127,13 @@ Before initiating the hands-on lab, you will setup an environment to use for the
 
     > **Note**: For this lab, it is recommended you use the **East US**, **North Europe**, or **Australia East** Azure Region. There are certain Azure regions that don't support all the resources provisioned by the ARM Template. This limitation can also vary depending on restrictions applied to the type of Azure Subscription you are using.
 
-7. Check the **I agree to the terms and conditions stated above** checkbox.
+8. Check the **I agree to the terms and conditions stated above** checkbox.
 
-8. Select **Purchase**.
+9. Select **Purchase**.
 
     ![The I agreed to the terms and conditions state box is checked, then select Purchase.](images/Setup/2019-06-24-17-20-12.png)
 
-9. The deployment will take 5 - 10 minutes to complete.
+10. The deployment will take 5 - 10 minutes to complete.
 
 ### Task 4: Explore the Contoso Sports League sample
 
@@ -141,7 +141,6 @@ Before initiating the hands-on lab, you will setup an environment to use for the
 
     - **Admin username**: `demouser`
     - **Admin password**: `demo@pass123`
-
 
     > **Note**: Be sure to wait until the **Lab VM** ARM Template deployment has completed before connecting to the **LabVM** virtual machine.
 

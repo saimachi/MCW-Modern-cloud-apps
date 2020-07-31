@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Queue;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace ContosoFunctionApp
 {
@@ -21,10 +17,10 @@ namespace ContosoFunctionApp
         public static CloudBlobClient blobClient { get; set; }
         public static CloudBlobContainer blobContainer { get; set; }
 
-        public static CloudStorageAccount storageAccount { get { return CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("contososportsstorage")); } }
-
-        static async Task<string> GetImage(string fileName)
+        static async Task<string> GetImage(string fileName, IConfiguration config)
         {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(config["ConnectionStrings:ReceiptStorage"]);            
+            
             // Create the blob client.
             blobClient = storageAccount.CreateCloudBlobClient();
 
@@ -53,9 +49,10 @@ namespace ContosoFunctionApp
         /// <param name="file">Byte array containig the Pdf file contents to be uploaded.</param>
         /// <param name="fileName">The desired filename of the uploaded file.</param>
         /// <returns></returns>
-        public static async Task<string> UploadPdfToBlob(byte[] file, string fileName, ILogger log)
+        public static async Task<string> UploadPdfToBlob(byte[] file, string fileName, IConfiguration config,  ILogger log)
         {
             log.LogInformation("Hit Upload");
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(config["ConnectionStrings:ReceiptStorage"]);
             // Create the blob client.
             blobClient = storageAccount.CreateCloudBlobClient();
     
@@ -93,11 +90,12 @@ namespace ContosoFunctionApp
         /// whose receipt we need to generate.
         /// </summary>
         /// <returns></returns>
-        public static async Task<int> GetOrderIdFromQueue()
+        public static async Task<int> GetOrderIdFromQueue(IConfiguration config)
         {
             int orderId = 0;
 
             // Create the queue client.
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(config["ConnectionStrings:ReceiptStorage"]);
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
 
             // Retrieve a reference to a queue.

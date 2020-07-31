@@ -9,7 +9,7 @@ Modern cloud apps
 </div>
 
 <div class="MCWHeader3">
-June 2020
+July 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -204,6 +204,8 @@ They have reached a point where managing their server infrastructure is becoming
 
 One example is in how they manage the usernames and passwords for call center operators and support staff, as applied to the call center admin website. Today they have a homegrown solution that stores usernames and passwords in the same database used for storing merchandise information. They have experimented with other third-party solutions in the past, and their employees found it jarring to see another company's logo displayed when logging into their own call center website. In creating their identity solution, they want to ensure they can brand the login screens with their own logo. Additionally, Contoso is concerned about hackers from foreign countries/regions gaining access to the administrator site. Before they choose an identity solution, they would like to see how it indicates such attempts.
 
+Contoso is interested in achieving automation surrounding their currently manual release processes. They wish to have features developed in their own branch. Once the feature is complete, a pull request is issued to the master branch. The pull request code is then reviewed for quality assurance, and once approved, the code is merged into the master branch. The merge of the code should trigger an automated deployment to release the new application code into production.
+
 There is one architectural enhancement Contoso would like to make in the transition to a PaaS solution. When a visitor loads the home page, it gets the list of featured products on offer (consisting of the product image, title, and URL) from the Offers service. The home page does it using a client-side GET request against an ASP.NET Web API service that is executed as the page loads in the browser. Contoso anticipates growing the functionality of this service and would like to scale it independently of the website.
 
 Contoso is also looking to augment their data analytics story by introducing a data warehouse to enable them to analyze their historical data over time, particularly as their number of transactions soars in the cloud. They would like to plan for a solution that moves the data from their OLTP database into their data warehouse on a nightly basis, ideally with the minimum amount of infrastructure or development effort.
@@ -322,6 +324,12 @@ Directions: With all participants at your table, respond to the following questi
 
 2. How would Contoso schedule nightly data transfers from their OLTP database to their data warehouse?
 
+*Automated deployment*
+
+1. How would you recommend Contoso implement their automated deployments?
+
+2. How would Contoso implement the trigger for the automated deployment?
+
 **Prepare**
 
 Directions: With all participants at your table:
@@ -383,6 +391,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Azure SQL Database                                           |                <https://docs.microsoft.com/en-us/azure/sql-database/sql-database-geo-replication-overview/>                 |
 | Designing highly available services using Azure SQL Database |     <https://docs.microsoft.com/en-us/azure/sql-database/sql-database-designing-cloud-solutions-for-disaster-recovery>      |
 | SQL Database auto-failover groups | <https://docs.microsoft.com/en-us/azure/sql-database/sql-database-auto-failover-group?tabs=azure-powershell> |
+| Deploy to Azure using GitHub Actions | <https://docs.microsoft.com/en-us/azure/developer/github/github-actions> |
 
 
 # Modern cloud apps whiteboard design session trainer guide
@@ -618,6 +627,16 @@ The primary audience are the business decision makers and technology decision ma
 2. How would Contoso schedule nightly data transfers from their OLTP database to their data warehouse?
 
     They would need to provision an instance of Azure Data Factory, and then utilize the Azure Data Factory Copy Wizard to setup a recurring copy from their SQL Database instance to existing tables in Azure Synapse Analytics. They could enable PolyBase in the Copy Wizard to speed up the copying process.
+
+*Automated deployment*
+
+1. How would you recommend Contoso implement their automated deployments?
+   
+   They could use GitHub Actions to deploy code into Azure. GitHub Actions can authenticate to Azure via a Service Principal established in Active Directory, or via a Publish Profile downloaded from the Azure portal; both of which are stored in repository secrets so they are not visible or checked into source control. Multiple GitHub Actions are available in the [GitHub Actions Marketplace](https://github.com/marketplace?query=Azure&type=actions) to aid in implementing automated releases. For Contoso, they are interested in releasing web application and Azure Function applications, both of which are available in the marketplace.
+
+2. How would Contoso implement the trigger for the automated deployment?
+   
+   GitHub Actions are workflows defined using structured YML (pronounced YAML) files. In the workflow definition, Contoso can trigger their deployment workflow on **push** filtered by the **master** branch. Defined this way, the workflow will execute every time code is checked in to the master branch, including when a pull request is merged (the merge is considered a push of code).
 
 ## Checklist of preferred objection handling
 

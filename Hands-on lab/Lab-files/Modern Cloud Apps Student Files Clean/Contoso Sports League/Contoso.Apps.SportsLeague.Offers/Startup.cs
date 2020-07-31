@@ -24,7 +24,7 @@ namespace Contoso.Apps.SportsLeague.Offers
             services.AddControllers();
 
             services.AddDbContext<ProductContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContosoSportsLeague")));
+                options.UseSqlServer(Configuration["ConnectionStrings:SportsDB"]));
 
             services.AddAutoMapper(typeof(AutoMapping));
 
@@ -58,8 +58,6 @@ namespace Contoso.Apps.SportsLeague.Offers
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
@@ -69,17 +67,12 @@ namespace Contoso.Apps.SportsLeague.Offers
 
             app.UseRouting();
             app.UseCors();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            // Make sure database is setup and seeded with data
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetService<ProductContext>();
-                ProductDatabaseInitializer.Configure(dbContext).Wait();
-            }
+                       
         }
     }
 }

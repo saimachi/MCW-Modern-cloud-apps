@@ -11,7 +11,6 @@
     },
     "variables": {
         "nameSuffix": "[uniqueString(resourceGroup().id)]",
-
         "webAppName": "[concat('contosoapp', variables('nameSuffix'))]",
         "hostingPlanName": "ContosoSportsPlan",
         "databaseName": "ContosoSportsDB",
@@ -19,9 +18,35 @@
         "appInsightsName": "[concat('contososportsai', variables('nameSuffix'))]",
         "storageAccountName": "[concat('contoso', variables('nameSuffix'))]",
         "serviceBusName": "[concat('contoso', variables('nameSuffix'))]",
-        "serviceBusQueueName": "receiptgenerator"
+        "serviceBusQueueName": "receiptgenerator",
+        "keyVaultName": "[concat('contosokv', variables('nameSuffix'))]",
+        "appConfigName": "[concat('contosoconfig', variables('nameSuffix'))]"
+
     },
     "resources": [
+        {
+            "name": "[variables('appConfigName')]",
+            "type": "Microsoft.AppConfiguration/configurationStores",
+            "apiVersion": "2019-10-01",
+            "location": "[resourceGroup().location]",            
+            "sku": {
+              "name": "free"
+            }
+        },
+        {
+            "apiVersion": "2018-02-14",
+            "name": "[variables('keyVaultName')]",
+            "location": "[resourceGroup().location]",
+            "type": "Microsoft.KeyVault/vaults",
+            "properties": {               
+                "accessPolicies": [],
+                "tenantId": "[subscription().tenantId]",
+                "sku": {
+                    "name": "standard",
+                    "family": "A"
+                }
+            }
+        },
         {
             "name": "[variables('webAppName')]",
             "type": "Microsoft.Web/sites",
@@ -166,7 +191,6 @@
             "kind": "StorageV2",
             "tags": {}
         },
-
         {
             "type": "Microsoft.ServiceBus/namespaces",
             "apiVersion": "2017-04-01",

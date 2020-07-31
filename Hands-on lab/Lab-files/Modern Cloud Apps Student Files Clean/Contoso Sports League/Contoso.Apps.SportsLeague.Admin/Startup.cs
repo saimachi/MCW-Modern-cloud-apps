@@ -25,7 +25,7 @@ namespace Contoso.Apps.SportsLeague.Admin
             services.AddControllersWithViews();
 
             services.AddDbContext<ProductContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ContosoSportsLeague")));
+                options.UseSqlServer(Configuration["ConnectionStrings:SportsDB"]));
 
             services.AddAutoMapper(typeof(AutoMapping));
 
@@ -58,13 +58,7 @@ namespace Contoso.Apps.SportsLeague.Admin
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            // Make sure database is setup and seeded with data
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetService<ProductContext>();
-                ProductDatabaseInitializer.Configure(dbContext).Wait();
-            }
+                       
         }
     }
 }
