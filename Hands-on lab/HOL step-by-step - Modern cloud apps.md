@@ -33,39 +33,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Help references](#help-references)
   - [Exercise 1: Proof of concept deployment](#exercise-1-proof-of-concept-deployment)
     - [Task 1: Deploy the e-commerce website, SQL Database, and storage](#task-1-deploy-the-e-commerce-website-sql-database-and-storage)
-      - [Subtask 1: Configure SQL Database Firewall and Retrieve Connection String](#subtask-1-configure-sql-database-firewall-and-retrieve-connection-string)
-      - [Subtask 2: Retrieve Storage Account Access Keys](#subtask-2-retrieve-storage-account-access-keys)
-      - [Subtask 3: Retrieve Service Bus Queue Connection String](#subtask-3-retrieve-service-bus-queue-connection-string)
-      - [Subtask 4: Create secrets in Azure Key Vault](#subtask-4-create-secrets-in-azure-key-vault)
-      - [Subtask 5: Centralize secrets for multiple projects using an App Configuration store](#subtask-5-centralize-secrets-for-multiple-projects-using-an-app-configuration-store)
-      - [Subtask 6: Update the configuration in the starter project](#subtask-6-update-the-configuration-in-the-starter-project)
-      - [Subtask 7: Configure and deploy the e-commerce Web App from Visual Studio](#subtask-7-configure-and-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: Setup SQL Database Geo-Replication](#task-2-setup-sql-database-geo-replication)
-      - [Subtask 1: Add secondary database](#subtask-1-add-secondary-database)
-      - [Subtask 2: Setup SQL Failover Group](#subtask-2-setup-sql-failover-group)
-      - [Subtask 3: Failover SQL Database Failover Group](#subtask-3-failover-sql-database-failover-group)
-      - [Subtask 4: Test e-commerce Web App after Failover](#subtask-4-test-e-commerce-web-app-after-failover)
     - [Task 3: Deploying the Call Center admin website](#task-3-deploying-the-call-center-admin-website)
-      - [Subtask 1: Provision the call center admin Web App](#subtask-1-provision-the-call-center-admin-web-app)
-      - [Subtask 2: Update the configuration in the starter project](#subtask-2-update-the-configuration-in-the-starter-project)
-      - [Subtask 3: Configure and deploy the call center admin Web App from Visual Studio](#subtask-3-configure-and-deploy-the-call-center-admin-web-app-from-visual-studio)
     - [Task 4: Deploying the payment gateway](#task-4-deploying-the-payment-gateway)
-      - [Subtask 1: Provision the payment gateway API app](#subtask-1-provision-the-payment-gateway-api-app)
-      - [Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio](#subtask-2-deploy-the-contosoappspaymentgateway-project-in-visual-studio)
     - [Task 5: Deploying the Offers Web API](#task-5-deploying-the-offers-web-api)
-      - [Subtask 1: Provision the Offers Web API app](#subtask-1-provision-the-offers-web-api-app)
-      - [Subtask 2: Configure Cross-Origin Resource Sharing (CORS)](#subtask-2-configure-cross-origin-resource-sharing-cors)
-      - [Subtask 3: Update the configuration in the starter project](#subtask-3-update-the-configuration-in-the-starter-project)
-      - [Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio](#subtask-4-deploy-the-contosoappssportsleagueoffers-project-in-visual-studio)
     - [Task 6: Add API endpoint configuration settings](#task-6-add-api-endpoint-configuration-settings)
-      - [Subtask 1: Add the API endpoint configuration settings](#subtask-1-add-the-api-endpoint-configuration-settings)
-      - [Subtask 2: Validate App Settings are correct](#subtask-2-validate-app-settings-are-correct)
   - [Exercise 2: Identity and Security](#exercise-2-identity-and-security)
     - [Task 1: Enable Azure AD Premium Trial](#task-1-enable-azure-ad-premium-trial)
     - [Task 2: Create a new Contoso user](#task-2-create-a-new-contoso-user)
     - [Task 3: Configure access control for the call center administration Web Application](#task-3-configure-access-control-for-the-call-center-administration-web-application)
-      - [Subtask 1: Enable Azure AD Authentication](#subtask-1-enable-azure-ad-authentication)
-      - [Subtask 2: Verify the call center administration website uses the access control logon](#subtask-2-verify-the-call-center-administration-website-uses-the-access-control-logon)
     - [Task 4: Apply custom branding for the Azure Active Directory logon page](#task-4-apply-custom-branding-for-the-azure-active-directory-logon-page)
     - [Task 5: Verify the branding has been successfully applied to the Azure Active Directory logon page](#task-5-verify-the-branding-has-been-successfully-applied-to-the-azure-active-directory-logon-page)
   - [Exercise 3: Enable Azure B2C for customer site](#exercise-3-enable-azure-b2c-for-customer-site)
@@ -80,25 +56,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 9: Run the sample app](#task-9-run-the-sample-app)
   - [Exercise 4: Enabling Telemetry with Application Insights](#exercise-4-enabling-telemetry-with-application-insights)
     - [Task 1: Configure the application for telemetry](#task-1-configure-the-application-for-telemetry)
-      - [Subtask 1: Add Application Insights Telemetry to the e-commerce website project](#subtask-1-add-application-insights-telemetry-to-the-e-commerce-website-project)
-      - [Subtask 2: Enable client side telemetry](#subtask-2-enable-client-side-telemetry)
-      - [Subtask 3: Deploy the e-commerce Web App from Visual Studio](#subtask-3-deploy-the-e-commerce-web-app-from-visual-studio)
     - [Task 2: View the Application Insights logs](#task-2-view-the-application-insights-logs)
   - [Exercise 5: Automating backend processes with Azure Functions and Logic Apps](#exercise-5-automating-backend-processes-with-azure-functions-and-logic-apps)
     - [Task 1: Create an Azure Function to Generate PDF Receipts](#task-1-create-an-azure-function-to-generate-pdf-receipts)
     - [Task 2: Configure and deploy the Function App](#task-2-configure-and-deploy-the-function-app)
     - [Task 3: Create an Azure Logic App to Process Orders](#task-3-create-an-azure-logic-app-to-process-orders)
     - [Task 4: Use Twilio to send SMS Order Notifications](#task-4-use-twilio-to-send-sms-order-notifications)
-      - [Subtask 1: Configure your Twilio trial account](#subtask-1-configure-your-twilio-trial-account)
-      - [Subtask 2: Create a new logic app](#subtask-2-create-a-new-logic-app)
   - [Exercise 6: Automate deployments using GitHub actions](#exercise-6-automate-deployments-using-github-actions)
     - [Task 1: Create a GitHub repository](#task-1-create-a-github-repository)
     - [Task 2: Commit the existing lab files to source control](#task-2-commit-the-existing-lab-files-to-source-control)
     - [Task 3: Create a service principal in Active Directory](#task-3-create-a-service-principal-in-active-directory)
     - [Task 4: Create repository secrets](#task-4-create-repository-secrets)
-      - [Subtask 1: Create the service principal credentials secret](#subtask-1-create-the-service-principal-credentials-secret)
-      - [Subtask 2: Create the e-commerce web application publish profile secret](#subtask-2-create-the-e-commerce-web-application-publish-profile-secret)
-      - [Subtask 3: Create publish profile secrets for the remaining projects](#subtask-3-create-publish-profile-secrets-for-the-remaining-projects)
     - [Task 5: Define the production deployment workflow](#task-5-define-the-production-deployment-workflow)
     - [Task 6: Trigger the Production Deployment Workflow](#task-6-trigger-the-production-deployment-workflow)
   - [After the hands-on lab](#after-the-hands-on-lab)
@@ -170,6 +138,7 @@ Contoso has asked you for a proof of concept in Microsoft Azure by deploying the
 
 In this exercise, you will provision a website via the Azure **Web App + SQL** template using the Microsoft Azure Portal. You will then edit the necessary configuration files in the starter project and deploy the e-commerce website.
 
+<!-- omit in toc -->
 #### Subtask 1: Configure SQL Database Firewall and Retrieve Connection String
 
 1. Navigate to the Azure Management portal, [http://portal.azure.com](http://portal.azure.com/), using a new tab or instance and login with your lab-provided Azure credentials.
@@ -210,6 +179,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
 11. Close all configuration blades.
 
+<!-- omit in toc -->
 #### Subtask 2: Retrieve Storage Account Access Keys
 
 1. Go back to the **contososports** blade resource group, and select the **contoso** Storage account.
@@ -222,6 +192,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![In the Access keys blade default keys section, the copy button for the key1 connection string is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image36.png "Access keys blade, default keys section")
 
+<!-- omit in toc -->
 #### Subtask 3: Retrieve Service Bus Queue Connection String
 
 1. Go back to the **contososports** blade resource group, and select the **contoso** Service Bus Namespace.
@@ -252,6 +223,7 @@ In this exercise, you will provision a website via the Azure **Web App + SQL** t
 
     ![Primary Connection String is highlighted](media/2020-03-18-10-54-39.png "Primary Connection String is highlighted")
 
+<!-- omit in toc -->
 #### Subtask 4: Create secrets in Azure Key Vault
 
 You've retrieved multiple access keys and connection strings in this task. To properly secure them, and to keep these values out of application code, we need a secure place to store them. This place is the Azure Key Vault.
@@ -286,6 +258,7 @@ You've retrieved multiple access keys and connection strings in this task. To pr
 
     ![The Create a secret form is displayed with the Name and Value fields highlighted.](media/kv_createasecret.png)
 
+<!-- omit in toc -->
 #### Subtask 5: Centralize secrets for multiple projects using an App Configuration store
 
 The Contoso Sports solution contains multiple projects, each of which access the same Azure resources. In this subtask, we will be centralizing the configuration of the solution applications via the deployed Azure **App Configuration** resource.
@@ -318,6 +291,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
     
     ![A portion of the Access keys screen is displayed. The Read-only keys tab is highlighted and the copy button next to the Primary key Connection string textbox is selected.](media/ac_connectionstringcopy.png)
 
+<!-- omit in toc -->
 #### Subtask 6: Update the configuration in the starter project
 
 1. Go back to the **contososports** resource group blade.
@@ -373,6 +347,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 15. Select **Save** on the Access policies screen to commit the changes. 
 
+<!-- omit in toc -->
 #### Subtask 7: Configure and deploy the e-commerce Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** of Visual Studio.
@@ -460,6 +435,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 In this exercise, the attendee will provision a secondary SQL Database and configure Geo-Replication using the Microsoft Azure Portal.
 
+<!-- omit in toc -->
 #### Subtask 1: Add secondary database
 
 1. In the Azure Portal, navigate back to the lab resource group.
@@ -514,24 +490,25 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
     ![In the list of resources, the secondary SQL server resource is selected.](media/secondarydatabaseinresourcelist.png)
 
-13. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
+12. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
 
     ![On the SQL Server blade, at the top, the Set server firewall tile is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image62.png "SQL Server blade, Essentials section")
 
-14. On the **Firewall Settings** blade, specify a new rule named **My IP**, copy your **Client IP address**, and paste it into the **Start IP** and **End IP**. This will set the allowed IP Address range to just your IP address so you can connect to the database from this machine.
+13. On the **Firewall Settings** blade, specify a new rule named **My IP**, copy your **Client IP address**, and paste it into the **Start IP** and **End IP**. This will set the allowed IP Address range to just your IP address so you can connect to the database from this machine.
 
     ![On the Firewall Settings blade, in the New rule section, a new rule has been created with the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image27.png "New rule section ")
 
-15. Select **Save**.
+14. Select **Save**.
 
     ![Screenshot of the Firewall settings Save button.](media/2019-04-10-16-00-29.png "Firewall settings Save button")
 
-16. Update progress can be found by choosing the **Notifications** link located at the top of the page.
+15. Update progress can be found by choosing the **Notifications** link located at the top of the page.
 
     ![Screenshot of the Success dialog box, which says that the server firewall rules have been successfully updated.](media/2019-04-19-13-39-41.png "Success dialog box")
 
-17. Close all configuration blades.
+16. Close all configuration blades.
 
+<!-- omit in toc -->
 #### Subtask 2: Setup SQL Failover Group
 
 With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feature can be used to enable "auto failover" scenarios for the SQL Database. This enables a single connection string endpoint to be used by the application, and SQL Database will automatically handle failing over from Primary to Secondary database in the event of a SQL Database outage / down time.
@@ -597,6 +574,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
     ![The ContosoSportsLeague secret Versions screen is shown with a current and older version present in the list. ](media/newvalueforsecret_keyvault.png)
 
+<!-- omit in toc -->
 #### Subtask 3: Failover SQL Database Failover Group
 
 >**Note**: This subtask is optional.
@@ -609,20 +587,21 @@ Since the Replication and Failover process can take anywhere from 10 to 30 minut
     
     ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png)
 
-4. On the **SQL server** blade, select **Failover groups** under Settings.
+3. On the **SQL server** blade, select **Failover groups** under Settings.
 
     ![Failover groups option is highlighted.](images/2020-03-17-19-37-00.png "Failover groups option is highlighted")
 
-5. Select the **Failover group** in the list.
+4. Select the **Failover group** in the list.
 
     ![Failover group is highlighted in the list.](images/2020-03-17-19-38-01.png "Failover group is highlighted in the list")
 
-6. On the Failover group blade, select the **Forced Failover** button, then select **Yes** to confirm the forced failover of the SQL Database Failover Group.
+5. On the Failover group blade, select the **Forced Failover** button, then select **Yes** to confirm the forced failover of the SQL Database Failover Group.
 
     ![Forced failover confirmation is displayed.](images/2020-03-17-19-39-56.png "Forced failover confirmation is displayed")
 
 The failover may take a few minutes to complete. You can continue with the next Subtask.
 
+<!-- omit in toc -->
 #### Subtask 4: Test e-commerce Web App after Failover
 
 1. From the Azure portal, select **Resource Groups**, and select **contososports**.
@@ -649,6 +628,7 @@ The failover may take a few minutes to complete. You can continue with the next 
 
 In this exercise, you will provision a website via the Azure Web App template using the Microsoft Azure Portal. You will then edit the necessary configuration files in the Starter Project and deploy the call center admin website.
 
+<!-- omit in toc -->
 #### Subtask 1: Provision the call center admin Web App
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management portal <http://portal.azure.com>.
@@ -663,6 +643,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 5. After the values are accepted, select **Review and create**, then **Create**.  It will take a few minutes to provision.
 
+<!-- omit in toc -->
 #### Subtask 2: Update the configuration in the starter project
 
 1. Navigate to the **App Service** blade for the Call Center Admin App just provisioned.
@@ -710,7 +691,8 @@ In this exercise, you will provision a website via the Azure Web App template us
     ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
 
 14. Select **Save** on the Access policies screen to commit the changes. 
-    
+
+<!-- omit in toc -->
 #### Subtask 3: Configure and deploy the call center admin Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Admin** project located in the **Web** folder using the **Solution Explorer** in Visual Studio.
@@ -793,6 +775,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 In this exercise, the attendee will provision an Azure API app template using the Microsoft Azure Portal. The attendee will then deploy the payment gateway API to the API app.
 
+<!-- omit in toc -->
 #### Subtask 1: Provision the payment gateway API app
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal <http://portal.azure.com>.
@@ -811,6 +794,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 4. After the values are accepted, select **Create**.  It will take a few minutes to provision.
 
+<!-- omit in toc -->
 #### Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio
 
 1. Navigate to the **Contoso.Apps.PaymentGateway** project located in the **APIs** folder using the **Solution Explorer** in Visual Studio.
@@ -847,6 +831,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 In this exercise, the attendee will provision an Azure API app template using the Microsoft Azure Portal. The attendee will then deploy the Offers Web API.
 
+<!-- omit in toc -->
 #### Subtask 1: Provision the Offers Web API app
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management Portal (<http://portal.azure.com>).
@@ -861,6 +846,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 5. When the Web App template has completed provisioning, return to the resource group, then select the new API App from the list of resources.
 
+<!-- omit in toc -->
 #### Subtask 2: Configure Cross-Origin Resource Sharing (CORS)
 
 1. On the **App Service** blade for the Offers API, under the **API** menu section, scroll down and select **CORS**.
@@ -873,15 +859,16 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![CORS configuration blade displayed.  Entering * as the Allowed Origins value.](media/2019-03-28-08-20-57.png "CORS configuration blade")
 
+<!-- omit in toc -->
 #### Subtask 3: Update the configuration in the starter project
 
 1. On the **App Service** blade for the Offers API, select **Configuration**.
 
     ![In the App Service blade, under Settings, select Configuration link.](media/2019-04-19-16-38-54.png "Configuration link")
 
-3. Scroll down, and locate the **Connection strings** section.
+2. Scroll down, and locate the **Connection strings** section.
 
-4. Add a new **Connection String** with the following values, and select **OK**:
+3. Add a new **Connection String** with the following values, and select **OK**:
 
    - Name: **AppConfig**
 
@@ -891,32 +878,33 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
 
-5. Select the **Ok** button.
+4. Select the **Ok** button.
 
-6. Select the **Save** button.
+5. Select the **Save** button.
 
     ![the Save button is circled on the App Service blade.](media/2019-03-28-05-36-38.png "App Service blade")
 
-7. The offers api resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
+6. The offers api resource needs access to the Key Vault. The App Configuration will use pass-through authentication to the Key Vault. To authenticate the application, it will utilize a system managed identity. From the left menu, select **Identity**.
 
-8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
-    
+7. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
+
     ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
 
-9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
+8. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
-10. Select the **+ Add Access Policy** link.
+9. Select the **+ Add Access Policy** link.
 
-11. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
+10. In the **Add access policy** form, expand **Secret permissions** and check the box next to **Get** and **List**.  
 
-12. In the **Select principal** blade, search for the name of the offers api application you just created and choose its managed identity.
+11. In the **Select principal** blade, search for the name of the offers api application you just created and choose its managed identity.
 
-13. Select **Add**.
-    
+12. Select **Add**.
+
     ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
 
-14. Select **Save** on the Access policies screen to commit the changes.
+13. Select **Save** on the Access policies screen to commit the changes.
 
+<!-- omit in toc -->
 #### Subtask 4: Deploy the Contoso.Apps.SportsLeague.Offers project in Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Offers** project located in the **APIs** folder using the **Solution Explorer** in Visual Studio.
@@ -924,7 +912,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 2. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Edit Project File**.
 
 3. In the **PropertyGroup** element, add the following XML beneath the TargetFramework item and save the file:
-   
+
     ```xml
     <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
     ```
@@ -944,14 +932,14 @@ In this exercise, the attendee will provision an Azure API app template using th
 8. Now we are ready to configure this application to use the App Configuration in Azure. Under the **Contoso.Apps.SportsLeague.Offers** project, open the **Program.cs** file.
 
 9. Uncomment the following **using** statements at the top of the file:
-    
+
     ```C#
     using Microsoft.Extensions.Configuration;
     using Azure.Identity;
     ```
 
 10. In the **CreateHostBuilder** method, uncomment the following code - this tells the application to utilize the AppConfig connection string that you've already setup on the API application service to point to the centralized App Configuration resource.
-    
+
     ```C#
     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
     {
@@ -982,7 +970,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 14. In the App Service dialog, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **OK**.
 
     ![The App Service dialog is shown with the offers api selected.](media/deployment_selectoffersapiservice.png)
-   
+
 15. Select **Publish** to publish the API App.
 
     ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
@@ -1009,18 +997,19 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 ### Task 6: Add API endpoint configuration settings
 
+<!-- omit in toc -->
 #### Subtask 1: Add the API endpoint configuration settings
 
 1. In the Azure Portal, return to the lab resource group.
 
 2. Select the **contosoconfig** App Configuration resource from the list.
-   
+
     ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png)
 
 3. On the left menu, in the **Operations** section, select **Configuration explorer**.
 
 4. Expand the **+ Create** button, and select **Key-value**. This API endpoint does not contain any secret values, thus is not required to be stored as a Key Vault value.
-    
+
     ![The + Create button is expanded with the Key-value item selected.](media/appconfig_createkeyvaluemenu.png)
 
 5. Create the new key-value entry with the following values:
@@ -1043,6 +1032,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![The list of Configuration settings is shown with the two new API endpoint settings highlighted.](media/appconfig_listofsettingswithAPIendpointshighlighted.png)
 
+<!-- omit in toc -->
 #### Subtask 2: Validate App Settings are correct
 
 1. On the **App Service** blade, select **Overview**.
@@ -1138,6 +1128,7 @@ The Contoso call center admin application will only be accessible by users of th
 
 >**Note**: This task is **optional**, and it is valid only if you have the right to create applications in your Azure AD Tenant.
 
+<!-- omit in toc -->
 #### Subtask 1: Enable Azure AD Authentication
 
 1. On the left navigation of the Azure Portal, select **App Services**.
@@ -1176,6 +1167,7 @@ The Contoso call center admin application will only be accessible by users of th
 
     ![The Save button is circled in the App Service blade.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image143.png "App Service blade")
 
+<!-- omit in toc -->
 #### Subtask 2: Verify the call center administration website uses the access control logon
 
 1. Close your browser (or use an alternative), and launch a browser is **InPrivate or Incognito mode**. Navigate to the **Call Center Administration** website.
@@ -1262,7 +1254,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 4. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
 
-    ![In the contososports resource group, the new B2C tenant is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
+    ![In the contososports resource group, the new B2C tenant is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
 
 5. In the new blade, select the **Azure AD B2C Settings** tile for the new B2C tenant. You will be taken to the new subscription for this tenant.
 
@@ -1296,34 +1288,33 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 2. To enable sign-up on your application, you will need to create a sign-up policy. This policy describes the experiences consumers will go through during sign-up and the contents of tokens the application will receive on successful sign-ups. Select **User flows** link on the left menu and then **+New user flow** link at the top of the blade.
 
-    ![In the Azure Portal, on the left, Azure AD B2C - User Flows selected.](media/2020-06-20-23-39-59.png "Azure AD B2C - User Flows selected")
+    ![On the Azure AD B2C screen, User Flows selected from the left menu and the +New user flow button is highlighted in the toolbar.](media/2020-06-20-23-39-59.png "Azure AD B2C - User Flows selected")
 
-3. Select the **Sign up and sign in** link.
+3. Select the **Sign up and sign in** tile, then under Version, select **Recommended**.
   
-    ![Recommended for most applications results is displayed. Sign up and sign in link is highlighted.](media/2019-03-28-12-20-42.png "Sign up and sign in link")
+    ![The Select a user flow type section is displayed with the Sign up and sign in tile highlighted.](media/2019-03-28-12-20-42.png "Sign up and sign in tile")
 
 4. Enter **SignUp** in the **Name** field.
 
     ![The unique Azure AD B2C user flow name is displayed.](media/2019-04-11-08-40-58.png "User Flow Name")
 
-5. Select **Identity providers**, and select **Email Signup**. Optionally, you can also select social identity providers (if previously configured for the tenant). Select **OK**.
+5. Beneath **Identity providers**, check **Email Signup**. Optionally, you can also select social identity providers (if previously configured for the tenant).
 
     ![In the Add policy blade, Identity providers is selected. In the Select identity providers blade, Email signup is selected.](media/2019-03-28-12-25-35.png "Add policy and Select identity providers blades")
 
-6. **Multifactor authentication** set to **Disabled**.
+6. In the **Multifactor authentication** section, ensure **Multifactor authentication** is set to **Disabled**.
 
-7. **User attributes and claims**.
-    - Select the **Show more...** link.
+7. In the **User attributes and claims** section, select the **Show more...** link.
 
     ![In the Azure AD B2C - User flow policy - create user flow pane, the Show more link is highlighted after the default user attributes and claims.](media/2019-03-28-12-38-39.png "Show more link")
 
-8. Select the following **Collect attributes**:
+8. Select the following **Collect attribute** checkboxes:
 
     - **Country/Region**
     - **Display Name**
     - **Postal Code**
 
-9. Select the following **Return claims**:
+9. Select the following **Return claim** checkboxes:
 
     - **Display Name**
     - **Identity Provider**
@@ -1331,9 +1322,9 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
     - **User is new**
     - **User's Object ID**
   
-10. Review your selections, select **OK**.
+10. Review your selections, then select **OK**.
 
-    ![Azure AD B2C - User flow - Review the collection and return claims columns.](media/2019-03-28-12-44-04.png "Collection and return claims")
+    ![The user attributes and claims section is displayed showing the appropriate checkbox selections described in the previous two steps.](media/2019-03-28-12-44-04.png "User attributes and claims listing")
 
 11. Select **Create**. Observe the policy just created appears as **B2C\_1\_SignUp** (the **B2C\_1\_** fragment is automatically added) in the **Sign-up policies** blade.
 
@@ -1381,7 +1372,7 @@ To enable profile editing on your application, you will need to create a profile
 
 7. Select the **Show more...** link.
 
-8. Select **Collect attributes**. Here, you choose attributes the consumer can view and edit.
+8. For the **Collect attribute** section, you choose attributes the consumer can view and edit.
 
     For now, select the following:
 
@@ -1392,7 +1383,7 @@ To enable profile editing on your application, you will need to create a profile
     - **State/Province**
     - **Street Address**
 
-9. Select **Return claims**. Here, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
+9. For the **Return claims** section, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
 
     For now, select the following:
 
@@ -1427,18 +1418,18 @@ To enable profile editing on your application, you will need to create a profile
 
     ![In the Add policy blade, Identity providers (1 Selected) is selected. Identities providers - select Reset password using email address.](media/2020-03-19-09-50-24.png "select Reset password using email address")
 
-5. Select Identity providers, and then "**Reset password using email address**."
+5. Under Identity providers, check **Reset password using email address**.
 
 6. Select the **Show more...** link.
 
-7. Select **Return claim**. Here, you choose attributes about the user that are returned to the application in the token.
+7. In the **Application claims** section in the **Return claim** column, choose attributes about the user that are returned to the application in the token.
 
     For now, select the following:
 
     - **Email Addresses**
     - **Given Name**
 
-    ![Return claim attributes selected blade.](media/2020-03-19-09-54-28.png "Return claims")
+    ![The Application claims section is shown with email address and given name checked in the Return claim column.](media/2020-03-19-09-54-28.png "Application claims")
 
 8. Select **OK**.
 
@@ -1722,6 +1713,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 ### Task 1: Configure the application for telemetry
 
+<!-- omit in toc -->
 #### Subtask 1: Add Application Insights Telemetry to the e-commerce website project
 
 1. Open the Solution **Contoso.Apps.SportsLeague** in Visual Studio.
@@ -1733,7 +1725,7 @@ To configure the application for logging and diagnostics, you have been asked to
 4. Within the **NuGet Package Manager**, select the **Browse** tab, then search for and install the following NuGet package:
 
     - **Microsoft.ApplicationInsights.AspNetCore**
-    
+
 5. Open the file `\Helpers\TelemetryHelper.cs` located in the **Contoso.Apps.SportsLeague.Web** project.
 
 6. Add the following using statements to the top of the file:
@@ -1759,6 +1751,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 9. Save the `TelemetryHelper.cs` file.
 
+<!-- omit in toc -->
 #### Subtask 2: Enable client side telemetry
 
 1. Open the Azure Management Portal (<http://portal.azure.com>), and navigate to the **contososports** Resource Group.
@@ -1817,6 +1810,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
 10. Save the **\_Layout.cshtml** file.
 
+<!-- omit in toc -->
 #### Subtask 3: Deploy the e-commerce Web App from Visual Studio
 
 1. Navigate to the **Contoso.Apps.SportsLeague.Web** project located in the **Web** folder using the **Solution Explorer** in Visual Studio.
@@ -2087,9 +2081,9 @@ The advantages of using Logic Apps include the following:
 
     ![In the Logic Apps Designer, the Blank Logic App tile is selected.](media/2019-03-29-12-56-10.png "Logic Apps Designer")
 
-6. Select the **All** tab, then select **Azure Queues**.
+6. Select the **All** tab, then select **Service Bus**.
 
-    ![In the Services section, the Azure Service Bus tile is selected.](media/2020-03-18-12-12-10.png "Services section")
+    ![In the Services section, the Service Bus tile is selected.](media/2020-03-18-12-12-10.png "Services section")
 
 7. Select **Service Bus - When a message is received in a queue (auto-complete)**.
 
@@ -2137,7 +2131,7 @@ The advantages of using Logic Apps include the following:
 
     ![In Azure Storage Explorer, on the left, the following tree view is expanded: Storage Accounts\\contososportsstorage01r\\Blob Containers. Under Blob Containers, receipts is selected. On the right, the ContosoSportsLeague-Store-Receipt-72.pdf is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image252.png "Azure Storage Explorer")
 
-17. Double-click it to see the Purchase receipt.
+17. Double-click the PDF document to download and see the Purchase receipt.
 
 18. Now, select the **Designer** button in the Logic Apps Designer screen. add two more steps to the flow for updating the database and removing the message from the queue after it has been processed. Switch back to the designer, select **+ New step**.
 
@@ -2240,6 +2234,7 @@ The advantages of using Logic Apps include the following:
 
 ### Task 4: Use Twilio to send SMS Order Notifications
 
+<!-- omit in toc -->
 #### Subtask 1: Configure your Twilio trial account
 
 1. If you do not have a Twilio account, sign up for one for free at the following URL:
@@ -2272,16 +2267,17 @@ The advantages of using Logic Apps include the following:
 
     ![On the Console, on the left, the Home button and the Settings menu tab are selected. On the right, under API Credentials, Account SID and Auth Token are circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image275.png "Console")
 
+<!-- omit in toc -->
 #### Subtask 2: Create a new logic app
 
 1. Open **SQL Server Management Studio** and connect to the SQL Database for the **ContosoSportsDB** database.
 
     >**Note**: You can find the database server name by:
+
     > - Navigate the Azure ContosoSportsDB in the portal.
     > - In the Overview, locate the **Show database connection strings** link.
     > - Copy the **Server** parameter value.
     e.g. Server=tcp:``contososqlserver2019th.database.windows.net,1433``
-    
 
     ![In Object Explorer, ContosoSportsDBserver1234.database is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image276.png "Object Explorer")
 
@@ -2487,6 +2483,8 @@ The advantages of using Logic Apps include the following:
 
 ## Exercise 6: Automate deployments using GitHub actions
 
+Duration: 30 minutes
+
 The Contoso Sports League would like to move their existing source control to GitHub. In addition to this, they wish to implement automatic deployments of their projects into production. The desired workflow is that features are developed in their own branch and once complete, pull requests are issued to the master branch. The pull requests are then reviewed for quality assurance, and once approved, the pull request is then merged into the master branch of the repository. Upon this merge, the projects in the solution should be automatically released into the production Azure environment using the code from the master branch. In this exercise, you will learn how to deploy code to Azure from GitHub Actions in two different ways: via a Service Principal created in Active Directory, as well as via Application Service Publish Profiles.
 
 ### Task 1: Create a GitHub repository
@@ -2559,6 +2557,7 @@ One method to deploy code using GitHub actions is to create a Service Principal 
 
 You have the ability to add secrets to the repository in GitHub. Secrets contain sensitive information that should never be checked into source control. These secrets are kept encrypted by GitHub and are made available to GitHub actions through the **secrets** collection (which you will see in the next task). We will be creating many secrets, as we have five projects that we are configuring for auto-deployment.
 
+<!-- omit in toc -->
 #### Subtask 1: Create the service principal credentials secret
 
 1. In GitHub, return to the **ContosoSports** repository screen and select the **Settings** tab.
@@ -2571,6 +2570,7 @@ You have the ability to add secrets to the repository in GitHub. Secrets contain
 
 4. In the New secret form, enter the name **AZURE_CREDENTIALS**, and for the value, paste in the JSON data obtained when creating the Service Principal in the previous task. Select **Add secret**.
 
+<!-- omit in toc -->
 #### Subtask 2: Create the e-commerce web application publish profile secret
 
 1. In the Azure Portal, open the e-commerce web application service, it is the one named contosoapp{randomcharacters}.
@@ -2581,6 +2581,7 @@ You have the ability to add secrets to the repository in GitHub. Secrets contain
 
 3. Return to the ContosoSports repository GitHub Secrets screen, and add a new secret named **AZURE_WEBAPP_PUBLISH_PROFILE**, for the value, paste the contents of the publish profile from the previous step, then select the **Add secret** button.
 
+<!-- omit in toc -->
 #### Subtask 3: Create publish profile secrets for the remaining projects
 
 Repeat Subtask 2 for the remaining projects by obtaining the publish profiles from the Azure Portal. Create the secrets as follows:
@@ -2788,6 +2789,8 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
             package: './pdfappdeploy'
             publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
     ```
+
+    >**Note**: Due to the nature of some browsers, you may need to adjust the whitepace of the yml document after it has been pasted into GitHub.
 
 5. Select the **Start commit** button to commit the workflow to the repository.
 
