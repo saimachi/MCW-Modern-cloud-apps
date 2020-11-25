@@ -230,19 +230,19 @@ You've retrieved multiple access keys and connection strings in this task. To pr
 
 1. Go back to the **contososports** resource group blade, and select the **contosokv** Key Vault resource.
 
-    ![The resource listing is displayed with the key vault item selected.](media/rg_selectkeyvault.png)
+    ![The resource listing is displayed with the key vault item selected.](media/rg_selectkeyvault.png "Resource group listing")
 
 2. Beneath **Settings**, select **Access Policies**.
 
 3. In order to add, edit, or view secrets, you must be granted access through a new Access policy. Select the **+ Add Access Policy** link.
     
-    ![A portion of the Access Policies screen is shown with the + Add Access Policy link selected.](media/add_access_policy_link.png)
+    ![A portion of the Access Policies screen is shown with the + Add Access Policy link selected.](media/add_access_policy_link.png "Key Vault Access Policies")
 
 4. Expand the **Secret permissions** drop down, and check the **Select all** checkbox.
 
 5. For **Select principal**, select your Azure user account, and select **Add**.
 
-    ![The Add access policy form is displayed with the Secret Permissions and Select principal fields highlighted.](media/kv_add_access_policy_form.png)
+    ![The Add access policy form is displayed with the Secret Permissions and Select principal fields highlighted.](media/kv_add_access_policy_form.png "The Add Access Policy Form")
 
 6. Press **Save** on the **Access policies** screen to save the changes.
 
@@ -256,7 +256,7 @@ You've retrieved multiple access keys and connection strings in this task. To pr
     | ContosoSportsLeague | {the database connection string} |
     | contososportsstorage | {the primary connection string you recorded for the storage account} |
 
-    ![The Create a secret form is displayed with the Name and Value fields highlighted.](media/kv_createasecret.png)
+    ![The Create a secret form is displayed with the Name and Value fields highlighted.](media/kv_createasecret.png "The Create a secret form")
 
 <!-- omit in toc -->
 #### Subtask 5: Centralize secrets for multiple projects using an App Configuration store
@@ -265,13 +265,13 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 1. Go back to the **contososports** resource group blade, and select the **contosoconfig** App Configuration resource.
 
-    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png)
+    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png "The resource listing")
 
 2. Select **Configuration explorer** found beneath the **Operations** section of the left menu.
 
 3. On the **Configuration explorer** screen, expand **+ Create** and select **Key Vault reference**.
    
-   ![The + Create button is expanded with the Key Vault reference item highlighted.](media/ac_createkeyvaultreference_menu.png)
+   ![The + Create button is expanded with the Key Vault reference item highlighted.](media/ac_createkeyvaultreference_menu.png "Create Key Vault Reference")
 
 4. On the **Create** form, be sure to select the appropriate **Subscription**, **Resource group**, and the **contosokv** Key Vault. Create the following Key Vault references:
 
@@ -281,7 +281,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
     | ConnectionStrings:ReceiptStorage | Select **contososportsstorage** | Select **Latest version** |
     | ConnectionStrings:SportsDB | Select **ContosoSportsLeague** | Select **Latest version** |
 
-    ![The Create new Key vault reference form is displayed populated with the ConnectionStrings:ReceiptQueue values.](media/ac_createkeyvaultref_form.png)
+    ![The Create new Key vault reference form is displayed populated with the ConnectionStrings:ReceiptQueue values.](media/ac_createkeyvaultref_form.png "The create new key vault reference form")
 
 5. From the left menu, select **Access keys** located in the **Settings** section.
 
@@ -289,7 +289,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 7. Copy the **Primary key Connection string** value, and paste it into notepad. This value is needed to connect the deployed applications to the App Configuration store. 
     
-    ![A portion of the Access keys screen is displayed. The Read-only keys tab is highlighted and the copy button next to the Primary key Connection string textbox is selected.](media/ac_connectionstringcopy.png)
+    ![A portion of the Access keys screen is displayed. The Read-only keys tab is highlighted and the copy button next to the Primary key Connection string textbox is selected.](media/ac_connectionstringcopy.png "The Access keys screen")
 
 <!-- omit in toc -->
 #### Subtask 6: Update the configuration in the starter project
@@ -323,7 +323,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
    - Type: Select **Custom**.
 
-    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png "The Add/Edit connection string form")
 
 7. Select **Save** to commit the changes.
 
@@ -331,7 +331,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 9. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
 
-    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png "The Identity Screen")
 
 10. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
@@ -343,7 +343,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 14. Select **Add**.
     
-    ![The Add access policy form is displayed with the Get secret permission selected, and the contosoconfig principal selected.](media/kv_addaccesspolicy_forconfig.png)
+    ![The Add access policy form is displayed with the Get secret permission selected, and the contosoconfig principal selected.](media/kv_addaccesspolicy_forconfig.png "The Add Access Policy Form")
 
 15. Select **Save** on the Access policies screen to commit the changes. 
 
@@ -354,7 +354,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 2. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Edit Project File**.
 
-    ![In the solution explorer, the Contoso.Apps.SportsLeague.Web project is highlighted with its context menu expanded. The Edit Project File option is selected from the menu.](media/web_editprojfile_menu.png)
+    ![In the solution explorer, the Contoso.Apps.SportsLeague.Web project is highlighted with its context menu expanded. The Edit Project File option is selected from the menu.](media/web_editprojfile_menu.png "Editor for the project file")
 
 3. In the **PropertyGroup** element, add the following XML beneath the TargetFramework item and save the file:
    
@@ -362,7 +362,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
     <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
     ```
 
-    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png "Project file editor")
 
 4. Right-click the **Contoso.Apps.SportsLeague.Web** project, and select **Manage NuGet Packages**.
 
@@ -370,7 +370,7 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
 6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
 
-    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png "Nuget Package Manager")
 
 7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
 
@@ -405,31 +405,29 @@ The Contoso Sports solution contains multiple projects, each of which access the
 
     ![In Solution Explorer, under Solution \'Contoso.Apps.SportsLeague\' (7 projects), Web is expanded, and under Web, Contoso.Apps.SportsLeague.Web is selected.](media/2019-04-19-14-03-04.png "Solution Explorer")
 
-12. On the Publish dialog, select **Start** in the **Publish** section.
-
-13. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
-
-    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
-
-14. In the App Service dialog, expand the resource group, and select the **contosoapp** from the list, then choose **OK**.
+12. On the Publish dialog, select **Azure** as the **Target**, then select **Next**.
     
-    ![The App Service dialog is shown with the resource group expanded and the contosoapp application service selected in the list. The OK button is highlighted.](media/deploywebapp_serviceselection.png)
+13. For **Specific target**, select **Azure App Service (Windows)**, then select **Next**.
 
-15. Select **Publish** to publish the Web application.
+15. For **App Service**, expand the lab resource group, and select the **contosoapp** from the list, then choose **Finish**.
+    
+    ![The App Service dialog is shown with the resource group expanded and the contosoapp application service selected in the list. The OK button is highlighted.](media/deploywebapp_serviceselection.png "App Service Selection")
+
+16. Select **Publish** to publish the Web application.
 
     ![Publish profile is displayed with the Publish button highlighted.](media/2020-06-15-16-53-15.png "Publish profile")
 
-16. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
+17. In the Visual Studio **Output** view, you will see a status that indicates the Web App was published successfully.
 
     ![Screenshot of the Visual Studio Output view, with the Publish Succeeded message circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image50.png "Visual Studio Output view")
 
     >**Note**: Your URL will differ from the one shown in the Output screenshot because it must be globally unique.
 
-17. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
+18. A new browser should automatically open the new web applications. Validate the website by choosing the **Store** link on the menu. You should see product items. If products are returned, then the connection to the database is successful.
 
     ![Screenshot of the Store link.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image51.png "Store link")
 
-    >**Troubleshooting**: If the web site fails to start up or show products, go back and double check all your connection string entries and passwords web application settings.
+    >**Troubleshooting**: If the web site fails to start up or show products, go back and double check all your connection string entries and passwords web application settings. If you get a message indicating the Service is unavailable. Give it a moment, and refresh your browser.
 
 ### Task 2: Setup SQL Database Geo-Replication
 
@@ -442,7 +440,7 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
 2. From the list of resources, select the **ContosoSportsDB** SQL database resource.
 
-    ![The resource listing is displayed with the ContosoSportsDB SQL database resource highlighted.](media/resourcelist_contososportsdb.png)
+    ![The resource listing is displayed with the ContosoSportsDB SQL database resource highlighted.](media/resourcelist_contososportsdb.png "Resource listing")
 
 3. Under the **Settings** menu area, select **Geo-Replication**.
 
@@ -464,7 +462,9 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
     ![the Target server Configure required settings option is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image55.png "Target server option")
 
-7. On the **New server** blade, specify the following configuration:
+7. Select **Create a new server**.
+   
+8. On the **New server** blade, specify the following configuration:
 
    - Server name: **A unique value (ensure the green checkmark appears)**.
 
@@ -474,39 +474,39 @@ In this exercise, the attendee will provision a secondary SQL Database and confi
 
     ![The fields in the New Server blade display with the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image56.png "New Server blade")
 
-8. Once the values are accepted in the **New server** blade, choose **Select**.
+9.  Once the values are accepted in the **New server** blade, choose **Select**.
 
     ![Screenshot of the Select button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image20.png "Select button")
 
-9. On the **Create secondary** blade, select **OK**.
+10. On the **Create secondary** blade, select **OK**.
 
     ![Screenshot of the OK button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image57.png "OK button")
 
     > **Note**: The Geo-Replication will take a few minutes to complete.
 
-10. After the Geo-Replication has finished provisioning, return to the resource group for the lab.
+11. After the Geo-Replication has finished provisioning, return to the resource group for the lab.
 
-11. Select the name of the secondary SQL Server resource that you just created.
+12. Select the name of the secondary SQL Server resource that you just created.
 
-    ![In the list of resources, the secondary SQL server resource is selected.](media/secondarydatabaseinresourcelist.png)
+    ![In the list of resources, the secondary SQL server resource is selected.](media/secondarydatabaseinresourcelist.png "Resource listing")
 
-12. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
+13. On the **SQL Server** blade, within the **Overview** pane, select **Show firewall settings** link.
 
-    ![On the SQL Server blade, at the top, the Set server firewall tile is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image62.png "SQL Server blade, Essentials section")
+    ![On the SQL Server blade, at the top, the Set server firewall tile is boxed in red.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image62.png "SQL Server blade, Overview section")
 
-13. On the **Firewall Settings** blade, specify a new rule named **My IP**, copy your **Client IP address**, and paste it into the **Start IP** and **End IP**. This will set the allowed IP Address range to just your IP address so you can connect to the database from this machine.
+14. On the **Firewall Settings** blade, specify a new rule named **My IP**, copy your **Client IP address**, and paste it into the **Start IP** and **End IP**. This will set the allowed IP Address range to just your IP address so you can connect to the database from this machine.
 
     ![On the Firewall Settings blade, in the New rule section, a new rule has been created with the previously defined settings.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image27.png "New rule section ")
 
-14. Select **Save**.
+15. Select **Save**.
 
     ![Screenshot of the Firewall settings Save button.](media/2019-04-10-16-00-29.png "Firewall settings Save button")
 
-15. Update progress can be found by choosing the **Notifications** link located at the top of the page.
+16. Update progress can be found by choosing the **Notifications** link located at the top of the page.
 
     ![Screenshot of the Success dialog box, which says that the server firewall rules have been successfully updated.](media/2019-04-19-13-39-41.png "Success dialog box")
 
-16. Close all configuration blades.
+17. Close all configuration blades.
 
 <!-- omit in toc -->
 #### Subtask 2: Setup SQL Failover Group
@@ -517,7 +517,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
 
 2. From the list of resources, select the Primary SQL server resource.
     
-    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png)
+    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png "Resource listing")
 
 3. On the **SQL server** blade, select **Failover groups** under **Settings**.
 
@@ -572,7 +572,7 @@ With SQL Database Geo-Replication configured, the Azure SQL Failover Groups feat
     > Server=tcp:{failover_group_endpoint};Initial Catalog=ContosoSportsDB;Persist Security Info=False;User ID=demouser;Password=demo@pass123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
     > ```
 
-    ![The ContosoSportsLeague secret Versions screen is shown with a current and older version present in the list. ](media/newvalueforsecret_keyvault.png)
+    ![The ContosoSportsLeague secret Versions screen is shown with a current and older version present in the list. ](media/newvalueforsecret_keyvault.png "Secrets version list")
 
 <!-- omit in toc -->
 #### Subtask 3: Failover SQL Database Failover Group
@@ -585,7 +585,7 @@ Since the Replication and Failover process can take anywhere from 10 to 30 minut
 
 2. From the list of resources, select the Primary SQL server resource.
     
-    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png)
+    ![The list of lab resources is shown with the primary SQL server resource selected.](media/primary_sqlserverresource_inlist.png "Resource listing")
 
 3. On the **SQL server** blade, select **Failover groups** under Settings.
 
@@ -633,15 +633,17 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 1. Using a new tab or instance of your browser, navigate to the Azure Management portal <http://portal.azure.com>.
 
-2. Select **+ Create a resource** then select **Web**, then **Web App**.
+2. Select **+ Create a resource**, then search for and select **Web App**.
 
 3. Specify a **unique Name** for the Web App, **Resource Group** you have used throughout the lab are selected. Also, specify **.NET Core 3.1 (LTS)** as the **Runtime stack**.
 
-    ![On the Web App blade, the App name field is set to contososportscallcentercp.](media/2019-03-28-05-29-59.png "Web App blade")
-
 4. Select **Linux Plan**, and create a new Linux-based App Service Plan for the Web App.
 
-5. After the values are accepted, select **Review and create**, then **Create**.  It will take a few minutes to provision.
+5. Select a different **Region** for the web app than what was chosen for the lab. You can't mix Linux and Windows app services in the same region in the same resource group.
+   
+6. After the values are accepted, select **Review and create**, then **Create**.  It will take a few minutes to provision.
+   
+  ![On the Create Web App blade, the App name field is set to contososportscallcentercp.](media/2019-03-28-05-29-59.png "Create Web App blade")
 
 <!-- omit in toc -->
 #### Subtask 2: Update the configuration in the starter project
@@ -664,7 +666,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
    - Type: Select **Custom**.
 
-    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png "The Add/Edit Connection String Form")
 
 5. Select the **OK** button.
 
@@ -676,7 +678,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 8. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
     
-    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png "The Identity Screen")
 
 9. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
@@ -688,7 +690,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 13. Select **Add**.
     
-    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png "The Add Access Policy form")
 
 14. Select **Save** on the Access policies screen to commit the changes. 
 
@@ -705,7 +707,7 @@ In this exercise, you will provision a website via the Azure Web App template us
     <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
     ```
 
-    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png "Editor displaying project file")
 
 4. Right-click the **Contoso.Apps.SportsLeague.Admin** project, and select **Manage NuGet Packages**.
 
@@ -713,7 +715,7 @@ In this exercise, you will provision a website via the Azure Web App template us
 
 6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
 
-    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png "The NuGet Package manager")
 
 7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
 
@@ -749,17 +751,15 @@ In this exercise, you will provision a website via the Azure Web App template us
 
     ![In Solution Explorer, the right-click menu for Contoso.Apps.SportsLeague.Admin displays, and Publish is selected.](media/2019-04-19-14-30-03.png "Right-Click menu")
 
-12. On the Publish dialog, select **Start**.
+12. On the Publish dialog, select **Azure** for the **Target**, then select **Next**.
 
-13. On the **Pick a publish target** dialog, select **App Service Linux** and in the right pane, choose **Select Existing**, then select **Create Profile**.
+13. For **Specific target**, select **Azure App Service (Linux)**, then select **Next**. 
 
-    ![The Pick a publish target window is shown with App Service Linux highlighted and Select Existing chosen. The Create Profile button is highlighted.](media/pickpublishtarget_linuxappservice.png)
-   
-14. Select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
+14. For **App Service**, expand the lab Resource group, and select the **Web App** that was created for the Call Center Admin Web App (with the name that was created previously).
 
-    ![The App Service dialog is shown with the resource group expanded and the call center app service selected.](media/appsvcdeploy_selectcallcenterappdialog.png)
+    ![The App Service dialog is shown with the resource group expanded and the call center app service selected.](media/appsvcdeploy_selectcallcenterappdialog.png "Publish target app service selection")
     
-15. Select **OK**.
+15. Select **Finish**.
 
 16. Select **Publish** to publish the Web application.
 
@@ -782,48 +782,48 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 2. Select **+ Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
 
-3. On the new **API App** blade, create the following values:
+3. On the new **API App** create form, create the following values:
 
    - **App name:** Specify a unique name for the App Name.
    - **Subscription:** Your Azure subscription.
-   - **Resource Group:** Select **Use existing** option, and choose the lab resource group.
-   - **App Service Plan/Location** Select the **ContosoSportsPlan**.
-   - **Application Insights:** **Disabled**
+   - **Resource Group:** Select the lab resource group.
+   - **App Service Plan/Location:** Select the **ContosoSportsPlan**.
+   - **Application Insights:** Enter the configuration, and select **Disabled**
 
-    ![On the API App blade. Configuration fields are displayed.](media/2019-04-20-14-55-42.png "Configuration fields are displayed")
+    ![On the API App create form, the Configuration fields are displayed.](media/2019-04-20-14-55-42.png "Configuration fields are displayed")
 
 4. After the values are accepted, select **Create**.  It will take a few minutes to provision.
 
 <!-- omit in toc -->
 #### Subtask 2: Deploy the Contoso.Apps.PaymentGateway project in Visual Studio
 
-1. Navigate to the **Contoso.Apps.PaymentGateway** project located in the **APIs** folder using the **Solution Explorer** in Visual Studio.
+1. In Visual Studio, navigate to the **Contoso.Apps.PaymentGateway** project located in the **APIs** folder using the **Solution Explorer**.
 
 2. Right-click the **Contoso.Apps.PaymentGateway** project, and select **Publish**.
 
     ![In Solution Explorer, Contoso.Apps.PaymentGateway is selected, and in its right-click menu, Publish is selected.](media/2019-04-19-14-52-22.png "Solution Explorer")
 
-3. On the Publish dialog, select **Start** in the **Publish** section.
+3. On the Publish dialog, select **Azure** as the **Target**, then select **Next**.
 
-4. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
+4. For **Specific target**, select **Azure App Service (Windows)**, then select **Next**.
 
-    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
+5. For **App Service**, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **Next**.
 
-5. In the App Service dialog, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **OK**.
+    ![The App Service form is shown with the payment gateway api selected.](media/deployment_selectpaymentapiappservice.png "Publish target App Service selection")
 
-    ![The App Service dialog is shown with the payment gateway api selected.](media/deployment_selectpaymentapiappservice.png)
-
-6. Select **Publish** to publish the API App.
+6. In the **API Management** form, check the **Skip this step** checkbox. Select **Finish**.
+   
+7. Select **Publish** to publish the API App.
 
     ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
 
-7. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
+8. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
     ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
 
-8. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
+9.  Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
 
-9. Viewing the Web App in a browser will display the Swagger UI for the API.
+10. Viewing the Web App in a browser will display the Swagger UI for the API.
 
    ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-04-58-04.png "Swagger UI")
 
@@ -840,13 +840,13 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 2. Select **+ Create a resource**, type **API App** into the marketplace search box, and press **Enter**.  Select the **Create** button.
 
-3. On the new **API App** blade, specify a unique name for the **API App**, and ensure the previously used Resource Group and the **ContosoSportsPlan** App Service Plan are selected. You may also disable **Application Insights**.
+3. On the new **API App** form, specify a unique name for the **API App**, and ensure the previously used Resource Group and the **ContosoSportsPlan** App Service Plan are selected. You may also disable **Application Insights**.
 
-    ![In the API App blade, offersapith is typed in the App name field. App configuration fields displayed.](media/2019-04-11-05-03-33.png "API App blade")
+    ![In the API App form, a unique name is typed in the App name field. App configuration fields displayed.](media/2019-04-11-05-03-33.png "API App blade")
 
-4. After the values are accepted, select the **Create** button.
+4. Select the **Create** button.
 
-5. When the Web App template has completed provisioning, return to the resource group, then select the new API App from the list of resources.
+5. When the API App has completed provisioning, return to the resource group, then select the new API App from the list of resources.
 
 <!-- omit in toc -->
 #### Subtask 2: Configure Cross-Origin Resource Sharing (CORS)
@@ -878,9 +878,9 @@ In this exercise, the attendee will provision an Azure API app template using th
 
    - Type: Select **Custom**.
 
-    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png)
+    ![The Add/Edit connection string form is displayed and is populated with the preceding values.](media/image43.png "The Add/Edit connection string form")
 
-4. Select the **Ok** button.
+4. Select the **OK** button.
 
 5. Select the **Save** button.
 
@@ -890,7 +890,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 7. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
 
-    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png "The Identity screen")
 
 8. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
@@ -902,7 +902,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 12. Select **Add**.
 
-    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png "The Add access policy form")
 
 13. Select **Save** on the Access policies screen to commit the changes.
 
@@ -919,7 +919,7 @@ In this exercise, the attendee will provision an Azure API app template using th
     <UserSecretsId>79a3edd0-2092-40a2-a04d-dcb46d5ca9ed</UserSecretsId>
     ```
 
-    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png)
+    ![A portion of the project file is displayed. The UserSecretsId element is highlighted in the code listing.](media/web_addusersecretsidtoproject.png "Editor showing the project file")
 
 4. Right-click the **Contoso.Apps.SportsLeague.Offers** project, and select **Manage NuGet Packages**.
 
@@ -927,7 +927,7 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 6. Select **Microsoft.Azure.AppConfiguration.AspNetCore** from the search results, and in the next pane, select **Install** to install the latest stable version.
 
-    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png)
+    ![The Nuget Package Manager windows is displayed with the Browse tab selected, Microsoft.Azure.AppConfiguration.AspNetCore entered into the search box and selected from the search results. In the next pane, the Install button is selected.](media/nuget_installappconfigpackage_web.png "The NuGet Package Manager")
 
 7. Repeat step 4-6, this time installing the latest **Azure.Identity**.
 
@@ -963,39 +963,39 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     ![In Solution Explorer, from the Contoso.Apps.SportsLeague.Admin right-click menu, Publish is selected.](media/2019-04-19-15-03-45.png "Solution Explorer")
 
-12. On the Publish dialog, select **Start** in the **Publish** section.
+12. On the Publish dialog, select **Azure** for the **Target**. Select **Next**.
 
-13. On the **Pick a publish target** dialog, ensure **App Service** is selected, and in the right pane, ensure the **Select Existing** option is selected, then choose **Create Profile**.
+13. For **Specific target**, select **Azure App Service (Windows)**. Select **Next**.
 
-    ![The Pick a publish target dialog is displayed with App Service and Select existing selected.](media/pickpublishtargetappserviceexisting.png)
+14. For **App Service**, expand the resource group, and select the API app service that you created for the Offer API from the list, then choose **Next**.
 
-14. In the App Service dialog, expand the resource group, and select the API app service that you created for the payment gateway from the list, then choose **OK**.
+    ![The App Service dialog is shown with the offers api selected.](media/deployment_selectoffersapiservice.png "Publish target app service selection")
+    
+15. For **API Management**, check the **Skip this step** checkbox and select **Finish**.
+    
+16. Select **Publish** to publish the API App.
 
-    ![The App Service dialog is shown with the offers api selected.](media/deployment_selectoffersapiservice.png)
+    ![Publish button is highlighted](media/offerapi_vspublishbutton.png "Publish button is highlighted")
 
-15. Select **Publish** to publish the API App.
+17. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
 
-    ![Publish button is highlighted](media/2020-06-19-22-33-57.png "Publish button is highlighted")
+    ![The Visual Studio output shows that the web app was published successfully.](media/offerapi_publishsuccessoutput.png "Visual Studio output")
 
-16. In the Visual Studio **Output** view, you will see a status indicating the Web App was published successfully.
+18. Copy and paste the offer api **URL** of the deployed **API App** into Notepad for later use.
 
-    ![The Visual Studio output shows that the web app was published successfully.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image99.png "Visual Studio output")
+19. Viewing the Web App in a browser will display the Swagger UI for the API.
 
-17. Copy and paste the gateway **URL** of the deployed **API App** into Notepad for later use.
+20. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
 
-18. Viewing the Web App in a browser will display the Swagger UI for the API.
+21. Record the value of the deployed API app URL into Notepad for later use.
 
-19. In the Visual Studio **Output** view, you will see a status the API app was published successfully.
+22. Viewing the Web App in a browser will display the Swagger UI for the API.
 
-20. Record the value of the deployed API app URL into Notepad for later use.
-
-21. Viewing the Web App in a browser will display the Swagger UI for the API.
-
-    ![Payment Gateway is up and running and the Swagger UI is displayed.](media/2019-04-11-05-20-40.png "Swagger UI")
+    ![The Offers API is up and running and the Swagger UI is displayed.](media/2019-04-11-05-20-40.png "Swagger UI")
 
     > **Note**: When opening the Swagger UI using the Internet Explorer browser you will see a "Resolver error" error message. This is a result of the Swagger UI no longer supporting Internet Explorer. In another browser, the Swagger UI will work as expected.
 
-22. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
+23. Within the Swagger UI for the Offers API, select the `/api/get` method on the API. Then select the **Try it out** button, and then **Execute** to test out the API call from within the Swagger UI in the web browser. Once it executes, scroll down to view the results of the API call execution.
 
     ![Swagger UI displaying API call response.](media/2020-03-17-20-56-31.png "Swagger UI")
 
@@ -1008,13 +1008,13 @@ In this exercise, the attendee will provision an Azure API app template using th
 
 2. Select the **contosoconfig** App Configuration resource from the list.
 
-    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png)
+    ![The resource listing is displayed with the App Configuration resource highlighted.](media/appconfig_resourcelist_selection.png "The resource listing")
 
 3. On the left menu, in the **Operations** section, select **Configuration explorer**.
 
 4. Expand the **+ Create** button, and select **Key-value**. This API endpoint does not contain any secret values, thus is not required to be stored as a Key Vault value.
 
-    ![The + Create button is expanded with the Key-value item selected.](media/appconfig_createkeyvaluemenu.png)
+    ![The + Create button is expanded with the Key-value item selected.](media/appconfig_createkeyvaluemenu.png "Create key value menu item")
 
 5. Create the new key-value entry with the following values:
 
@@ -1034,12 +1034,12 @@ In this exercise, the attendee will provision an Azure API app template using th
 
     >**Note**: Ensure both API URLs are using **SSL** (https://), or you will see a CORS errors.
 
-    ![The list of Configuration settings is shown with the two new API endpoint settings highlighted.](media/appconfig_listofsettingswithAPIendpointshighlighted.png)
+    ![The list of Configuration settings is shown with the two new API endpoint settings highlighted.](media/appconfig_listofsettingswithAPIendpointshighlighted.png "Configuration Settings")
 
 <!-- omit in toc -->
 #### Subtask 2: Validate App Settings are correct
 
-1. On the **App Service** blade, select **Overview**.
+1. Return to the lab Resource Group and select the **contosoapp** App Service (the e-commerce website). On the **App Service** blade, select **Overview**.
 
     ![Overview is selected on the left side of the App Service blade.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image119.png "App Service blade")
 
@@ -1050,6 +1050,8 @@ In this exercise, the attendee will provision an Azure API app template using th
 3. On the homepage, you should see the latest offers populated from the Offers API.
 
     ![On the Contoso Sports League webpage, Today\'s offers display: Baseball socks, Road bike, and baseball mitt.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image121.png "Contoso Sports League webpage")
+
+    >**Note**: The page may be cached, if Today's Offers are not displayed, you can try re-publishing the e-commerce app service from Visual Studio (Contoso.Apps.SportsLeague.Web).
 
 4. Submit several test orders to ensure all pieces of the site are functional.  **Accept the default data during the payment processing.**
 
@@ -1069,7 +1071,7 @@ The Contoso call center admin application will only be accessible by users of th
 
 1. Navigate to the Azure Management portal, [http://portal.azure.com](http://portal.azure.com/), using a new tab or instance.
 
-2. In the left-hand navigation menu, select **Azure Active Directory**.
+2. Expand the left-hand navigation menu, select **Azure Active Directory**.
 
     ![The Azure Active Directory menu option.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image123.png "Azure Portal")
 
@@ -1159,7 +1161,7 @@ The Contoso call center admin application will only be accessible by users of th
 
     ![At the bottom of the Azure Active Directory Settings blade, Management mode is set to Express.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image140.png "Azure Active Directory Settings blade")
 
-7. Select **OK**.
+7. Keep the remaining fields as their default, and select **OK**.
 
     ![Screenshot of the OK button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image141.png "OK button")
 
@@ -1773,7 +1775,7 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ![From the Configure menu, Getting started is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image196.png "Configure menu")
 
-5. In the portal, navigate to **How-to Guides** -> **Application Insights** -> **Code-based monitoring** -> **Web pages** -> **Client-side JavaScript**, then navigate to the **Snippet based setup** section under **Adding the JavaScript SDK** within the documentation page.
+5. In the portal, navigate to **How-to Guides** -> **Application Insights** -> **Code-based monitoring** -> **JavaScript** -> **Client-side JavaScript**, then navigate to the **Snippet based setup** section under **Adding the JavaScript SDK** within the documentation page.
 
     ![Screenshot of the Monitor and Diagnose Client Side Application arrow.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image197.png "Monitor and Diagnose Client Side Application")
 
@@ -1787,16 +1789,16 @@ To configure the application for logging and diagnostics, you have been asked to
 
     ```javascript
     <script type="text/javascript">
-    !function(T,l,y){var S=T.location,u="script",k="instrumentationKey",D="ingestionendpoint",C="disableExceptionTracking",E="ai.device.",I="toLowerCase",b="crossOrigin",w="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"4",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[I](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,p,l,u;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][I]()]=i[1])}if(!e[D]){var r=e.endpointsuffix,o=r?e.location:null;e[D]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[k]||d[k]||"",p=s[D],l=p?p+"/v2/track":config.endpointUrl,(u=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=l,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),u.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,l)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:w,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(w,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(u,l))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(u);n.src=h;var e=y[b];return!e&&""!==e||"undefined"==n[b]||(n[b]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(u)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[C]&&!0!==s[C]){method="onerror",t(["_"+method]);var c=T[method];T[method]=function(e,t,n,a,i){var r=c&&c(e,t,n,a,i);return!0!==r&&m["_"+method]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);(T[t]=n).queue&&0===n.queue.length&&n.trackPageView({})}(window,document,{
-    src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
-    //name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
-    //ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
-    //useXhr: 1, // Use XHR instead of fetch to report failures (if available),
-    //crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
-    cfg: { // Application Insights Configuration
-        instrumentationKey: "YOUR_INSTRUMENTATION_KEY_GOES_HERE"
-        /* ...Other Configuration Options... */
-    }});
+        !function(T,l,y){var S=T.location,u="script",k="instrumentationKey",D="ingestionendpoint",C="disableExceptionTracking",E="ai.device.",I="toLowerCase",b="crossOrigin",w="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"4",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[I](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,p,l,u;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][I]()]=i[1])}if(!e[D]){var r=e.endpointsuffix,o=r?e.location:null;e[D]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[k]||d[k]||"",p=s[D],l=p?p+"/v2/track":config.endpointUrl,(u=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=l,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),u.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,l)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:w,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(w,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(u,l))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(u);n.src=h;var e=y[b];return!e&&""!==e||"undefined"==n[b]||(n[b]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(u)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[C]&&!0!==s[C]){method="onerror",t(["_"+method]);var c=T[method];T[method]=function(e,t,n,a,i){var r=c&&c(e,t,n,a,i);return!0!==r&&m["_"+method]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);(T[t]=n).queue&&0===n.queue.length&&n.trackPageView({})}(window,document,{
+        src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
+        //name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
+        //ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
+        //useXhr: 1, // Use XHR instead of fetch to report failures (if available),
+        //crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
+        cfg: { // Application Insights Configuration
+            instrumentationKey: "YOUR_INSTRUMENTATION_KEY_GOES_HERE"
+            /* ...Other Configuration Options... */
+        }});
     </script>
     ```
 
@@ -1879,7 +1881,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
    
 2. Select the **+ Create a resource** tile, then select **Compute \> Function App**. Select **Create** button at the bottom.
 
-    ![The New resource screen is shown with Compute and Function app selected.](media/newcomputefunctionapp.png)
+    ![The New resource screen is shown with Compute and Function app selected.](media/newcomputefunctionapp.png "Create function app in the Portal")
    
 3. Provision and deploy the new function app, with the following settings:
 
@@ -1929,7 +1931,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 12. With the **System assigned** tab selected, toggle the **Status** field to **On**, then select **Save**. 
     
-    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png)
+    ![On the Identity screen, the System assigned tab is selected and the Status field is in the On position.](media/appconfig_systemidentity.png "Identity screen")
 
 13. Open the **contosokv** Key Vault resource, and from the left menu, select **Access policies**. 
 
@@ -1941,7 +1943,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 17. Select **Add**.
     
-    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png)
+    ![The Add access policy form is displayed.](media/kv_addaccesspolicy_forconfig.png "The Add Access Policy Form")
 
 18. Select **Save** on the Access policies screen to commit the changes. 
 
@@ -1987,15 +1989,13 @@ Contoso wants to automate the process of generating receipts in PDF format and a
     ```
 8. To publish the Function App, open the Visual Studio solution, Right-click on the **Contoso.Apps.FunctionApp** project, then select **Publish**.
 
-9.  On the **Publish** dialog, select **Start**.
+9.  For **Target**, choose **Azure** and then select **Next**.
    
-10. On the **Pick a publish target** dialog, choose the target of **Azure App Service Plan**, then select **Select Existing**. Select **Create Profile**.
+10. For **Specific target**, choose **Azure Function App (Windows)**, then select **Next**.
 
-    ![The Pick a publish target dialog is shown with Azure App Service Plan and Select existing chosen. The Create Profile button is highlighted.](media/functiondeployment_createprofile.png)
+11. For **Functions instance**, expand the lab resource group and select the **Function App**, then select **Finish**.
 
-11. Expand the lab resource group and elect the **Function App**, then select **OK**.
-
-    ![The App Service dialog is shown with the resource group expanded and the Function App selected.](media/deployment_appservice_functionselection.png)
+    ![The App Service dialog is shown with the resource group expanded and the Function App selected.](media/deployment_appservice_functionselection.png "Publish target app service selection")
    
 12. Select **Publish**.
 
@@ -2013,7 +2013,7 @@ Contoso wants to automate the process of generating receipts in PDF format and a
 
 15. Select **POST** for the HTTP method.
 
-16. Open the **sample.dat** file found in your lab files Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
+16. Open the **sample.dat** file found in your lab files C:\MCW\Contoso Sports League\Contoso.CreatePDFReport directory.  Copy the contents into the **Request body** text box.
 
     ![A small screenshot of Windows Explorer is shown emphasizing the file path to the sample.dat file.](media/2019-04-15-15-47-39.png "Sample.dat File")
 
@@ -2065,91 +2065,85 @@ The advantages of using Logic Apps include the following:
 - Build off BizTalk server, API Management, Azure Functions, and Azure Service Bus with first-class integration support
 
 
-1. Next, we will create a Logic App that will trigger when an item is added to the **receiptgenerator** queue. In the Azure Management Portal, select the **+Create a resource** button, search for **Logic App**, select the returned Logic App result, and select **Create**.
+1. Next, we will create a Logic App that will trigger when an item is added to the **receiptgenerator** queue. In the Azure Management Portal, select the **+ Create a resource** button, search for and select **Logic App**, then select **Create**.
 
-    ![In the Azure Portal, under Marketplace, Everything is selected. Under Everything, Logic App is in the search field. Under Name, Logic App is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image236.png "Azure Portal")
-
-2. Fill out the name as **ContosoLogicApplication** along with your subscription, and use the existing resource group **contososports**. Choose the **same region** as your Web App and storage account. Select **Create**.
+2. Fill out the name as **ContosoLogicApplication** along with your subscription, and use the existing resource group **contososports**. Choose the **same region** that you have been using for this lab. Select **Review + create**, then **Create** once validation has passed.
 
     ![In the Create logic app blade, ContosoLogicApplication is in the Name field. Under Resource group, the Use existing radio button is selected, and contososports is the name.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image237.png "Create logic app blade")
 
-3. Open the logic app after it is deployed by choosing **All Services**, searching for and selecting **Logic App** and selecting the Logic App you just created.
+3. Open the newly created **ContosoLogicApplication** logic app resource after it is deployed.
 
-    ![In the Azure Portal, logic is in the search field, and under that, Logic apps is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image238.png "Azure Portal")
-
-4. Select the **Logic App Designer** link.
-
-    ![In the Logic app blade, under Development tools, Logic App Designer is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image239.png "Logic app blade")
-
-5. In the Logic Apps Designer, under **Templates**, select **Blank Logic App**.
+4. In the Logic Apps Designer, under **Templates**, select **Blank Logic App**.
 
     ![In the Logic Apps Designer, the Blank Logic App tile is selected.](media/2019-03-29-12-56-10.png "Logic Apps Designer")
 
-6. Select the **All** tab, then select **Service Bus**.
+    >**Note**: The first time you access the Logic App resource, it will automatically enter the Logic App Designer. Otherwise, you can open the logic app designer by selecting the **Logic app designer** link from the left menu of the resource screen (beneath **Development Tools**).
+
+5. Select the **All** tab, then select **Service Bus**.
 
     ![In the Services section, the Service Bus tile is selected.](media/2020-03-18-12-12-10.png "Services section")
 
-7. Select **Service Bus - When a message is received in a queue (auto-complete)**.
+6. Select **Service Bus - When a message is received in a queue (auto-complete)**.
 
     ![In the Search all triggers section, Service Bus - When a message is received in a queue (auto-complete).](media/2020-03-18-12-13-24.png "Search all triggers section")
 
-8. Specify **ContosoQueue** as the connection name, select the Contoso storage account from the list, and select **Create**.
+7. Specify **ContosoQueue** as the connection name, select the Contoso storage account from the list.
 
     ![In When there are messages in a queue, the Connection Name is ContosoQueue, and under Service Bus Namespace, contosooiyxeonvhew7u is selected.](media/2020-03-18-12-15-23.png "When there are messages in a queue ")
 
-9. Select the **RootManageSharedAccessKey** from the list of Service Bus Policies, then select **Create**.
+8. Select the **RootManageSharedAccessKey** from the list of Service Bus Policies, then select **Create**.
 
     ![RootManageSharedAccessKey is selected.](media/2020-03-18-12-17-17.png "RootManageSharedAccessKey is selected")
 
-10. Select the **receiptgenerator** queue from the drop-down, select **New Step**, and **Add an Action**.
+9.  Select the **receiptgenerator** queue from the drop-down.
 
     ![Under When there are messages in a queue, the Queue name is set to receiptgenerator.](media/2020-03-18-12-19-06.png "Queue name")
 
     >**Note**: If you wish, you can set the **Interval** and **Frequency** to check for new items to a shorter interval than the default; such as every 30 seconds. This could help reduce delay for when the Logic App is triggered when new messages are sent to the Service Bus Queue while you progress through this lab.
 
-11. Select the **+ New step** button, then select **Azure Functions**.
+10. Select the **+ New step** button, choose the **All** tab, then select **Azure Functions**.
 
     ![In the Choose an action section, under Services ,the Azure Functions tile is selected.](media/2020-03-18-12-21-44.png "Choose an action")
 
-12. Select the **Azure Function App** you just created.
+11. Select the **Azure Function App** you just created.
 
     ![Under Azure Functions, on the Actions tab, a single Action, the Azure function ContosoFunctionApp, is listed.](media/2020-03-18-12-22-46.png "Azure Functions")
 
-13. Select the Azure function **ContosoMakePDF**.
+12. Select the Azure function **ContosoMakePDF**.
 
     ![Under Azure Functions, on the Actions tab, a single Action, the Azure function ContosoMakePDF, is listed.](media/2020-03-18-12-23-39.png "Azure Functions")
 
-14. Type this in the Request Body:
+13. Type this in the Request Body:
 
     ```json
-    {"Order": pick Content from list }
+    {"Order": pick Content from list (see picture below) }
     ```
 
     Make sure the syntax is json format. Sometimes the ":" will go to the right side of Content by mistake. Keep it on the left. It should look like this:
 
     ![Under ContosoMakePDF, the previous JSON code is typed in the Request Body, and to the right of this, in Insert parameters from previous steps, Content is selected.](media/2020-03-18-12-25-29.png "ContosoMakePDF")
 
-15. Select **Save** to save the Logic App.
+14. Select **Save** to save the Logic App.
 
-16. Run the logic app. It should process the orders you have submitted previously to test PDF generation. Using Azure Storage Explorer or Visual Studio Cloud Explorer you can navigate to the storage account and open the receipts container to see the created PDFs.
+15. Run the logic app by selecting the **Run** button of the Logic app designer toolbar. It should process the orders you have submitted previously to test PDF generation. Using Azure Storage Explorer or Visual Studio Cloud Explorer you can navigate to the storage account and open the receipts container to see the created PDFs.
 
     ![In Azure Storage Explorer, on the left, the following tree view is expanded: Storage Accounts\\contososportsstorage01r\\Blob Containers. Under Blob Containers, receipts is selected. On the right, the ContosoSportsLeague-Store-Receipt-72.pdf is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image252.png "Azure Storage Explorer")
 
-17. Double-click the PDF document to download and see the Purchase receipt.
+16. Double-click the PDF document to download and see the Purchase receipt.
 
-18. Now, select the **Designer** button in the Logic Apps Designer screen. add two more steps to the flow for updating the database and removing the message from the queue after it has been processed. Switch back to the designer, select **+ New step**.
+17. Open the **ContosoLogicApplication** Logic Apps Designer. We will be adding another to the flow for updating the database. In the designer, select **+ New step**.
 
     ![In Designer, the New Step link is circled. Under New step, the Add an action tile is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image254.png "Designer")
 
-19. Select **SQL Server**.
+18. Select the **All** tab, then choose **SQL Server**.
 
     ![In the Services section, under Services, SQL Server is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image255.png "Services section")
 
-20. Select **SQL Server - Update row (V2)**.
+19. Select **Update row (V2)**.
 
     ![In the SQL Server section, on the Actions tab, SQL Server - Update row (V2) is selected.](media/2020-03-18-12-35-07.png "SQL Server section")
 
-21. Enter the following values, then select **Create**:
+20. Enter the following values, then select **Create**:
 
     - Authentication Type: **SQL Server Authentication**
 
@@ -2163,13 +2157,13 @@ The advantages of using Logic Apps include the following:
 
     ![The Update row section displays the previously defined settings.](media/2020-03-18-12-37-03.png "Update row")
 
-22. Select the **Server name** and **Database name** previously specified, then from the drop-down select the name of the **Orders** table, and enter `OrderId` into the **Row id** field.
+21. Select the **Server name** and **Database name** previously specified, then from the drop-down select the name of the **Orders** table, and enter `OrderId` into the **Row id** field.
 
     ![In the Update row section, under Table name, Orders is selected.](media/2020-03-18-12-41-11.png "Update row section")
 
-23. Press **Save**, then select the **Code View** button.
+22. Press **Save**, then select the **Code View** button.
 
-24. Add the following JSON within the `Update_row_(V2).inputs` object:
+23. Add the following JSON within the `Update_row_(V2).inputs` object:
 
     ```json
     "body": {
@@ -2196,43 +2190,31 @@ The advantages of using Logic Apps include the following:
 
     ![JSON edits have been made.](media/2020-03-18-18-21-47.png "JSON edits have been made")
 
-25. And modify the `path` variable for the `Update_row_(V2)` action to include the index key or OrderId as follows:
+24. And modify the `path` variable for the `Update_row_(V2)` action to include the index key or OrderId as follows:
 
     ```json
     "path": "/v2/datasets/@{encodeURIComponent(encodeURIComponent('default'))},@{encodeURIComponent(encodeURIComponent('default'))}/tables/@{encodeURIComponent(encodeURIComponent('[dbo].[Orders]'))}/items/@{encodeURIComponent(encodeURIComponent(body('ContosoMakePDF')['OrderId']))}"
     ```
 
-26. **Save** and return to the designer.
+25. **Save** and return to the designer.
 
-27. Your updated designer view should look like this:
+26. Your updated designer view should look like this:
 
     ![The Update row section displays the purchase fields.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image261.png "Update row section")
 
-28. Finally, let us add one more step to remove the message from the queue. Press **+New Step**. Select **Service Bus**, then select the **Complete the message in a queue** action.
+27. Select Run on the Logic App Designer, and then run the Contoso sports Web App and check out an Item.
 
-    ![In the Choose an action section, under Service Bus, the Complete the message in a queue is selected.](media/2020-03-18-12-51-40.png "Choose an action section")
-
-29. Select the **receiptgenerator** queue from the list.
-
-30. Select **Lock token of the message** **\>** **Lock Token** from the list of outputs form the Trigger, and select **Save**.
-
-    ![Lock token of the message field is set to the Lock Token of the Service Bus Trigger.](media/2020-03-18-12-54-28.png "Lock token is highlighted")
-
-31. Select **Save**.
-
-32. Select Run on the Logic App Designer, and then run the Contoso sports Web App and check out an Item.
-
-33. Run the call center website app, and select the last Details link in the list.
+28. Run the call center website app, and select the last Details link in the list.
 
     ![Screenshot of the Details link.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image264.png "Details link")
 
-34. You should now see a Download receipt link because the database has been updated.
+29. You should now see a Download receipt link because the database has been updated.
 
     ![In the Order Details window, the Download receipt link is circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image265.png "Order Details window")
 
-35. Select the Download receipt link to see the receipt.
+30. Select the Download receipt link to see the receipt.
 
-36. Return to the Logic app and you should see all green check marks for each step. If not, select the yellow status icon to find out details.
+31. Return to the Logic app and you should see all green check marks for each step. If not, select the yellow status icon to find out details.
 
     ![In the Logic app, all steps have green checkmarks.](media/2020-03-18-19-05-39.png "Logic app")
 
@@ -2247,27 +2229,15 @@ The advantages of using Logic Apps include the following:
 
    ![Screenshot of the Twilio account Sign up for free webpage.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image268.png "Twilio account Sign up webpage")
 
-2. Select **All Products & Services**.
+2. On the home dashboard, select **Get a Trial Number**.
+   
+   ![The Twilio dashboard is shown with the Get a Trial Number button highlighted.](media/twilio_gettrialnumberbutton.png "The Twilio Dashboard")
 
-    ![In the Console, under Home, the All Products and Services (ellipses) button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image270.png "Console")
-
-3. Select **Phone Numbers**.
-
-    ![On the Console, under Numbers, Phone Numbers is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image271.png "Console")
-
-4. Select **Get Started**.
-
-    ![On the Console, under Phone Numbers, the Get Started button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image272.png "Console")
-
-5. Select the **Get your first Twilio phone number** button.
-
-    ![On the Get Started with Phone Numbers prompt, the Get your first Twilio phone number button displays.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image273.png "Get Started with Phone Numbers prompt")
-
-6. Record the **Phone Number**, select the **Choose this Number** button on the **Your first Twilio Phone Number** prompt, and select **Done**.
+3. Record the **Phone Number**, select the **Choose this Number** button on the **Your first Twilio Phone Number** prompt, and select **Done**.
 
     ![On the Your first Twilio Phone Number prompt, the number is obscured.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image274.png "Your first Twilio Phone Number prompt")
 
-7. Select **Home**, then **Settings**. Authenticate if needed and then record the **Account SID** and **Auth Token** for use when configuring the Twilio Connector.
+4. Select **Home**, then **Settings**. Authenticate if needed and then record the **Account SID** and **Auth Token** for use when configuring the Twilio Connector.
 
     ![On the Console, on the left, the Home button and the Settings menu tab are selected. On the right, under API Credentials, Account SID and Auth Token are circled.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image275.png "Console")
 
@@ -2319,21 +2289,19 @@ The advantages of using Logic Apps include the following:
 
     ![Screenshot of the Execute button.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image278.png "Execute button")
 
-7. In the Azure Management Portal, select the **+Create a resource** button, then **Web**, and, finally **Logic App**.
+7. In the Azure Management Portal, select the **+ Create a resource** button, then search for and select **Logic App**. Then select **Create** on the overview screen.
 
-    ![In the Azure Portal, on the left side, the Create a resource menu option is selected. On the right, Web and Logic App are selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image279.png "Azure Portal")
+8. On the **Logic app** form, assign a value for **Name**, and set the Resource Group to **contososports**, then select **Review + create**. Once validation has passed, select **Create**.
 
-8. On the **Create logic app** blade, assign a value for **Name**, and set the Resource Group to **contososports**, then create the Logic App.
+    ![In the Create logic app form, the Name field is set to contososportssms. Under Resource group, contososports is selected.](media/2020-03-19-11-31-05.png "Create logic app form")
 
-    ![In the Create logic app blade, the Name field is set to contososportssms. Under Resource group, Use existing is selected, and contososports is selected.](media/2020-03-19-11-31-05.png "Create logic app blade")
+9. Once deployed, open the new Logic App you just created. 
 
-9. In the navigation menu to the left in the Portal, select **Resource Groups** then **contososports**, then the new Logic App you just created. 
-
-10. In the Logic App blade, under the **DEVELOPMENT TOOLS** menu area, select **Logic App Designer**. Then, select the **Blank Logic App** Template.
+10. In the Logic Apps Designer, select the **Blank Logic App** Template.
 
     ![In the Logic Apps Designer, the Blank Logic App tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image282.png "Logic Apps Designer")
 
-11. On the **Logic Apps Designer**, select **Schedule**. Then, select **Schedule - Recurrence**.
+11. On the **Logic Apps Designer**, select the **All** tab, and choose **Schedule**. Then, select **Recurrence**.
 
     ![In the Logic Apps Designer, the Schedule tile is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image283.png "Logic Apps Designer")
 
@@ -2383,9 +2351,9 @@ The advantages of using Logic Apps include the following:
 
     ![The Add an action button is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image294.png "Add an action button")
 
-24. Type **Twilio** in the filter box, and select the **Twilio -- Send Text Message (SMS)** connector.
+24. Select the **All** tab, and search for **Twilio** in the filter box, and select the **Twilio -- Send Text Message (SMS)** item in the Actions box.
 
-    ![Under Show Microsoft managed APIs, the Search box is set to Twilio, and below, Twilio - Send Text Message (SMS) is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image295.png "Show Microsoft managed APIs")
+    ![In the Choose an operation tile, the Search box is set to Twilio, and below, Twilio - Send Text Message (SMS) is selected.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/image295.png "Choose an Operation Tile.")
 
 25. Set the Connection Name to Twilio, specify your Twilio **Account SID** and **Authentication Token**, then select the **Create** button.
 
@@ -2497,19 +2465,19 @@ The Contoso Sports League would like to move their existing source control to Gi
 
 2. In the upper-right corner, expand the user drop down menu and select **Your repositories**.
 
-    ![The user menu is expanded with the Your repositories item selected.](media/github_yourrepositoriesmenu.png)
+    ![The user menu is expanded with the Your repositories item selected.](media/github_yourrepositoriesmenu.png "GitHub user menu")
 
 3. Next to the search criteria, locate and select the **New** button.
 
-    ![The GitHub Find a repository search criteria is shown with the New button selected.](media/github_newbutton.png)
+    ![The GitHub Find a repository search criteria is shown with the New button selected.](media/github_newbutton.png "New repository button")
 
 4. On the **Create a new repository** screen, name the repository **ContosoSports** and select the **Create repository** button.
 
-    ![The Create a new repository screen is shown with the Repository name set to ContosoSports and the Create repository button is highlighted.](media/github_createrepositoryform.png)
+    ![The Create a new repository screen is shown with the Repository name set to ContosoSports and the Create repository button is highlighted.](media/github_createrepositoryform.png "Create a new repository form")
 
 5. On the **Quick setup** screen, copy the **HTTPS** GitHub URL for your new repository, paste this in notepad for future use.
 
-    ![The Quick setup screen is displayed with the copy button next to the GitHub URL textbox selected.](media/github_copygithuburl.png)
+    ![The Quick setup screen is displayed with the copy button next to the GitHub URL textbox selected.](media/github_copygithuburl.png "The quick setup screen")
 
 ### Task 2: Commit the existing lab files to source control
 
@@ -2541,7 +2509,7 @@ One method to deploy code using GitHub actions is to create a Service Principal 
 
 1. In the Azure portal, select the icon to open the Cloud Shell located on the top toolbar.
 
-    ![A portion of the Azure Portal top toolbar is displayed with the Cloud Shell menu item highlighted.](media/azureportal_cloudshellmenuitem.png)
+    ![A portion of the Azure Portal top toolbar is displayed with the Cloud Shell menu item highlighted.](media/azureportal_cloudshellmenuitem.png "The cloud shell taskbar item")
 
     > **Note**: You may be prompted to create a storage account to support cloud shell activities, this is required in order to utilize the cloud shell.
 
@@ -2555,7 +2523,7 @@ One method to deploy code using GitHub actions is to create a Service Principal 
 
 4. This will output a JSON data result, copy and paste this result and save it for a future step in this lab.
 
-    ![The output of the previous command is displayed with the JSON result highlighted.](media/azurecloudshell_serviceprincipaljson.png)
+    ![The output of the previous command is displayed with the JSON result highlighted.](media/azurecloudshell_serviceprincipaljson.png "JSON output in the cloud shell")
 
 ### Task 4: Create repository secrets
 
@@ -2570,7 +2538,7 @@ You have the ability to add secrets to the repository in GitHub. Secrets contain
 
 3. Select the **New secret** button.
 
-   ![The Settings tab of the ContosoSports repository is shown with the Secrets menu item and the New secret button highlighted.](media/github_newsecretbutton.png)
+   ![The Settings tab of the ContosoSports repository is shown with the Secrets menu item and the New secret button highlighted.](media/github_newsecretbutton.png "GitHub repository settings")
 
 4. In the New secret form, enter the name **AZURE_CREDENTIALS**, and for the value, paste in the JSON data obtained when creating the Service Principal in the previous task. Select **Add secret**.
 
@@ -2581,7 +2549,7 @@ You have the ability to add secrets to the repository in GitHub. Secrets contain
 
 2. From the top toolbar of the App Service screen, select **Get publish profile** item. This will download a file. Open this file in a text editor.
 
-    ![On the App service screen, the Get publish profile button is highlighted on the toolbar menu.](media/azureportal_appservice_getpublishprofile.png)
+    ![On the App service screen, the Get publish profile button is highlighted on the toolbar menu.](media/azureportal_appservice_getpublishprofile.png "Get Publish profile")
 
 3. Return to the ContosoSports repository GitHub Secrets screen, and add a new secret named **AZURE_WEBAPP_PUBLISH_PROFILE**, for the value, paste the contents of the publish profile from the previous step, then select the **Add secret** button.
 
@@ -2596,19 +2564,19 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
 | AZURE_API_OFFERS_PUBLISH_PROFILE | Contents of the publish profile for the Offers API |
 | AZURE_FUNCTIONAPP_PUBLISH_PROFILE | Contents of the publish profile for the Receipt Function Application |
 
-![The GitHub repository secrets screen is displayed with a table containing all the secrets added in this lab.](media/github_secretslisting.png)
+![The GitHub repository secrets screen is displayed with a table containing all the secrets added in this lab.](media/github_secretslisting.png "GitHub repository secrets")
 
 ### Task 5: Define the production deployment workflow
 
 1. In the web browser, return to the ContosoSports repository on GitHub, and select the **Actions** tab.
 
-    ![On the ContosoSports repository screen, the Actions tab is selected.](media/github_actionstab.png)
+    ![On the ContosoSports repository screen, the Actions tab is selected.](media/github_actionstab.png "Repository Actions")
 
 2. Beneath the **Get started with GitHub Actions** heading, select the **set up a workflow yourself** link.
 
 3. Above the editor, name the workflow **productiondeployment.yml**. Remove all code in the file editor.
 
-    ![The Actions workflow editor is displayed with an empty code listing with the name productiondeployment.yml highlighted.](media/github_actions_namedandempty.png)
+    ![The Actions workflow editor is displayed with an empty code listing with the name productiondeployment.yml highlighted.](media/github_actions_namedandempty.png "The Actions workflow editor")
 
 4. Copy and paste the following workflow to the text editor. The code is documented inline.
 
@@ -2800,17 +2768,17 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
 
 6. Enter a commit title and comment, and select **Commit new file**.
 
-    ![The Commit new file dialog is shown with the title and description populated.](media/github_commitworkflowform.png)
+    ![The Commit new file dialog is shown with the title and description populated.](media/github_commitworkflowform.png "Commit new file dialog")
 
 7. Committing this file is a push to the master branch. This means that the workflow that we just created is triggered. Select the **Actions** tab to view the currently running/historical record of workflow executions.
 
-    ![The workflow we just defined is triggered and is displayed on the Actions tab.](media/github_workflowsstatus.png)
+    ![The workflow we just defined is triggered and is displayed on the Actions tab.](media/github_workflowsstatus.png "GitHub repository Actions tab")
 
 8. You are able to drill into each workflow, and each job executed by the workflow. Furthermore, as you drill into the job, you are able to see the output of each step contained in the job by expanding the section in the console runner window.
 
-    ![The workflow is currently running, the workflow run displays the current status each job.](media/github_runningworkflowsteps.png)
+    ![The workflow is currently running, the workflow run displays the current status each job.](media/github_runningworkflowsteps.png "Running workflow")
 
-    ![A completed workflow job console is shown with one of the steps expanded so that the output of the step is displayed.](media/github_jobstepexpanded.png)
+    ![A completed workflow job console is shown with one of the steps expanded so that the output of the step is displayed.](media/github_jobstepexpanded.png "Completed workflow")
 
 ### Task 6: Trigger the Production Deployment Workflow
 
@@ -2828,7 +2796,7 @@ In this task, we will be making a modification to the e-commerce web application
 
 3. In Visual Studio, expand the e-commerce website project (Web/Contoso.Apps.SportsLeague.Web), and edit and save the **Views/Home/Index.cshtml** file.
 
-    ![The code listing for Views/Home/Index.cshtml is shown with some modified text highlighted.](media/visualstudio_edithomeindex.png)
+    ![The code listing for Views/Home/Index.cshtml is shown with some modified text highlighted.](media/visualstudio_edithomeindex.png "Visual Studio file editor")
 
 4. Return to the command window, and execute the following commands to commit the text change to the branch.
 
@@ -2841,13 +2809,13 @@ In this task, we will be making a modification to the e-commerce web application
 
 6. Above the file listing table, you should see a notification that **textchange had recent pushes**. Select the **Compare &amp; pull request** button.
 
-    ![The textchange had recent pushes notification is shown with the Compare and pull request button highlighted.](media/github_compareandpullrequest.png)
+    ![The textchange had recent pushes notification is shown with the Compare and pull request button highlighted.](media/github_compareandpullrequest.png "Recent push notification")
 
 7. On the **Open a pull request** form, feel free to write a comment, and select the **Create pull request** button.
 
 8. You should now see a message indicating that there are no conflicts with the base branch.
 
-    ![A message indicating there are no conflicts is shown.](media/github_pullrequest_noconflicts.png)
+    ![A message indicating there are no conflicts is shown.](media/github_pullrequest_noconflicts.png "No conflicts on the branch")
 
 9. Select the **Actions** tab of the repository to verify that the deployment workflow has not been triggered by the recent file commits on the textchange branch.
 
@@ -2857,11 +2825,11 @@ In this task, we will be making a modification to the e-commerce web application
 
 12. Return to the **Actions** tab, and you should see that the workflow has been triggered (merging pushes new code to the branch, thus the production workflow is triggered).
 
-    ![The workflows list is displayed with an in progress workflow that has been triggered by the merge of the pull request.](media/github_mergeworkflowtriggered.png)
+    ![The workflows list is displayed with an in progress workflow that has been triggered by the merge of the pull request.](media/github_mergeworkflowtriggered.png "Workflow in progress")
 
 13. Once the deployment workflow has completed. Navigate to the E-commerce web application and ensure the changes you made are visible.
 
-    ![A portion of the e-commerce website is shown with the textual change highlighted.](media/ecommerce_textchangevisible.png)
+    ![A portion of the e-commerce website is shown with the textual change highlighted.](media/ecommerce_textchangevisible.png "Screenshot demonstrating the text change")
 
 ## After the hands-on lab
 
