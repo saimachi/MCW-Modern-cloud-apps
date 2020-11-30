@@ -1276,7 +1276,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     - Name: **Contoso B2C Application**
 
-    - Supported account types: **Accounts in this organizational directory only**.
+    - Supported account types: **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**.
 
     - Redirect URI: Set to **Web**, then set the URL to the following format: `https://[your web url].azurewebsites.net/signin-oidc-b2c` _(This should be the HTTPS URL to the Contoso E-Commerce Site.)_
 
@@ -1290,13 +1290,13 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 ### Task 3: Create Policies, Sign up and sign in
 
-1. Navigate back to the **Azure AD B2C** blade that was opened in the last task.
+1. Navigate back to the **Azure AD B2C** screen.
 
 2. To enable sign-up on your application, you will need to create a sign-up policy. This policy describes the experiences consumers will go through during sign-up and the contents of tokens the application will receive on successful sign-ups. Select **User flows** link on the left menu and then **+New user flow** link at the top of the blade.
 
     ![On the Azure AD B2C screen, User Flows selected from the left menu and the +New user flow button is highlighted in the toolbar.](media/2020-06-20-23-39-59.png "Azure AD B2C - User Flows selected")
 
-3. Select the **Sign up and sign in** tile, then under Version, select **Recommended**.
+3. Select the **Sign up and sign in** tile, then under Version, select **Recommended**, then select the **Create** button.
   
     ![The Select a user flow type section is displayed with the Sign up and sign in tile highlighted.](media/2019-03-28-12-20-42.png "Sign up and sign in tile")
 
@@ -1308,19 +1308,25 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
     ![In the Add policy blade, Identity providers is selected. In the Select identity providers blade, Email signup is selected.](media/2019-03-28-12-25-35.png "Add policy and Select identity providers blades")
 
-6. In the **Multifactor authentication** section, ensure **Multifactor authentication** is set to **Disabled**.
+6. In the **Multifactor authentication** section, ensure **MFA enforcement** is set to **Conditional (Recommended)**, this will disable MFA for this exercise.
 
-7. In the **User attributes and claims** section, select the **Show more...** link.
+    ![The Multifactor authentication section of the form is displayed with MFA enforcement set to Conditional.](media/mfa_conditional.png "MFA enforcement form")
+
+7. In the **Conditional Access** section. Uncheck the **Enforce conditional access policies** checkbox.
+
+    ![The Conditional Access section of the form is displayed with the enforce conditional access policies checkbox unchecked.](media/uncheck_conditionalaccess.png "Conditional Access form")
+
+8. In the **User attributes and claims** section, select the **Show more...** link.
 
     ![In the Azure AD B2C - User flow policy - create user flow pane, the Show more link is highlighted after the default user attributes and claims.](media/2019-03-28-12-38-39.png "Show more link")
 
-8. Select the following **Collect attribute** checkboxes:
+9. In the **User attributes and token claims** section, select the following **Collect attribute** checkboxes:
 
     - **Country/Region**
     - **Display Name**
     - **Postal Code**
 
-9. Select the following **Return claim** checkboxes:
+10. Select the following **Return claim** checkboxes:
 
     - **Display Name**
     - **Identity Provider**
@@ -1328,31 +1334,31 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
     - **User is new**
     - **User's Object ID**
   
-10. Review your selections, then select **OK**.
+11. Review your selections, then select **OK**.
 
     ![The user attributes and claims section is displayed showing the appropriate checkbox selections described in the previous two steps.](media/2019-03-28-12-44-04.png "User attributes and claims listing")
 
-11. Select **Create**. Observe the policy just created appears as **B2C\_1\_SignUp** (the **B2C\_1\_** fragment is automatically added) in the **Sign-up policies** blade.
+12. Select **Create**. Observe the policy just created appears as **B2C\_1\_SignUp** (the **B2C\_1\_** fragment is automatically added) in the **Sign-up policies** blade.
 
     >**Note**: The page may take a few minutes to load/refresh after you start creating the policy.
 
     ![Azure AD B2C - User flows list.  Shows the newly created flow.](media/2019-03-28-12-46-48.png "Azure AD B2C User Flow List")
 
-12. Open the policy by selecting the link in the list e.g. **B2C\_1\_SignUp**.
+13. Open the policy by selecting the link in the list e.g. **B2C\_1\_SignUp**.
 
-13. Select **Run user flow** and open the dialog.
+14. Select **Run user flow** and open the dialog.
 
     ![In the Policies section, Sign-in policies is selected.](media/2019-03-28-12-52-27.png "Policies section")
 
-14. Select **Run user flow** - Choose application and run user flow. 
+15. Select **Run user flow** - Choose application and run user flow. 
 
     ![Choose application options are displayed. Contoso B2C Application option is selected. Run user flow button is displayed.](media/2019-03-28-12-55-51.png "Test the user flow")
 
-15. A browser tab/window will open that looks like the following screenshot.
+16. A browser tab/window will open that looks like the following screenshot.
 
     ![Test the user flow.  Sample sign in presented in the browser.](media/2019-03-28-13-00-01.png "Test the user flow")
 
-16. Select **Sign up now**.
+17. Select **Sign up now**.
 
     ![Sign up now fields are presented to the user.](media/2019-03-28-13-02-25.png "Sign up now")
 
@@ -1364,21 +1370,31 @@ To enable profile editing on your application, you will need to create a profile
 
 2. Select **+ New user flow** link at the top of the blade.
 
-3. Select the **All** tab link.
+3. For the **Select a user flow type**, select the **Profile editing** card.
 
-    ![The Create a user flow pane is displayed.  The ALL tab is selected. All user flows are displayed. The Profile editing has an arrow pointing at it.](media/2019-03-28-16-19-55.png "Select Profile Editing")
+    ![The Create a user flow screen is displayed with the Profile editing card selected.](media/2019-03-28-16-19-55.png "Select Profile Editing")
 
-4. Select **Profile editing**.
+4. For the **Version**, select **Recommended**, then select **Create**.
 
 5. The Name determines the profile editing policy name used by your application. For example, enter **EditProfile**.
 
     ![In the Add policy blade, Identity providers (1 Selected) is selected. Identities providers - select Local Account SignIn.](media/2019-03-28-16-24-26.png "select Local Account SignIn")
 
-6. Select Identity providers, and then "**Local Account SignIn**."
+6. In the **Identity providers** section, select **Email signin**.
 
-7. Select the **Show more...** link.
+   ![The Identity providers section of the form is displayed with Email signin selected.](media/profile_identityproviders.png "Identity providers")
 
-8. For the **Collect attribute** section, you choose attributes the consumer can view and edit.
+7. In the **Multifactor authentication** section, ensure the MFA enforcement is set to **Conditional (Recommended)**.
+
+   ![The Multifactor authentication section of the form is displayed with the MFA enforcement field set to Conditional.](media/profile_mfaauth.png "Multifactor authentication")
+
+8. For the **Conditional Access** section, uncheck the **Enforce conditional access policies** checkbox.
+
+   ![The Conditional Access section of the form is displayed with the Enforce conditional access policies checkbox unchecked.](media/profile_conditionalaccess.png "Conditional Access")
+
+9. In the **User attributes** section, select the **Show more...** link at the bottom of the checkbox lists.
+
+10. For the **Collect attribute** section, you choose attributes the consumer can view and edit.
 
     For now, select the following:
 
@@ -1389,7 +1405,7 @@ To enable profile editing on your application, you will need to create a profile
     - **State/Province**
     - **Street Address**
 
-9. For the **Return claims** section, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
+11. For the **Return claims** section, you choose claims you want returned in the tokens sent back to your application after a successful profile editing experience.
 
     For now, select the following:
 
@@ -1398,15 +1414,15 @@ To enable profile editing on your application, you will need to create a profile
 
     ![Sign up - User attributes selected blade.](media/2019-03-28-16-28-53.png "Sign up - User attributes selected blade")
 
-10. Select **OK**.
+12. Select **OK**.
 
-11. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_EditProfile**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
+13. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_EditProfile**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
 
-12. Open the policy by selecting **B2C\_1\_EditProfile**, then **Run user flow**.
+14. Open the policy by selecting **B2C\_1\_EditProfile**, then **Run user flow**.
 
-13. Select **Contoso B2C application** in the **Select Application** drop-down.
+15. Select **Contoso B2C application** in the **Select Application** drop-down.
 
-14. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
+16. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
 
 ### Task 5: Create a password reset policy
 
@@ -1416,36 +1432,38 @@ To enable profile editing on your application, you will need to create a profile
 
 2. Select **+ New user flow** link at the top of the blade.
 
-3. Select **Password reset**.
+3. From the **Select a user flow type**, select the **Password reset** card.
 
-    ![The Create a user flow pane is displayed.  The Recommended tab is selected. The Password reset is highlighted.](media/2020-03-19-09-47-15.png "Select Password reset")
+    ![The Create a user flow form is displayed with the Password reset card highlighted.](media/2020-03-19-09-47-15.png "Select Password reset")
 
-4. The Name determines the profile editing policy name used by your application. For example, enter **SSPR**.
+4. For **Version**, select **Recommended**. Select **Create**.
 
-    ![In the Add policy blade, Identity providers (1 Selected) is selected. Identities providers - select Reset password using email address.](media/2020-03-19-09-50-24.png "select Reset password using email address")
+5. The Name determines the profile editing policy name used by your application. For example, enter **SSPR**.
 
-5. Under Identity providers, check **Reset password using email address**.
+6. Under Identity providers, select **Reset password using email address**.
 
-6. Select the **Show more...** link.
+7. In the **Multifactor authentication** section, ensure **MFA enforcement** is set to **Conditional**.
 
-7. In the **Application claims** section in the **Return claim** column, choose attributes about the user that are returned to the application in the token.
+8. In the **Conditional Access** section, uncheck the **Enforce conditional access policies** checkbox.
+
+9. In the **Application claims** section, select the **Show more** link at the bottom of the checklist box.
+
+10. In the **Return claim** column, choose attributes about the user that are returned to the application in the token.
 
     For now, select the following:
 
     - **Email Addresses**
     - **Given Name**
 
-    ![The Application claims section is shown with email address and given name checked in the Return claim column.](media/2020-03-19-09-54-28.png "Application claims")
+11. Select **OK**.
 
-8. Select **OK**.
+12. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_SSPR**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
 
-9. Select **Create**. Observe the policy just created appears as \"**B2C\_1\_SSPR**\" (the **B2C\_1\_** fragment is automatically added) in the **Profile editing policies** blade.
+13. Open the policy by selecting **B2C\_1\_SSPR**, then **Run user flow**.
 
-10. Open the policy by selecting **B2C\_1\_SSPR**, then **Run user flow**.
+14. Select **Contoso B2C application** in the **Select Application** drop-down.
 
-11. Select **Contoso B2C application** in the **Select Application** drop-down.
-
-12. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
+15. Select **Run user flow**. A new browser tab opens, and you can run through the profile editing consumer experience in your application.
 
 ### Task 6: Modify the Contoso.App.SportsLeague.Web
 
