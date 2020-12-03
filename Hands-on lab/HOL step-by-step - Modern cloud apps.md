@@ -1258,7 +1258,7 @@ In this exercise, you will configure an Azure AD Business to Consumer (B2C) inst
 
 3. The new Azure AD Directory that was created will now be open in new browser tab. Keep this tab open for the next few steps.
 
-4. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and, then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
+4. Back in the browser tab where you created the Azure AD Directory from, open the new Azure AD B2C tenant by selecting **Resource Groups** in the navigation menu to the left and then, **contososports**. Then, in the new blade, select the **B2C tenant** you just created.
 
     ![In the contososports resource group, the new B2C tenant is highlighted.](images/Hands-onlabstep-by-step-Moderncloudappsimages/media/b2ctenant_in_rg.png "Azure AD B2C Settings window")
 
@@ -2780,7 +2780,7 @@ Repeat Subtask 2 for the remaining projects by obtaining the publish profiles fr
             publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
     ```
 
-    >**Note**: Due to the nature of some browsers, you may need to adjust the whitepace of the yml document after it has been pasted into GitHub.
+    >**Note**: Due to the nature of some browsers, you may need to adjust the whitespace of the yml document after it has been pasted into GitHub.
 
 5. Select the **Start commit** button to commit the workflow to the repository.
 
