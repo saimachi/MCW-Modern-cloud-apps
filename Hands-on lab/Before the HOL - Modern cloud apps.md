@@ -138,8 +138,8 @@ Before initiating the hands-on lab, you will setup an environment to use for the
     ![The Custom deployment form is shown populated with the values described above.](images/Setup/2019-06-24-17-20-12.png "The Custom deployment form")
 
     > **Note**: The deployment may fail if you have not registered the `Microsoft.AppConfiguration` resource provider for the subscription you are using. To fix this, just navigate to your subscription and locate **Settings --> Resource providers**. Then search for `Microsoft.AppConfiguration`, select the resource provider, and select **Register**.
-
-    ![](images/Setup/registering-appconfiguration-resource-provider.png)
+    >
+    > ![Demonstrating how to register the AppConfiguration resource provider.](images/Setup/registering-appconfiguration-resource-provider.png "Registering Microsoft.AppConfiguration within portal")
 
 10. The deployment will take 5 - 10 minutes to complete.
 
