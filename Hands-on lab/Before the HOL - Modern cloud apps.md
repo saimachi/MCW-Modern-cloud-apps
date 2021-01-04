@@ -47,7 +47,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - Local machine or Azure virtual machine configured with:
 
   - Visual Studio 2019 Community Edition or later
-  - Windows Server 2016
+  - Windows Server 2019
 
 ## Before the hands-on lab
 
@@ -81,7 +81,7 @@ Before initiating the hands-on lab, you will setup an environment to use for the
 
 3. On the **Edit parameters** pane, select the **Load file** button.
 
-4. Locate and open the `\Hands-on lab\Scripts\labvm\parameters.json` file within the extracted files.
+4. Locate and open the `\Hands-on lab\scripts\labvm\parameters.json` file within the extracted files.
 
 5. Select **Save**.
 
@@ -121,7 +121,7 @@ Before initiating the hands-on lab, you will setup an environment to use for the
 
 3. On the **Edit parameters** pane, select the **Load file** button.
 
-4. Locate and open the `\Hands-on lab\Scripts\environment\parameters.json` file within the extracted files.
+4. Locate and open the `\Hands-on lab\scripts\environment\parameters.json` file within the extracted files.
 
 5. Select **Save**.
 
@@ -136,6 +136,10 @@ Before initiating the hands-on lab, you will setup an environment to use for the
 9.  Select **Review + create**.
 
     ![The Custom deployment form is shown populated with the values described above.](images/Setup/2019-06-24-17-20-12.png "The Custom deployment form")
+
+    > **Note**: The deployment may fail if you have not registered the `Microsoft.AppConfiguration` resource provider for the subscription you are using. To fix this, just navigate to your subscription and locate **Settings --> Resource providers**. Then search for `Microsoft.AppConfiguration`, select the resource provider, and select **Register**.
+    >
+    > ![Demonstrating how to register the AppConfiguration resource provider.](images/Setup/registering-appconfiguration-resource-provider.png "Registering Microsoft.AppConfiguration within portal")
 
 10. The deployment will take 5 - 10 minutes to complete.
 
