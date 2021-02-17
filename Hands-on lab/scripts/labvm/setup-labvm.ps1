@@ -1,4 +1,4 @@
-param($labFilesName="", $labFilesUri)
+param($labFilesName="")
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -15,8 +15,6 @@ if ([string]::IsNullOrEmpty($labFilesName) -eq $false)
     {
         New-Item -Path $labFilesFolder -ItemType directory
     }
-
-    Invoke-RestMethod -Uri $labFilesUri -Outfile $labFilesName
 
     Write-Host "Extract .ZIP file..."
     Expand-Archive -Path $labFilesName -DestinationPath $labFilesFolder -Force
